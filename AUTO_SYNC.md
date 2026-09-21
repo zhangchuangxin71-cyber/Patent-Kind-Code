@@ -9,6 +9,6 @@ git add <修改的文件>
 git commit -m "简要说明本次修改"
 ```
 
-提交完成后，`.githooks/post-commit` 会自动推送当前分支到 GitHub。若网络或 GitHub 登录暂时不可用，提交仍会保留在本地；恢复后执行 `git push` 即可补传。若某次需要只提交到本地，可在命令前加 `SKIP_GITHUB_AUTO_PUSH=1`。
+提交完成后，`.githooks/post-commit` 会在后台自动推送当前分支到 GitHub，不会阻塞提交。若网络或 GitHub 登录暂时不可用，提交仍会保留在本地；恢复后执行 `git push` 即可补传。若某次需要只提交到本地，可在命令前加 `SKIP_GITHUB_AUTO_PUSH=1`。最近一次自动推送的日志在 `.git/auto-sync/last-push.log`。
 
 原始数据、缓存、模型权重、密钥和独立的 `ClipTalk` 仓库均已排除，以避免泄露凭据及超过 GitHub 文件大小限制。实验的汇总结果、代码、文档和图表会同步。
