@@ -1,0 +1,109 @@
+{
+  "settings": {
+    "dataset": "amazon_beauty",
+    "seed": 2048,
+    "protocol_version": "corrected_v4_activity_adaptive_frozen_ood",
+    "semantic_prior": "real",
+    "test_gt_loaded": true,
+    "uniform_alpha": 1.0,
+    "selected_group_alphas": {
+      "low_activity": 1.0,
+      "mid_activity": 1.0,
+      "high_activity": 0.5
+    },
+    "activity_thresholds_frozen": {
+      "q1": 3.0,
+      "q3": 7.0
+    }
+  },
+  "source_record": "experiments/records/amazon_beauty_lightgcn_strict_ood_seed2048_v3.json",
+  "checkpoint": "checkpoints/amazon_beauty_lightgcn_strict_ood_seed2048_v3.pt",
+  "validation_metrics": {
+    "baseline": {
+      "Top10": {
+        "Hit Ratio": 0.09932,
+        "Precision": 0.01524,
+        "Recall": 0.0936,
+        "NDCG": 0.05332
+      },
+      "Top20": {
+        "Hit Ratio": 0.15483,
+        "Precision": 0.01188,
+        "Recall": 0.14471,
+        "NDCG": 0.06775
+      }
+    },
+    "uniform": {
+      "Top10": {
+        "Hit Ratio": 0.11977,
+        "Precision": 0.01837,
+        "Recall": 0.11813,
+        "NDCG": 0.06983
+      },
+      "Top20": {
+        "Hit Ratio": 0.17753,
+        "Precision": 0.01362,
+        "Recall": 0.17131,
+        "NDCG": 0.08491
+      }
+    },
+    "adaptive": {
+      "Top10": {
+        "Hit Ratio": 0.12137,
+        "Precision": 0.01862,
+        "Recall": 0.11812,
+        "NDCG": 0.07001
+      },
+      "Top20": {
+        "Hit Ratio": 0.18205,
+        "Precision": 0.01396,
+        "Recall": 0.17464,
+        "NDCG": 0.08603
+      }
+    }
+  },
+  "test_metrics": {
+    "baseline": {
+      "Top10": {
+        "Hit Ratio": 0.01859,
+        "Precision": 0.00424,
+        "Recall": 0.02106,
+        "NDCG": 0.01166
+      },
+      "Top20": {
+        "Hit Ratio": 0.03484,
+        "Precision": 0.00397,
+        "Recall": 0.03736,
+        "NDCG": 0.0167
+      }
+    },
+    "uniform": {
+      "Top10": {
+        "Hit Ratio": 0.04461,
+        "Precision": 0.01017,
+        "Recall": 0.04836,
+        "NDCG": 0.03029
+      },
+      "Top20": {
+        "Hit Ratio": 0.07329,
+        "Precision": 0.00836,
+        "Recall": 0.07766,
+        "NDCG": 0.0393
+      }
+    },
+    "adaptive": {
+      "Top10": {
+        "Hit Ratio": 0.04339,
+        "Precision": 0.00989,
+        "Recall": 0.04782,
+        "NDCG": 0.02968
+      },
+      "Top20": {
+        "Hit Ratio": 0.07191,
+        "Precision": 0.0082,
+        "Recall": 0.07688,
+        "NDCG": 0.03864
+      }
+    }
+  }
+}

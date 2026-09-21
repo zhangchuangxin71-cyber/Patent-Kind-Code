@@ -1,0 +1,105 @@
+{
+  "settings": {
+    "dataset": "food",
+    "seed": 5120,
+    "method": "pure_lightgcn_semantic_late_fusion",
+    "protocol_version": "corrected_v4_frozen_ood",
+    "comparison_label": "semantic_shuffled",
+    "source_protocol_version": "corrected_v3_lightgcn_validation_only",
+    "data_version": "v1_strict",
+    "eval_split": "ood",
+    "selection_split": "val",
+    "selection_metric": "NDCG@20",
+    "alpha": 0.25,
+    "alpha_selection_seeds": [
+      1024,
+      2048,
+      3072
+    ],
+    "alpha_confirmation_seeds": [
+      4096,
+      5120
+    ],
+    "score_normalization": "per_user_zscore",
+    "user_semantic_profile": "mean_train_item_semantics",
+    "semantic_prior_path": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/data_strict/processed/food/v1_strict/features/semantic_prior_shuffled.pt",
+    "semantic_prior_meta": {
+      "dataset": "food",
+      "mode": "llm",
+      "backend": "sbert",
+      "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "n_item": 6309,
+      "emb_dim": 384,
+      "coverage": 1.0,
+      "data_root": "data_strict/processed/food/v1_strict",
+      "diagnostic": "row_shuffle",
+      "shuffle_seed": 20260731,
+      "source_prior": "data_strict/processed/food/v1_strict/features/semantic_prior.pt",
+      "backend_original": "sbert"
+    },
+    "frozen_comparison_set": [
+      "collaborative_alpha_0",
+      "semantic_late_fusion"
+    ],
+    "test_gt_loaded": true
+  },
+  "source_record": "experiments/records/food_lightgcn_strict_ood_seed5120_v3.json",
+  "checkpoint": "checkpoints/food_lightgcn_strict_ood_seed5120_v3.pt",
+  "best_epoch": 165,
+  "baseline_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.03032,
+      "Precision": 0.00886,
+      "Recall": 0.03857,
+      "NDCG": 0.02381
+    },
+    "Top20": {
+      "Hit Ratio": 0.0493,
+      "Precision": 0.00721,
+      "Recall": 0.0623,
+      "NDCG": 0.03067
+    }
+  },
+  "best_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.02938,
+      "Precision": 0.00859,
+      "Recall": 0.03674,
+      "NDCG": 0.0233
+    },
+    "Top20": {
+      "Hit Ratio": 0.04663,
+      "Precision": 0.00682,
+      "Recall": 0.05702,
+      "NDCG": 0.02921
+    }
+  },
+  "baseline_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.02063,
+      "Precision": 0.01158,
+      "Recall": 0.02664,
+      "NDCG": 0.02061
+    },
+    "Top20": {
+      "Hit Ratio": 0.03725,
+      "Precision": 0.01045,
+      "Recall": 0.04787,
+      "NDCG": 0.02789
+    }
+  },
+  "best_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.02107,
+      "Precision": 0.01182,
+      "Recall": 0.02659,
+      "NDCG": 0.02061
+    },
+    "Top20": {
+      "Hit Ratio": 0.03522,
+      "Precision": 0.00988,
+      "Recall": 0.04458,
+      "NDCG": 0.02665
+    }
+  }
+}

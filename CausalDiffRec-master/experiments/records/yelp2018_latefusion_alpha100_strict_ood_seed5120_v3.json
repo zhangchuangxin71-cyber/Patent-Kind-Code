@@ -1,0 +1,98 @@
+{
+  "settings": {
+    "dataset": "yelp2018",
+    "seed": 5120,
+    "method": "lsci_stage1_semantic_late_fusion",
+    "protocol_version": "corrected_v3_late_fusion",
+    "data_version": "v1_strict",
+    "eval_split": "ood",
+    "selection_split": "val",
+    "selection_metric": "NDCG@20",
+    "alpha": 1.0,
+    "alpha_selection_seeds": [
+      1024,
+      2048,
+      3072
+    ],
+    "alpha_confirmation_seeds": [
+      4096,
+      5120
+    ],
+    "score_normalization": "per_user_zscore",
+    "user_semantic_profile": "mean_train_item_semantics",
+    "semantic_prior_path": "data_strict/processed/yelp2018/v1_strict/features/semantic_prior.pt",
+    "semantic_prior_meta": {
+      "dataset": "yelp2018",
+      "mode": "llm",
+      "backend": "sbert",
+      "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "n_item": 12185,
+      "emb_dim": 384,
+      "coverage": 1.0,
+      "data_root": "data_strict/processed/yelp2018/v1_strict"
+    },
+    "frozen_comparison_set": [
+      "collaborative_alpha_0",
+      "semantic_late_fusion"
+    ]
+  },
+  "source_record": "experiments/records/yelp2018_lsci_strict_ood_corrected_v3_yelp_stage1_valonly_strict_ood_seed5120_v3.json",
+  "checkpoint": "checkpoints/yelp2018_lsci_stage1_v1_strict_ood_corrected_v3_yelp_stage1_valonly_strict_ood_seed5120_v3.pt",
+  "best_epoch": 16,
+  "baseline_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.03217,
+      "Precision": 0.01364,
+      "Recall": 0.03326,
+      "NDCG": 0.02567
+    },
+    "Top20": {
+      "Hit Ratio": 0.0544,
+      "Precision": 0.01154,
+      "Recall": 0.05598,
+      "NDCG": 0.03383
+    }
+  },
+  "best_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.04084,
+      "Precision": 0.01732,
+      "Recall": 0.04249,
+      "NDCG": 0.03283
+    },
+    "Top20": {
+      "Hit Ratio": 0.07032,
+      "Precision": 0.01491,
+      "Recall": 0.07236,
+      "NDCG": 0.04359
+    }
+  },
+  "baseline_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.00516,
+      "Precision": 0.00517,
+      "Recall": 0.00554,
+      "NDCG": 0.00608
+    },
+    "Top20": {
+      "Hit Ratio": 0.01032,
+      "Precision": 0.00517,
+      "Recall": 0.01103,
+      "NDCG": 0.0083
+    }
+  },
+  "best_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.01046,
+      "Precision": 0.01048,
+      "Recall": 0.01077,
+      "NDCG": 0.01223
+    },
+    "Top20": {
+      "Hit Ratio": 0.01963,
+      "Precision": 0.00984,
+      "Recall": 0.02024,
+      "NDCG": 0.01587
+    }
+  }
+}

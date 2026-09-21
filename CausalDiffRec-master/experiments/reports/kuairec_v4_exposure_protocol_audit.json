@@ -1,0 +1,51 @@
+{
+  "train": {
+    "rows": 592489,
+    "users": 7175,
+    "items": 10001,
+    "source_matrix": {
+      "big": 592489
+    },
+    "user_item_pairs": 592489
+  },
+  "val": {
+    "rows": 84641,
+    "users": 6944,
+    "items": 6811,
+    "source_matrix": {
+      "big": 84641
+    },
+    "user_item_pairs": 84641
+  },
+  "iid_test": {
+    "rows": 169284,
+    "users": 7127,
+    "items": 7970,
+    "source_matrix": {
+      "big": 169284
+    },
+    "user_item_pairs": 169284
+  },
+  "ood_test": {
+    "rows": 217229,
+    "users": 1411,
+    "items": 3276,
+    "source_matrix": {
+      "small": 217229
+    },
+    "user_item_pairs": 217229
+  },
+  "overlap_checks": {
+    "val_pair_overlap_with_train": 0,
+    "ood_pair_overlap_with_train": 0,
+    "ood_users_seen_in_train": 1410,
+    "ood_items_seen_in_train": 3268,
+    "ood_users": 1411,
+    "ood_items": 3276
+  },
+  "protocol_findings": [
+    "train/val are entirely source_matrix=big while ood_test is source_matrix=small",
+    "validation and OOD therefore do not share the same exposure universe",
+    "model or alpha selection on current val must not be treated as an OOD claim"
+  ]
+}

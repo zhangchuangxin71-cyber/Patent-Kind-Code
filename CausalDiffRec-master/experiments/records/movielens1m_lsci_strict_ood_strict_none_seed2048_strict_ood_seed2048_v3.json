@@ -1,0 +1,770 @@
+{
+  "settings": {
+    "dataset": "movielens1m",
+    "seed": 2048,
+    "epochs": 25,
+    "learning_rate": 0.1,
+    "lr2": 0.1,
+    "wd2": 0.0,
+    "hidden1": 8,
+    "hidden2": 8,
+    "emd_size": 8,
+    "emb_size": 10,
+    "mlp_dims": "[8]",
+    "steps": 100,
+    "sampling_steps": 100,
+    "noise_schedule": "linear-var",
+    "noise_scale": 0.1,
+    "noise_min": 0.01,
+    "noise_max": 0.09,
+    "mean_type": "x0",
+    "reweight": true,
+    "sampling_noise": false,
+    "gpu_id": 0,
+    "generator_rank": 128,
+    "num_environments_K": 3,
+    "bpr_batch_size": 1024,
+    "lgcn_layers": 3,
+    "rec_lr": 0.001,
+    "num_nodes": 7528,
+    "num_users": 5148,
+    "num_items": 2380,
+    "feat_dim": 64,
+    "train_edges": 619670,
+    "test_edges": 619670,
+    "param_count": {
+      "vgae": 69000,
+      "diffusion": 0,
+      "mlp": 398,
+      "generator": 7708672,
+      "env_infer": 232,
+      "total": 7778302
+    },
+    "device": "cuda:0",
+    "use_semantic_prior": false,
+    "lambda_sem": 0.1,
+    "force_sem_gate": null,
+    "data_version": "v1_strict",
+    "data_status": "method-validation",
+    "eval_split": "ood",
+    "data_root": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/data_strict/processed/movielens1m/v1_strict",
+    "val_gt_users": 5004,
+    "val_gt_interactions": 44262,
+    "gt_users": 5127,
+    "gt_interactions": 110655,
+    "method": "lsci_stage1_baseline_end2endrank_lam0.1",
+    "protocol_version": "corrected_v3_stable",
+    "stability": {
+      "evae_reduction": "mean",
+      "log_std_range": [
+        -10.0,
+        5.0
+      ],
+      "grad_clip": 5.0,
+      "fusion_lr": 0.001
+    },
+    "selection_split": "val",
+    "selection_metric": "NDCG@20",
+    "validation_only": false,
+    "causal_keep_ratio": 0.7,
+    "edge_gate_mode": "none",
+    "variant_keep_prob": 0.5,
+    "lambda_inv": 0.1,
+    "inv_mean_weight": 0.0,
+    "lambda_rank_upstream": 0.1,
+    "rank_batch_size": 2048,
+    "rank_layers": 3,
+    "rec_refresh": 0.25,
+    "score_lr": 0.01
+  },
+  "best_epoch": 20,
+  "best_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.07415,
+      "Precision": 0.06559,
+      "Recall": 0.08734,
+      "NDCG": 0.09151
+    },
+    "Top20": {
+      "Hit Ratio": 0.12693,
+      "Precision": 0.05614,
+      "Recall": 0.14677,
+      "NDCG": 0.10994
+    }
+  },
+  "best_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.00932,
+      "Precision": 0.02011,
+      "Recall": 0.01559,
+      "NDCG": 0.0235
+    },
+    "Top20": {
+      "Hit Ratio": 0.01845,
+      "Precision": 0.01991,
+      "Recall": 0.0288,
+      "NDCG": 0.02787
+    }
+  },
+  "semantic_gate_diagnostics": null,
+  "epoch_logs": [
+    {
+      "epoch": 1,
+      "pretrain_loss": 1.347115798222298,
+      "rec_loss": 115.49930256605148,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07354,
+          "Precision": 0.06505,
+          "Recall": 0.08704,
+          "NDCG": 0.09094
+        },
+        "Top20": {
+          "Hit Ratio": 0.12573,
+          "Precision": 0.05561,
+          "Recall": 0.14466,
+          "NDCG": 0.10895
+        }
+      },
+      "is_best": false,
+      "selection_eligible": false,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.6230425834655762,
+      "upstream_rank_grad_diagnostics": {
+        "vgae": 0.10352776199579239,
+        "diffusion_mlp": 0.22775427997112274,
+        "env_infer": 0.15615221858024597
+      },
+      "soft_gate_grad_norm": 0.025393133983016014
+    },
+    {
+      "epoch": 2,
+      "pretrain_loss": 1.081446395458588,
+      "rec_loss": 117.54263481497765,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07361,
+          "Precision": 0.06511,
+          "Recall": 0.08707,
+          "NDCG": 0.09112
+        },
+        "Top20": {
+          "Hit Ratio": 0.126,
+          "Precision": 0.05573,
+          "Recall": 0.14538,
+          "NDCG": 0.10927
+        }
+      },
+      "is_best": false,
+      "selection_eligible": false,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.385095477104187,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.02599009871482849
+    },
+    {
+      "epoch": 3,
+      "pretrain_loss": 0.5319257737920604,
+      "rec_loss": 118.32173219323158,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07338,
+          "Precision": 0.06491,
+          "Recall": 0.08645,
+          "NDCG": 0.09086
+        },
+        "Top20": {
+          "Hit Ratio": 0.12614,
+          "Precision": 0.05579,
+          "Recall": 0.14569,
+          "NDCG": 0.10934
+        }
+      },
+      "is_best": false,
+      "selection_eligible": false,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.6380233764648438,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.024309899657964706
+    },
+    {
+      "epoch": 4,
+      "pretrain_loss": 0.3758604458750202,
+      "rec_loss": 117.44934093952179,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07379,
+          "Precision": 0.06527,
+          "Recall": 0.08695,
+          "NDCG": 0.09103
+        },
+        "Top20": {
+          "Hit Ratio": 0.1262,
+          "Precision": 0.05582,
+          "Recall": 0.14551,
+          "NDCG": 0.10921
+        }
+      },
+      "is_best": true,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.5699862837791443,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.01979691907763481
+    },
+    {
+      "epoch": 5,
+      "pretrain_loss": 0.29658706782422917,
+      "rec_loss": 114.92583239078522,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07358,
+          "Precision": 0.06509,
+          "Recall": 0.08655,
+          "NDCG": 0.0909
+        },
+        "Top20": {
+          "Hit Ratio": 0.12607,
+          "Precision": 0.05576,
+          "Recall": 0.14559,
+          "NDCG": 0.1092
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.5186085104942322,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.011938831768929958
+    },
+    {
+      "epoch": 6,
+      "pretrain_loss": 0.2671072982980656,
+      "rec_loss": 116.28216940164566,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07354,
+          "Precision": 0.06505,
+          "Recall": 0.08647,
+          "NDCG": 0.09128
+        },
+        "Top20": {
+          "Hit Ratio": 0.12625,
+          "Precision": 0.05584,
+          "Recall": 0.14538,
+          "NDCG": 0.1096
+        }
+      },
+      "is_best": true,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.43585702776908875,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.0030949278734624386
+    },
+    {
+      "epoch": 7,
+      "pretrain_loss": 0.21983553956825902,
+      "rec_loss": 114.90985190868378,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07374,
+          "Precision": 0.06523,
+          "Recall": 0.08646,
+          "NDCG": 0.09098
+        },
+        "Top20": {
+          "Hit Ratio": 0.12625,
+          "Precision": 0.05584,
+          "Recall": 0.14523,
+          "NDCG": 0.10921
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.5560791492462158,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.001084951451048255
+    },
+    {
+      "epoch": 8,
+      "pretrain_loss": 0.16913176352117934,
+      "rec_loss": 116.57353401184082,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07354,
+          "Precision": 0.06505,
+          "Recall": 0.08596,
+          "NDCG": 0.09079
+        },
+        "Top20": {
+          "Hit Ratio": 0.12625,
+          "Precision": 0.05584,
+          "Recall": 0.14534,
+          "NDCG": 0.10928
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.505885899066925,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.0008832071325741708
+    },
+    {
+      "epoch": 9,
+      "pretrain_loss": 0.1731406127503142,
+      "rec_loss": 115.01532933115959,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07338,
+          "Precision": 0.06491,
+          "Recall": 0.08571,
+          "NDCG": 0.09065
+        },
+        "Top20": {
+          "Hit Ratio": 0.12618,
+          "Precision": 0.05581,
+          "Recall": 0.1453,
+          "NDCG": 0.10924
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.6351204514503479,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.0005663282936438918
+    },
+    {
+      "epoch": 10,
+      "pretrain_loss": 0.17334798575537164,
+      "rec_loss": 118.62763318419456,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07336,
+          "Precision": 0.06489,
+          "Recall": 0.08581,
+          "NDCG": 0.0907
+        },
+        "Top20": {
+          "Hit Ratio": 0.12629,
+          "Precision": 0.05586,
+          "Recall": 0.14559,
+          "NDCG": 0.10937
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.4419994354248047,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.000671249465085566
+    },
+    {
+      "epoch": 11,
+      "pretrain_loss": 0.20672856267667686,
+      "rec_loss": 115.55892151594162,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07381,
+          "Precision": 0.06529,
+          "Recall": 0.08631,
+          "NDCG": 0.0911
+        },
+        "Top20": {
+          "Hit Ratio": 0.12665,
+          "Precision": 0.05602,
+          "Recall": 0.14655,
+          "NDCG": 0.1098
+        }
+      },
+      "is_best": true,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.6576604843139648,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.0005006705760024488
+    },
+    {
+      "epoch": 12,
+      "pretrain_loss": 0.15601537726987702,
+      "rec_loss": 115.83596307039261,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.0737,
+          "Precision": 0.06519,
+          "Recall": 0.08581,
+          "NDCG": 0.09083
+        },
+        "Top20": {
+          "Hit Ratio": 0.12661,
+          "Precision": 0.056,
+          "Recall": 0.14653,
+          "NDCG": 0.10967
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.5333043336868286,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.0008405003463849425
+    },
+    {
+      "epoch": 13,
+      "pretrain_loss": 0.15201821304567562,
+      "rec_loss": 114.43182599544525,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.0737,
+          "Precision": 0.06519,
+          "Recall": 0.08617,
+          "NDCG": 0.09106
+        },
+        "Top20": {
+          "Hit Ratio": 0.12672,
+          "Precision": 0.05605,
+          "Recall": 0.14675,
+          "NDCG": 0.10992
+        }
+      },
+      "is_best": true,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.602615475654602,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.0006091136019676924
+    },
+    {
+      "epoch": 14,
+      "pretrain_loss": 0.1446464000172231,
+      "rec_loss": 113.13480550050735,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07365,
+          "Precision": 0.06515,
+          "Recall": 0.08632,
+          "NDCG": 0.0909
+        },
+        "Top20": {
+          "Hit Ratio": 0.12661,
+          "Precision": 0.056,
+          "Recall": 0.14573,
+          "NDCG": 0.10946
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.5358577966690063,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.0003345216391608119
+    },
+    {
+      "epoch": 15,
+      "pretrain_loss": 0.14218733361042102,
+      "rec_loss": 112.98359316587448,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.0734,
+          "Precision": 0.06493,
+          "Recall": 0.08604,
+          "NDCG": 0.09063
+        },
+        "Top20": {
+          "Hit Ratio": 0.12684,
+          "Precision": 0.0561,
+          "Recall": 0.1461,
+          "NDCG": 0.10955
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.49296092987060547,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.0001947067939909175
+    },
+    {
+      "epoch": 16,
+      "pretrain_loss": 0.139123910974923,
+      "rec_loss": 113.07172775268555,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07374,
+          "Precision": 0.06523,
+          "Recall": 0.08612,
+          "NDCG": 0.09095
+        },
+        "Top20": {
+          "Hit Ratio": 0.12659,
+          "Precision": 0.05599,
+          "Recall": 0.14567,
+          "NDCG": 0.10954
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.45505470037460327,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 7.993911276571453e-05
+    },
+    {
+      "epoch": 17,
+      "pretrain_loss": 0.13802225582673555,
+      "rec_loss": 112.59892311692238,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07377,
+          "Precision": 0.06525,
+          "Recall": 0.08621,
+          "NDCG": 0.09099
+        },
+        "Top20": {
+          "Hit Ratio": 0.12713,
+          "Precision": 0.05623,
+          "Recall": 0.1465,
+          "NDCG": 0.10979
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.47799086570739746,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 3.688818105729297e-05
+    },
+    {
+      "epoch": 18,
+      "pretrain_loss": 0.13335068070023529,
+      "rec_loss": 113.00508052110672,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07377,
+          "Precision": 0.06525,
+          "Recall": 0.08638,
+          "NDCG": 0.09093
+        },
+        "Top20": {
+          "Hit Ratio": 0.1267,
+          "Precision": 0.05604,
+          "Recall": 0.14603,
+          "NDCG": 0.10952
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.46122273802757263,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 3.411250509088859e-05
+    },
+    {
+      "epoch": 19,
+      "pretrain_loss": 0.1315138174410584,
+      "rec_loss": 112.48487308621407,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07397,
+          "Precision": 0.06543,
+          "Recall": 0.08677,
+          "NDCG": 0.0914
+        },
+        "Top20": {
+          "Hit Ratio": 0.1269,
+          "Precision": 0.05613,
+          "Recall": 0.14638,
+          "NDCG": 0.1099
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.49196499586105347,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 2.2965130483498797e-05
+    },
+    {
+      "epoch": 20,
+      "pretrain_loss": 0.13184978772687353,
+      "rec_loss": 113.46295481920242,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07415,
+          "Precision": 0.06559,
+          "Recall": 0.08734,
+          "NDCG": 0.09151
+        },
+        "Top20": {
+          "Hit Ratio": 0.12693,
+          "Precision": 0.05614,
+          "Recall": 0.14677,
+          "NDCG": 0.10994
+        }
+      },
+      "is_best": true,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.45388063788414,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 1.866081584012136e-05
+    },
+    {
+      "epoch": 21,
+      "pretrain_loss": 0.13571678570000734,
+      "rec_loss": 111.5119056403637,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07404,
+          "Precision": 0.06549,
+          "Recall": 0.08745,
+          "NDCG": 0.09137
+        },
+        "Top20": {
+          "Hit Ratio": 0.12643,
+          "Precision": 0.05592,
+          "Recall": 0.14566,
+          "NDCG": 0.10949
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.5311094522476196,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 2.0117171516176313e-05
+    },
+    {
+      "epoch": 22,
+      "pretrain_loss": 0.15013652516129516,
+      "rec_loss": 115.76676946878433,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07406,
+          "Precision": 0.06551,
+          "Recall": 0.08732,
+          "NDCG": 0.09123
+        },
+        "Top20": {
+          "Hit Ratio": 0.1265,
+          "Precision": 0.05595,
+          "Recall": 0.14578,
+          "NDCG": 0.1094
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.4159996211528778,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 1.0329880751669407e-05
+    },
+    {
+      "epoch": 23,
+      "pretrain_loss": 0.18453793836034096,
+      "rec_loss": 113.56007000803947,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07399,
+          "Precision": 0.06545,
+          "Recall": 0.08726,
+          "NDCG": 0.0914
+        },
+        "Top20": {
+          "Hit Ratio": 0.12686,
+          "Precision": 0.05611,
+          "Recall": 0.14644,
+          "NDCG": 0.10985
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.647409200668335,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 2.3849801436881535e-05
+    },
+    {
+      "epoch": 24,
+      "pretrain_loss": 0.14048266626704126,
+      "rec_loss": 113.47249373793602,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07392,
+          "Precision": 0.06539,
+          "Recall": 0.08685,
+          "NDCG": 0.09106
+        },
+        "Top20": {
+          "Hit Ratio": 0.12684,
+          "Precision": 0.0561,
+          "Recall": 0.14656,
+          "NDCG": 0.10965
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.5220605134963989,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 0.00016603092080913484
+    },
+    {
+      "epoch": 25,
+      "pretrain_loss": 0.14020419494800343,
+      "rec_loss": 113.06143045425415,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07386,
+          "Precision": 0.06533,
+          "Recall": 0.08724,
+          "NDCG": 0.09106
+        },
+        "Top20": {
+          "Hit Ratio": 0.12708,
+          "Precision": 0.05621,
+          "Recall": 0.14649,
+          "NDCG": 0.1096
+        }
+      },
+      "is_best": false,
+      "selection_eligible": true,
+      "causal_edges": 433768,
+      "variant_edges": 185902,
+      "upstream_rank_loss": 0.5556964874267578,
+      "upstream_rank_grad_diagnostics": null,
+      "soft_gate_grad_norm": 8.979534322861582e-05
+    }
+  ],
+  "peak_vram_mb": 2273.60498046875,
+  "checkpoint": "checkpoints/movielens1m_lsci_stage1_baseline_end2endrank_lam0.1_v1_strict_ood_strict_none_seed2048_strict_ood_seed2048_v3.pt",
+  "wall_time_sec": 342.05452036857605,
+  "wall_time_hms": "00:05:42"
+}

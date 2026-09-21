@@ -1,0 +1,515 @@
+{
+  "dataset": "yelp2018",
+  "protocol_version": "corrected_v5_fair_three_method_bpr25_frozen_one_shot_ood",
+  "validation_audit": "experiments/reports/yelp2018_v5_fair_bpr25_validation_audit.json",
+  "shared_bpr_pass_budget": 25,
+  "seeds": [
+    1024,
+    2048,
+    3072,
+    4096,
+    5120
+  ],
+  "method_definitions": {
+    "lightgcn": "LightGCN, collaborative-only",
+    "causaldiffrec": "original CausalDiffRec E0",
+    "full_method": "Causal diffusion/LSCI backbone + semantic ConditionFusion + InfoNCE(lambda=0.1) + train-history semantic score fusion(alpha=0.75); learned edge gate disabled"
+  },
+  "integrity_checks": {
+    "identical_seed_sets": true,
+    "frozen_protocol_labels": true,
+    "expected_alphas": true
+  },
+  "aggregate_top20": {
+    "NDCG": {
+      "lightgcn": {
+        "mean": 0.0169,
+        "sample_std": 0.00024351591323771866,
+        "values": [
+          0.01647,
+          0.01697,
+          0.01707,
+          0.01698,
+          0.01701
+        ]
+      },
+      "causaldiffrec": {
+        "mean": 0.012828,
+        "sample_std": 0.0007419366549780381,
+        "values": [
+          0.01257,
+          0.01236,
+          0.01328,
+          0.01205,
+          0.01388
+        ]
+      },
+      "full_method": {
+        "mean": 0.015382000000000002,
+        "sample_std": 0.00017455658108475895,
+        "values": [
+          0.01515,
+          0.01526,
+          0.01551,
+          0.01557,
+          0.01542
+        ]
+      },
+      "full_minus_causaldiffrec": {
+        "mean": 0.002554,
+        "sample_std": 0.0007393781170686623,
+        "values": [
+          0.0025800000000000007,
+          0.0029,
+          0.0022299999999999993,
+          0.0035200000000000006,
+          0.0015399999999999997
+        ],
+        "positive_seeds": 5,
+        "negative_seeds": 0,
+        "zero_seeds": 0,
+        "paired_delta_t95_ci_approx": [
+          0.0016359408457608505,
+          0.0034720591542391492
+        ],
+        "one_sided_exact_sign_p_positive": 0.03125
+      },
+      "full_minus_lightgcn": {
+        "mean": -0.0015179999999999992,
+        "sample_std": 0.00015385057685949789,
+        "values": [
+          -0.0013199999999999983,
+          -0.0017099999999999997,
+          -0.0015599999999999989,
+          -0.001409999999999998,
+          -0.0015900000000000011
+        ],
+        "positive_seeds": 0,
+        "negative_seeds": 5,
+        "zero_seeds": 0,
+        "paired_delta_t95_ci_approx": [
+          -0.0017090307151512824,
+          -0.001326969284848716
+        ],
+        "one_sided_exact_sign_p_positive": 1.0
+      },
+      "causaldiffrec_minus_lightgcn": {
+        "mean": -0.004071999999999999,
+        "sample_std": 0.0007109992967647712,
+        "values": [
+          -0.003899999999999999,
+          -0.0046099999999999995,
+          -0.0037899999999999982,
+          -0.004929999999999999,
+          -0.003130000000000001
+        ],
+        "positive_seeds": 0,
+        "negative_seeds": 5,
+        "zero_seeds": 0,
+        "paired_delta_t95_ci_approx": [
+          -0.004954822196091419,
+          -0.003189177803908579
+        ],
+        "one_sided_exact_sign_p_positive": 1.0
+      },
+      "full_vs_causaldiffrec_relative_percent": 19.90957280947927,
+      "full_vs_lightgcn_relative_percent": -8.98224852071004
+    },
+    "Recall": {
+      "lightgcn": {
+        "mean": 0.02162,
+        "sample_std": 0.0003432928778754373,
+        "values": [
+          0.02102,
+          0.02169,
+          0.02172,
+          0.02179,
+          0.02188
+        ]
+      },
+      "causaldiffrec": {
+        "mean": 0.016542,
+        "sample_std": 0.0009910953536365716,
+        "values": [
+          0.01633,
+          0.01594,
+          0.01694,
+          0.01547,
+          0.01803
+        ]
+      },
+      "full_method": {
+        "mean": 0.01954,
+        "sample_std": 0.0003358571124749334,
+        "values": [
+          0.01897,
+          0.01952,
+          0.01967,
+          0.01981,
+          0.01973
+        ]
+      },
+      "full_minus_causaldiffrec": {
+        "mean": 0.0029980000000000002,
+        "sample_std": 0.0010030553324717442,
+        "values": [
+          0.00264,
+          0.00358,
+          0.00273,
+          0.004340000000000002,
+          0.0017000000000000001
+        ],
+        "positive_seeds": 5,
+        "negative_seeds": 0,
+        "zero_seeds": 0,
+        "paired_delta_t95_ci_approx": [
+          0.0017525423526531527,
+          0.004243457647346848
+        ],
+        "one_sided_exact_sign_p_positive": 0.03125
+      },
+      "full_minus_lightgcn": {
+        "mean": -0.00208,
+        "sample_std": 7.874007874011876e-05,
+        "values": [
+          -0.0020499999999999997,
+          -0.002170000000000002,
+          -0.0020499999999999997,
+          -0.001979999999999999,
+          -0.002149999999999999
+        ],
+        "positive_seeds": 0,
+        "negative_seeds": 5,
+        "zero_seeds": 0,
+        "paired_delta_t95_ci_approx": [
+          -0.0021777687172829384,
+          -0.0019822312827170612
+        ],
+        "one_sided_exact_sign_p_positive": 1.0
+      },
+      "causaldiffrec_minus_lightgcn": {
+        "mean": -0.005078000000000001,
+        "sample_std": 0.0009671452838121074,
+        "values": [
+          -0.00469,
+          -0.005750000000000002,
+          -0.0047799999999999995,
+          -0.006320000000000001,
+          -0.0038499999999999993
+        ],
+        "positive_seeds": 0,
+        "negative_seeds": 5,
+        "zero_seeds": 0,
+        "paired_delta_t95_ci_approx": [
+          -0.006278869434441852,
+          -0.00387713056555815
+        ],
+        "one_sided_exact_sign_p_positive": 1.0
+      },
+      "full_vs_causaldiffrec_relative_percent": 18.12356426066979,
+      "full_vs_lightgcn_relative_percent": -9.620721554116567
+    },
+    "Precision": {
+      "lightgcn": {
+        "mean": 0.010311999999999998,
+        "sample_std": 0.00017796066981218072,
+        "values": [
+          0.01001,
+          0.01036,
+          0.01033,
+          0.01038,
+          0.01048
+        ]
+      },
+      "causaldiffrec": {
+        "mean": 0.007718000000000001,
+        "sample_std": 0.0005200673033367893,
+        "values": [
+          0.00761,
+          0.00742,
+          0.00782,
+          0.00719,
+          0.00855
+        ]
+      },
+      "full_method": {
+        "mean": 0.009298,
+        "sample_std": 0.0001251798705862885,
+        "values": [
+          0.00909,
+          0.00928,
+          0.00935,
+          0.00941,
+          0.00936
+        ]
+      },
+      "full_minus_causaldiffrec": {
+        "mean": 0.0015800000000000002,
+        "sample_std": 0.0005228288438867923,
+        "values": [
+          0.0014800000000000013,
+          0.0018599999999999997,
+          0.0015300000000000001,
+          0.0022199999999999998,
+          0.00081
+        ],
+        "positive_seeds": 5,
+        "negative_seeds": 0,
+        "zero_seeds": 0,
+        "paired_delta_t95_ci_approx": [
+          0.000930822271920219,
+          0.0022291777280797815
+        ],
+        "one_sided_exact_sign_p_positive": 0.03125
+      },
+      "full_minus_lightgcn": {
+        "mean": -0.0010139999999999997,
+        "sample_std": 8.294576541331084e-05,
+        "values": [
+          -0.0009199999999999989,
+          -0.0010799999999999994,
+          -0.00098,
+          -0.0009700000000000004,
+          -0.0011199999999999995
+        ],
+        "positive_seeds": 0,
+        "negative_seeds": 5,
+        "zero_seeds": 0,
+        "paired_delta_t95_ci_approx": [
+          -0.0011169907668149058,
+          -0.0009110092331850935
+        ],
+        "one_sided_exact_sign_p_positive": 1.0
+      },
+      "causaldiffrec_minus_lightgcn": {
+        "mean": -0.002594,
+        "sample_std": 0.0004900306112887234,
+        "values": [
+          -0.0024000000000000002,
+          -0.002939999999999999,
+          -0.00251,
+          -0.00319,
+          -0.0019299999999999994
+        ],
+        "positive_seeds": 0,
+        "negative_seeds": 5,
+        "zero_seeds": 0,
+        "paired_delta_t95_ci_approx": [
+          -0.0032024533450010677,
+          -0.001985546654998932
+        ],
+        "one_sided_exact_sign_p_positive": 1.0
+      },
+      "full_vs_causaldiffrec_relative_percent": 20.471624773257314,
+      "full_vs_lightgcn_relative_percent": -9.833204034134965
+    },
+    "Hit Ratio": {
+      "lightgcn": {
+        "mean": 0.020582,
+        "sample_std": 0.00036051352263125936,
+        "values": [
+          0.01997,
+          0.02067,
+          0.02062,
+          0.02073,
+          0.02092
+        ]
+      },
+      "causaldiffrec": {
+        "mean": 0.015401999999999999,
+        "sample_std": 0.001038686670753023,
+        "values": [
+          0.01519,
+          0.01481,
+          0.01561,
+          0.01434,
+          0.01706
+        ]
+      },
+      "full_method": {
+        "mean": 0.018554,
+        "sample_std": 0.00025205158202241083,
+        "values": [
+          0.01814,
+          0.01851,
+          0.01865,
+          0.01879,
+          0.01868
+        ]
+      },
+      "full_minus_causaldiffrec": {
+        "mean": 0.0031519999999999994,
+        "sample_std": 0.0010470768835190662,
+        "values": [
+          0.0029499999999999995,
+          0.0036999999999999984,
+          0.0030399999999999993,
+          0.004450000000000001,
+          0.00162
+        ],
+        "positive_seeds": 5,
+        "negative_seeds": 0,
+        "zero_seeds": 0,
+        "paired_delta_t95_ci_approx": [
+          0.001851882379643636,
+          0.004452117620356363
+        ],
+        "one_sided_exact_sign_p_positive": 0.03125
+      },
+      "full_minus_lightgcn": {
+        "mean": -0.0020280000000000007,
+        "sample_std": 0.00016783920876839345,
+        "values": [
+          -0.0018300000000000018,
+          -0.002160000000000002,
+          -0.0019699999999999995,
+          -0.0019399999999999973,
+          -0.0022400000000000024
+        ],
+        "positive_seeds": 0,
+        "negative_seeds": 5,
+        "zero_seeds": 0,
+        "paired_delta_t95_ci_approx": [
+          -0.0022363998951185765,
+          -0.001819600104881425
+        ],
+        "one_sided_exact_sign_p_positive": 1.0
+      },
+      "causaldiffrec_minus_lightgcn": {
+        "mean": -0.00518,
+        "sample_std": 0.0009820641526906465,
+        "values": [
+          -0.004780000000000001,
+          -0.005860000000000001,
+          -0.005009999999999999,
+          -0.006389999999999998,
+          -0.0038600000000000023
+        ],
+        "positive_seeds": 0,
+        "negative_seeds": 5,
+        "zero_seeds": 0,
+        "paired_delta_t95_ci_approx": [
+          -0.006399393656120384,
+          -0.003960606343879615
+        ],
+        "one_sided_exact_sign_p_positive": 1.0
+      },
+      "full_vs_causaldiffrec_relative_percent": 20.464874691598506,
+      "full_vs_lightgcn_relative_percent": -9.853269847439504
+    }
+  },
+  "per_seed_top20": {
+    "1024": {
+      "NDCG": {
+        "lightgcn": 0.01647,
+        "causaldiffrec": 0.01257,
+        "full_method": 0.01515
+      },
+      "Recall": {
+        "lightgcn": 0.02102,
+        "causaldiffrec": 0.01633,
+        "full_method": 0.01897
+      },
+      "Precision": {
+        "lightgcn": 0.01001,
+        "causaldiffrec": 0.00761,
+        "full_method": 0.00909
+      },
+      "Hit Ratio": {
+        "lightgcn": 0.01997,
+        "causaldiffrec": 0.01519,
+        "full_method": 0.01814
+      }
+    },
+    "2048": {
+      "NDCG": {
+        "lightgcn": 0.01697,
+        "causaldiffrec": 0.01236,
+        "full_method": 0.01526
+      },
+      "Recall": {
+        "lightgcn": 0.02169,
+        "causaldiffrec": 0.01594,
+        "full_method": 0.01952
+      },
+      "Precision": {
+        "lightgcn": 0.01036,
+        "causaldiffrec": 0.00742,
+        "full_method": 0.00928
+      },
+      "Hit Ratio": {
+        "lightgcn": 0.02067,
+        "causaldiffrec": 0.01481,
+        "full_method": 0.01851
+      }
+    },
+    "3072": {
+      "NDCG": {
+        "lightgcn": 0.01707,
+        "causaldiffrec": 0.01328,
+        "full_method": 0.01551
+      },
+      "Recall": {
+        "lightgcn": 0.02172,
+        "causaldiffrec": 0.01694,
+        "full_method": 0.01967
+      },
+      "Precision": {
+        "lightgcn": 0.01033,
+        "causaldiffrec": 0.00782,
+        "full_method": 0.00935
+      },
+      "Hit Ratio": {
+        "lightgcn": 0.02062,
+        "causaldiffrec": 0.01561,
+        "full_method": 0.01865
+      }
+    },
+    "4096": {
+      "NDCG": {
+        "lightgcn": 0.01698,
+        "causaldiffrec": 0.01205,
+        "full_method": 0.01557
+      },
+      "Recall": {
+        "lightgcn": 0.02179,
+        "causaldiffrec": 0.01547,
+        "full_method": 0.01981
+      },
+      "Precision": {
+        "lightgcn": 0.01038,
+        "causaldiffrec": 0.00719,
+        "full_method": 0.00941
+      },
+      "Hit Ratio": {
+        "lightgcn": 0.02073,
+        "causaldiffrec": 0.01434,
+        "full_method": 0.01879
+      }
+    },
+    "5120": {
+      "NDCG": {
+        "lightgcn": 0.01701,
+        "causaldiffrec": 0.01388,
+        "full_method": 0.01542
+      },
+      "Recall": {
+        "lightgcn": 0.02188,
+        "causaldiffrec": 0.01803,
+        "full_method": 0.01973
+      },
+      "Precision": {
+        "lightgcn": 0.01048,
+        "causaldiffrec": 0.00855,
+        "full_method": 0.00936
+      },
+      "Hit Ratio": {
+        "lightgcn": 0.02092,
+        "causaldiffrec": 0.01706,
+        "full_method": 0.01868
+      }
+    }
+  },
+  "all_test_records_frozen_after_validation": true,
+  "interpretation_guard": "The table supports only the observed pairwise directions. Do not claim the full method beats a baseline when its reported paired difference is non-positive."
+}

@@ -1,0 +1,101 @@
+{
+  "settings": {
+    "dataset": "movielens1m",
+    "seed": 2048,
+    "method": "lsci_stage1_semantic_late_fusion",
+    "protocol_version": "corrected_v5_deepseek_alpha_frozen_ood",
+    "comparison_label": "full_method_alpha0.5",
+    "source_protocol_version": "corrected_v4_controlled",
+    "data_version": "v1_strict",
+    "eval_split": "ood",
+    "selection_split": "val",
+    "selection_metric": "NDCG@20",
+    "alpha": 0.5,
+    "alpha_selection_seeds": [
+      1024,
+      2048,
+      3072
+    ],
+    "alpha_confirmation_seeds": [
+      4096,
+      5120
+    ],
+    "score_normalization": "per_user_zscore",
+    "user_semantic_profile": "mean_train_item_semantics",
+    "semantic_prior_path": "data_strict/processed/movielens1m/v1_strict/features/semantic_prior_deepseek.pt",
+    "semantic_prior_meta": {
+      "dataset": "movielens1m",
+      "mode": "llm",
+      "backend": "sbert",
+      "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "n_item": 2380,
+      "emb_dim": 384,
+      "coverage": 1.0,
+      "data_root": "data_strict/processed/movielens1m/v1_strict"
+    },
+    "frozen_comparison_set": [
+      "collaborative_alpha_0",
+      "semantic_late_fusion"
+    ],
+    "test_gt_loaded": true
+  },
+  "source_record": "experiments/records/movielens1m_lsci_strict_ood_e3_v5_deepseek_full_seed2048_strict_ood_e3_seed2048_v4.json",
+  "checkpoint": "checkpoints/movielens1m_lsci_e3_scorefusion_a0.75_v1_strict_ood_v5_deepseek_full_seed2048_strict_ood_e3_seed2048_v4.pt",
+  "best_epoch": 4,
+  "baseline_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.0744,
+      "Precision": 0.06581,
+      "Recall": 0.08788,
+      "NDCG": 0.09183
+    },
+    "Top20": {
+      "Hit Ratio": 0.12693,
+      "Precision": 0.05614,
+      "Recall": 0.14607,
+      "NDCG": 0.10986
+    }
+  },
+  "best_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.0791,
+      "Precision": 0.06996,
+      "Recall": 0.09526,
+      "NDCG": 0.10051
+    },
+    "Top20": {
+      "Hit Ratio": 0.13041,
+      "Precision": 0.05767,
+      "Recall": 0.1551,
+      "NDCG": 0.11831
+    }
+  },
+  "baseline_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.0094,
+      "Precision": 0.02028,
+      "Recall": 0.01596,
+      "NDCG": 0.02365
+    },
+    "Top20": {
+      "Hit Ratio": 0.01855,
+      "Precision": 0.02002,
+      "Recall": 0.02904,
+      "NDCG": 0.02801
+    }
+  },
+  "best_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.01085,
+      "Precision": 0.02343,
+      "Recall": 0.01839,
+      "NDCG": 0.02782
+    },
+    "Top20": {
+      "Hit Ratio": 0.02099,
+      "Precision": 0.02265,
+      "Recall": 0.03263,
+      "NDCG": 0.03225
+    }
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "dataset": "yelp2018",
+  "protocol_version": "corrected_v5_fair_three_method_bpr25_validation_audit",
+  "comparison_arms": {
+    "lightgcn": "LightGCN, collaborative-only",
+    "causaldiffrec": "original CausalDiffRec E0",
+    "full_method": "Causal diffusion/LSCI backbone + semantic ConditionFusion + InfoNCE(lambda=0.1) + train-history semantic score fusion(alpha=0.75); learned edge gate disabled"
+  },
+  "shared_protocol": {
+    "data": "yelp2018 v1_strict",
+    "evaluation": "full-candidate OOD, train items masked, Recall/NDCG at 20",
+    "checkpoint_selection": "validation NDCG@20 only",
+    "seeds": [
+      1024,
+      2048,
+      3072,
+      4096,
+      5120
+    ],
+    "bpr_pass_budget": 25,
+    "embedding_dimension": 8,
+    "lightgcn_layers": 3,
+    "ranking_learning_rate": 0.001,
+    "ranking_batch_size": 1024,
+    "ranking_l2": 0.001,
+    "negative_sampling": "one random unobserved item per positive per BPR pass"
+  },
+  "semantic_confirmation_source": null,
+  "semantic_validation_confirmation": null,
+  "semantic_score_alpha_policy": {
+    "value": 0.75,
+    "mode": "fixed_full_method_parameter",
+    "external_validation_confirmation": "not_provided_not_claimed",
+    "interpretation": "The audit verifies that every full-method record used alpha=0.75. When no external confirmation file is supplied, this is not evidence that alpha was independently selected or confirmed on validation; it is a fixed comparison parameter."
+  },
+  "checks": {
+    "five_identical_seeds": true,
+    "all_validation_only": true,
+    "same_dataset": true,
+    "same_data_version": true,
+    "same_eval_split": true,
+    "equal_25_bpr_passes": true,
+    "same_embedding_dimension": true,
+    "same_lightgcn_layers": true,
+    "same_ranking_lr": true,
+    "same_ranking_batch_size": true,
+    "expected_method_implementations": true,
+    "all_selected_checkpoints_exist": true,
+    "full_uses_semantic_prior": true,
+    "full_uses_infonce_lambda_0_1": true,
+    "full_uses_semantic_score_alpha_0_75": true,
+    "unsupported_learned_edge_gate_disabled": true
+  },
+  "ood_test_allowed": true,
+  "per_arm_validation": {
+    "lightgcn": {
+      "source_records": {
+        "1024": "experiments/checkpoints/yelp2018_v5_fair_bpr25_lightgcn_seed1024.pt",
+        "2048": "experiments/checkpoints/yelp2018_v5_fair_bpr25_lightgcn_seed2048.pt",
+        "3072": "experiments/checkpoints/yelp2018_v5_fair_bpr25_lightgcn_seed3072.pt",
+        "4096": "experiments/checkpoints/yelp2018_v5_fair_bpr25_lightgcn_seed4096.pt",
+        "5120": "experiments/checkpoints/yelp2018_v5_fair_bpr25_lightgcn_seed5120.pt"
+      },
+      "validation_ndcg20": {
+        "1024": 0.05386,
+        "2048": 0.0551,
+        "3072": 0.05554,
+        "4096": 0.05502,
+        "5120": 0.05527
+      },
+      "bpr_passes": {
+        "1024": 25,
+        "2048": 25,
+        "3072": 25,
+        "4096": 25,
+        "5120": 25
+      },
+      "peak_vram_mb": {
+        "1024": 995.3828125,
+        "2048": 995.3828125,
+        "3072": 995.3828125,
+        "4096": 995.3828125,
+        "5120": 995.3828125
+      },
+      "wall_time_sec": {
+        "1024": 520.9074549674988,
+        "2048": 503.9700665473938,
+        "3072": 505.646537065506,
+        "4096": 513.6079189777374,
+        "5120": 521.1641511917114
+      }
+    },
+    "causaldiffrec": {
+      "source_records": {
+        "1024": "checkpoints/yelp2018_causaldiffrec_e0_v1_strict_ood_v5_fair_bpr25_e0_seed1024_strict_ood_seed1024_v4.pt",
+        "2048": "checkpoints/yelp2018_causaldiffrec_e0_v1_strict_ood_v5_fair_bpr25_e0_seed2048_strict_ood_seed2048_v4.pt",
+        "3072": "checkpoints/yelp2018_causaldiffrec_e0_v1_strict_ood_v5_fair_bpr25_e0_seed3072_strict_ood_seed3072_v4.pt",
+        "4096": "checkpoints/yelp2018_causaldiffrec_e0_v1_strict_ood_v5_fair_bpr25_e0_seed4096_strict_ood_seed4096_v4.pt",
+        "5120": "checkpoints/yelp2018_causaldiffrec_e0_v1_strict_ood_v5_fair_bpr25_e0_seed5120_strict_ood_seed5120_v4.pt"
+      },
+      "validation_ndcg20": {
+        "1024": 0.04857,
+        "2048": 0.04834,
+        "3072": 0.04957,
+        "4096": 0.04869,
+        "5120": 0.05114
+      },
+      "bpr_passes": {
+        "1024": 25,
+        "2048": 25,
+        "3072": 25,
+        "4096": 25,
+        "5120": 25
+      },
+      "peak_vram_mb": {
+        "1024": 17823.2431640625,
+        "2048": 17823.25537109375,
+        "3072": 17823.24951171875,
+        "4096": 17823.24072265625,
+        "5120": 17823.23828125
+      },
+      "wall_time_sec": {
+        "1024": 743.6071779727936,
+        "2048": 742.3793406486511,
+        "3072": 748.0503447055817,
+        "4096": 740.3070523738861,
+        "5120": 738.8121130466461
+      }
+    },
+    "full_method": {
+      "source_records": {
+        "1024": "checkpoints/yelp2018_lsci_e3_scorefusion_a0.75_v1_strict_ood_v5_fair_bpr25_full_seed1024_strict_ood_e3_seed1024_v4.pt",
+        "2048": "checkpoints/yelp2018_lsci_e3_scorefusion_a0.75_v1_strict_ood_v5_fair_bpr25_full_seed2048_strict_ood_e3_seed2048_v4.pt",
+        "3072": "checkpoints/yelp2018_lsci_e3_scorefusion_a0.75_v1_strict_ood_v5_fair_bpr25_full_seed3072_strict_ood_e3_seed3072_v4.pt",
+        "4096": "checkpoints/yelp2018_lsci_e3_scorefusion_a0.75_v1_strict_ood_v5_fair_bpr25_full_seed4096_strict_ood_e3_seed4096_v4.pt",
+        "5120": "checkpoints/yelp2018_lsci_e3_scorefusion_a0.75_v1_strict_ood_v5_fair_bpr25_full_seed5120_strict_ood_e3_seed5120_v4.pt"
+      },
+      "validation_ndcg20": {
+        "1024": 0.04919,
+        "2048": 0.05023,
+        "3072": 0.04877,
+        "4096": 0.05087,
+        "5120": 0.04996
+      },
+      "bpr_passes": {
+        "1024": 25,
+        "2048": 25,
+        "3072": 25,
+        "4096": 25,
+        "5120": 25
+      },
+      "peak_vram_mb": {
+        "1024": 14640.69677734375,
+        "2048": 14640.69677734375,
+        "3072": 14640.69677734375,
+        "4096": 14640.69677734375,
+        "5120": 14640.69677734375
+      },
+      "wall_time_sec": {
+        "1024": 691.2846903800964,
+        "2048": 689.318457365036,
+        "3072": 688.2262976169586,
+        "4096": 690.869781255722,
+        "5120": 689.9322264194489
+      }
+    }
+  },
+  "scope_note": "Equal budget means equal complete BPR passes. CausalDiffRec/full method also optimize their architecture-specific representation objectives, which is part of each method. Checkpoint selection is validation-only. This audit does not assert an independent validation confirmation for a fixed semantic score alpha when no confirmation file is supplied."
+}

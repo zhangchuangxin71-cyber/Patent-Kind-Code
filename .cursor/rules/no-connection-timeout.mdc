@@ -1,0 +1,68 @@
+---
+description: 防止长命令/阻塞等待导致对话连接失败（alwaysApply）
+alwaysApply: true
+---
+
+# 防连接超时：Shell 与长任务规范
+
+目标：避免「The connection failed 10 times」——通常由**对话内长时间阻塞**引起，不是用户网络问题。
+
+## 硬性禁止
+
+1. **禁止**在对话里同步等待 >30 秒的任务（下载、训练、解压大 zip、全盘 find、pip 大包安装）。
+2. **禁止**使用 `Await` / 长 `block_until_ms`（>30s）等待后台任务完成；只读日志末尾。
+3. **禁止**对 `/media`、`/home` 等大目录做无界 `find`；路径必须已知且浅层。
+4. **禁止**在 Shell 输出中读取/打印密钥（`kaggle.json`、API key、token 内容）。
+5. **禁止**一次 Turn 里串联多个可能各 >30s 的重命令。
+
+## 必须遵守
+
+### 长任务 → 后台 + 日志
+
+```bash
+# ✅ 下载 / 训练 / prepare
+nohup bash -c '...' > logs/<task>.log 2>&1 &
+echo "PID=$!"
+```
+
+日志统一放 `CausalDiffRec-master/logs/` 或 `data_strict/` 相关目录。
+
+### 查进度 → 秒级命令
+
+只允许：`tail -n N log`、`head -n N log`、`ls -lh path`、`ps -p PID`、`wc -l log`（N≤30）。
+
+```bash
+# ✅
+tail -n 20 logs/download_food.log
+ls -lh data_strict/cache/KuaiRec_clean.zip
+ps -C wget -o pid,etime,cmd | head -3
+
+# ❌
+find /media/p520 -name '*.csv'
+sleep 120 && wait
+block_until_ms: 120000
+```
+
+### 下载文件
+
+- 大 zip **不要用 `wget -c` 续传到已损坏文件**；异常大小则删后整包重下。
+- 完成后用 `ls -lh` + `zipfile.ZipFile` 快速验大小，不在对话里解压等待完成。
+
+### 向用户汇报
+
+- 说明：**后台 PID / 日志路径 / 预计耗时**。
+- 未完成时只报当前进度，**不**在 Turn 内等到结束。
+- 用户问「进度如何」→ 只读日志，≤3 条短命令。
+
+## 本仓库任务约定
+
+| 任务类型 | 做法 |
+|---------|------|
+| 5-seed 训练 | `nohup bash scripts/run_*_multiseed.sh` + master log |
+| 数据下载 | `download_datasets.py` 或 `nohup wget` + log |
+| prepare/validate | `nohup python -u scripts/data/prepare_*.py` + log |
+| 依赖安装 | `pip install ... -q --timeout 60`，失败则报阻塞点，不反复 pip |
+
+## 失败时
+
+若命令被中断或 connection failed：**不要原样重试长命令**；改读已有 log，或拆成更小的后台步骤。

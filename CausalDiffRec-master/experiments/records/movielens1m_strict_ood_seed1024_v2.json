@@ -1,0 +1,112 @@
+{
+  "settings": {
+    "dataset": "movielens1m",
+    "seed": 1024,
+    "epochs": 1,
+    "learning_rate": 0.1,
+    "lr2": 0.1,
+    "wd2": 0.0,
+    "hidden1": 8,
+    "hidden2": 8,
+    "emd_size": 8,
+    "emb_size": 10,
+    "mlp_dims": "[8]",
+    "steps": 2,
+    "sampling_steps": 2,
+    "noise_schedule": "linear-var",
+    "noise_scale": 0.1,
+    "noise_min": 0.01,
+    "noise_max": 0.09,
+    "mean_type": "x0",
+    "reweight": true,
+    "sampling_noise": false,
+    "gpu_id": 0,
+    "generator_rank": 128,
+    "num_environments_K": 3,
+    "bpr_batch_size": 1024,
+    "lgcn_layers": 3,
+    "rec_lr": 0.001,
+    "num_nodes": 7528,
+    "num_users": 5148,
+    "num_items": 2380,
+    "feat_dim": 64,
+    "train_edges": 619670,
+    "test_edges": 619670,
+    "param_count": {
+      "vgae": 69000,
+      "diffusion": 0,
+      "mlp": 398,
+      "generator": 7708672,
+      "env_infer": 232,
+      "total": 7778302
+    },
+    "device": "cpu",
+    "method": "causaldiffrec_e0",
+    "data_version": "v1_strict",
+    "data_status": "method-validation",
+    "eval_split": "ood",
+    "data_root": "data_strict/processed/movielens1m/v1_strict",
+    "val_gt_users": 5004,
+    "val_gt_interactions": 44262,
+    "gt_users": 5127,
+    "gt_interactions": 110655,
+    "protocol_version": "corrected_v2",
+    "selection_split": "val",
+    "selection_metric": "NDCG@20"
+  },
+  "best_epoch": 1,
+  "best_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.07381,
+      "Precision": 0.06529,
+      "Recall": 0.08698,
+      "NDCG": 0.09101
+    },
+    "Top20": {
+      "Hit Ratio": 0.12607,
+      "Precision": 0.05576,
+      "Recall": 0.14503,
+      "NDCG": 0.10907
+    }
+  },
+  "best_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.00921,
+      "Precision": 0.01988,
+      "Recall": 0.01572,
+      "NDCG": 0.02327
+    },
+    "Top20": {
+      "Hit Ratio": 0.01837,
+      "Precision": 0.01983,
+      "Recall": 0.02866,
+      "NDCG": 0.02767
+    }
+  },
+  "epoch_logs": [
+    {
+      "epoch": 1,
+      "pretrain_loss": 1173.1082253373709,
+      "rec_loss": 116.422164529562,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07381,
+          "Precision": 0.06529,
+          "Recall": 0.08698,
+          "NDCG": 0.09101
+        },
+        "Top20": {
+          "Hit Ratio": 0.12607,
+          "Precision": 0.05576,
+          "Recall": 0.14503,
+          "NDCG": 0.10907
+        }
+      },
+      "is_best": true
+    }
+  ],
+  "peak_vram_mb": null,
+  "checkpoint": "checkpoints/movielens1m_causaldiffrec_e0_v1_strict_ood_corrected_v2_smoke_strict_ood_seed1024_v2.pt",
+  "wall_time_sec": 49.52789258956909,
+  "wall_time_hms": "00:00:49"
+}

@@ -1,0 +1,230 @@
+{
+  "summary": {
+    "dataset": "movielens1m",
+    "protocol_version": "corrected_v4_activity_adaptive_validation_only",
+    "test_gt_loaded": false,
+    "selection_seeds": [
+      1024,
+      2048,
+      3072
+    ],
+    "confirmation_seeds": [
+      4096,
+      5120
+    ],
+    "activity_thresholds_frozen": {
+      "q1": 23.0,
+      "q3": 79.0
+    },
+    "group_rule": "low: degree<=q1; mid: q1<degree<=q3; high: degree>q3",
+    "alpha_candidates": [
+      0.0,
+      0.025,
+      0.05,
+      0.075,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.5
+    ],
+    "selected_group_alphas": {
+      "low_activity": 0.2,
+      "mid_activity": 0.1,
+      "high_activity": 0.0
+    },
+    "uniform_alpha": 0.1,
+    "selection": {
+      "baseline": 0.16610013548270722,
+      "uniform_real": 0.169111097509006,
+      "adaptive_real": 0.169896046787981,
+      "adaptive_shuffle": 0.1595599933201168
+    },
+    "confirmation": {
+      "baseline": 0.16663216059747185,
+      "uniform_real": 0.16886121190656753,
+      "adaptive_real": 0.16964005964153742,
+      "adaptive_shuffle": 0.15973224683446618
+    },
+    "checks": {
+      "test_gt_not_loaded": true,
+      "confirmation_beats_uniform": true,
+      "confirmation_beats_baseline": true,
+      "confirmation_beats_shuffle": true,
+      "each_confirmation_seed_beats_uniform": true
+    },
+    "ood_test_allowed": true
+  },
+  "selection_grid": {
+    "low_activity": {
+      "0.0": 0.1568598464994419,
+      "0.025": 0.15834188082968137,
+      "0.05": 0.1606225436314104,
+      "0.075": 0.16193769228159913,
+      "0.1": 0.16304501935564591,
+      "0.15": 0.1649471947026173,
+      "0.2": 0.16508609979424882,
+      "0.25": 0.16456082207543676,
+      "0.5": 0.15576305876964916
+    },
+    "mid_activity": {
+      "0.0": 0.16880389968488452,
+      "0.025": 0.17004756255773643,
+      "0.05": 0.17134503278170166,
+      "0.075": 0.17196854284528568,
+      "0.1": 0.17225617436264995,
+      "0.15": 0.17202878229072122,
+      "0.2": 0.17107048733532873,
+      "0.25": 0.16946054611152558,
+      "0.5": 0.15549539791092218
+    },
+    "high_activity": {
+      "0.0": 0.16997558789430983,
+      "0.025": 0.1696451740143424,
+      "0.05": 0.16958233436795148,
+      "0.075": 0.16912420776649517,
+      "0.1": 0.16886849135548868,
+      "0.15": 0.16731129933761907,
+      "0.2": 0.16457839376477437,
+      "0.25": 0.1622691916010047,
+      "0.5": 0.14534584786770346
+    }
+  },
+  "per_seed": {
+    "1024": {
+      "source_record": "experiments/records/movielens1m_pure_lightgcn_v4_bpr200_seed1024.json",
+      "baseline": 0.17001541521376634,
+      "uniform_real": 0.17171297591906093,
+      "adaptive_real": 0.172137546634678,
+      "adaptive_shuffle": 0.16299198891573397,
+      "groups": {
+        "low_activity": {
+          "baseline": 0.16462473676121334,
+          "uniform_real": 0.16742211358694783,
+          "adaptive_real": 0.16848286743270532,
+          "adaptive_shuffle": 0.14562681933551205
+        },
+        "mid_activity": {
+          "baseline": 0.1718220751828765,
+          "uniform_real": 0.17412161765232406,
+          "adaptive_real": 0.17412161765232406,
+          "adaptive_shuffle": 0.1673185601695414
+        },
+        "high_activity": {
+          "baseline": 0.17180988739593336,
+          "uniform_real": 0.17116719602184918,
+          "adaptive_real": 0.17180988739593336,
+          "adaptive_shuffle": 0.17180988739593336
+        }
+      }
+    },
+    "2048": {
+      "source_record": "experiments/records/movielens1m_pure_lightgcn_v4_bpr200_seed2048.json",
+      "baseline": 0.16225346487505357,
+      "uniform_real": 0.16618440488759378,
+      "adaptive_real": 0.167340152932043,
+      "adaptive_shuffle": 0.15542098823102501,
+      "groups": {
+        "low_activity": {
+          "baseline": 0.1492857185546031,
+          "uniform_real": 0.15775550303838262,
+          "adaptive_real": 0.16081396321521768,
+          "adaptive_shuffle": 0.13497244717133897
+        },
+        "mid_activity": {
+          "baseline": 0.1659535790307664,
+          "uniform_real": 0.17032802940179437,
+          "adaptive_real": 0.17032802940179437,
+          "adaptive_shuffle": 0.15949340766556916
+        },
+        "high_activity": {
+          "baseline": 0.16788410152423072,
+          "uniform_real": 0.1663080059314534,
+          "adaptive_real": 0.16788410152423072,
+          "adaptive_shuffle": 0.16788410152423072
+        }
+      }
+    },
+    "3072": {
+      "source_record": "experiments/records/movielens1m_pure_lightgcn_v4_bpr200_seed3072.json",
+      "baseline": 0.1660315263593017,
+      "uniform_real": 0.16943591172036326,
+      "adaptive_real": 0.17021044079722203,
+      "adaptive_shuffle": 0.16026700281359144,
+      "groups": {
+        "low_activity": {
+          "baseline": 0.15666908418250935,
+          "uniform_real": 0.16395744144160726,
+          "adaptive_real": 0.1659614687348235,
+          "adaptive_shuffle": 0.14266851967546984
+        },
+        "mid_activity": {
+          "baseline": 0.16863604484101072,
+          "uniform_real": 0.17231887603383148,
+          "adaptive_real": 0.17231887603383148,
+          "adaptive_shuffle": 0.1641456041365928
+        },
+        "high_activity": {
+          "baseline": 0.17023277476276547,
+          "uniform_real": 0.16913027211316348,
+          "adaptive_real": 0.17023277476276547,
+          "adaptive_shuffle": 0.17023277476276547
+        }
+      }
+    },
+    "4096": {
+      "source_record": "experiments/records/movielens1m_pure_lightgcn_v4_bpr200_seed4096.json",
+      "baseline": 0.16564188729980678,
+      "uniform_real": 0.16827233398518449,
+      "adaptive_real": 0.16889724337195608,
+      "adaptive_shuffle": 0.15823248607230964,
+      "groups": {
+        "low_activity": {
+          "baseline": 0.15718253776312988,
+          "uniform_real": 0.1616974808030237,
+          "adaptive_real": 0.1635644530072535,
+          "adaptive_shuffle": 0.1384318054843005
+        },
+        "mid_activity": {
+          "baseline": 0.16808090326545314,
+          "uniform_real": 0.17137719605340224,
+          "adaptive_real": 0.17137719605340224,
+          "adaptive_shuffle": 0.16268582551495842
+        },
+        "high_activity": {
+          "baseline": 0.16926352013262064,
+          "uniform_real": 0.1686277082982349,
+          "adaptive_real": 0.16926352013262064,
+          "adaptive_shuffle": 0.16926352013262064
+        }
+      }
+    },
+    "5120": {
+      "source_record": "experiments/records/movielens1m_pure_lightgcn_v4_bpr200_seed5120.json",
+      "baseline": 0.16762243389513692,
+      "uniform_real": 0.16945008982795057,
+      "adaptive_real": 0.17038287591111875,
+      "adaptive_shuffle": 0.16123200759662276,
+      "groups": {
+        "low_activity": {
+          "baseline": 0.15871560081615144,
+          "uniform_real": 0.16220161624294163,
+          "adaptive_real": 0.16417707960029462,
+          "adaptive_shuffle": 0.14361164212185776
+        },
+        "mid_activity": {
+          "baseline": 0.17062870810026504,
+          "uniform_real": 0.17339901734953217,
+          "adaptive_real": 0.17339901734953217,
+          "adaptive_shuffle": 0.16544281748963635
+        },
+        "high_activity": {
+          "baseline": 0.17054427477649256,
+          "uniform_real": 0.16877208180719408,
+          "adaptive_real": 0.17054427477649256,
+          "adaptive_shuffle": 0.17054427477649256
+        }
+      }
+    }
+  }
+}

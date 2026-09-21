@@ -1,0 +1,169 @@
+{
+  "dataset": "amazon_beauty",
+  "protocol_version": "corrected_v5_fair_three_method_bpr25_validation_audit",
+  "comparison_arms": {
+    "lightgcn": "LightGCN, collaborative-only",
+    "causaldiffrec": "original CausalDiffRec E0",
+    "full_method": "Causal diffusion/LSCI backbone + semantic ConditionFusion + InfoNCE(lambda=0.1) + train-history semantic score fusion(alpha=0.75); learned edge gate disabled"
+  },
+  "shared_protocol": {
+    "data": "amazon_beauty v1_strict",
+    "evaluation": "full-candidate OOD, train items masked, Recall/NDCG at 20",
+    "checkpoint_selection": "validation NDCG@20 only",
+    "seeds": [
+      1024,
+      2048,
+      3072,
+      4096,
+      5120
+    ],
+    "bpr_pass_budget": 25,
+    "embedding_dimension": 8,
+    "lightgcn_layers": 3,
+    "ranking_learning_rate": 0.001,
+    "ranking_batch_size": 1024,
+    "ranking_l2": 0.001,
+    "negative_sampling": "one random unobserved item per positive per BPR pass"
+  },
+  "semantic_confirmation_source": null,
+  "semantic_validation_confirmation": null,
+  "semantic_score_alpha_policy": {
+    "value": 0.75,
+    "mode": "fixed_full_method_parameter",
+    "external_validation_confirmation": "not_provided_not_claimed",
+    "interpretation": "The audit verifies that every full-method record used alpha=0.75. When no external confirmation file is supplied, this is not evidence that alpha was independently selected or confirmed on validation; it is a fixed comparison parameter."
+  },
+  "checks": {
+    "five_identical_seeds": true,
+    "all_validation_only": true,
+    "same_dataset": true,
+    "same_data_version": true,
+    "same_eval_split": true,
+    "equal_25_bpr_passes": true,
+    "same_embedding_dimension": true,
+    "same_lightgcn_layers": true,
+    "same_ranking_lr": true,
+    "same_ranking_batch_size": true,
+    "expected_method_implementations": true,
+    "all_selected_checkpoints_exist": true,
+    "full_uses_semantic_prior": true,
+    "full_uses_infonce_lambda_0_1": true,
+    "full_uses_semantic_score_alpha_0_75": true,
+    "unsupported_learned_edge_gate_disabled": true
+  },
+  "ood_test_allowed": true,
+  "per_arm_validation": {
+    "lightgcn": {
+      "source_records": {
+        "1024": "experiments/checkpoints/amazon_beauty_v5_fair_bpr25_lightgcn_seed1024.pt",
+        "2048": "experiments/checkpoints/amazon_beauty_v5_fair_bpr25_lightgcn_seed2048.pt",
+        "3072": "experiments/checkpoints/amazon_beauty_v5_fair_bpr25_lightgcn_seed3072.pt",
+        "4096": "experiments/checkpoints/amazon_beauty_v5_fair_bpr25_lightgcn_seed4096.pt",
+        "5120": "experiments/checkpoints/amazon_beauty_v5_fair_bpr25_lightgcn_seed5120.pt"
+      },
+      "validation_ndcg20": {
+        "1024": 0.06275,
+        "2048": 0.06148,
+        "3072": 0.06128,
+        "4096": 0.05815,
+        "5120": 0.06183
+      },
+      "bpr_passes": {
+        "1024": 25,
+        "2048": 25,
+        "3072": 25,
+        "4096": 25,
+        "5120": 25
+      },
+      "peak_vram_mb": {
+        "1024": 504.1923828125,
+        "2048": 504.1923828125,
+        "3072": 504.1923828125,
+        "4096": 504.1923828125,
+        "5120": 504.1923828125
+      },
+      "wall_time_sec": {
+        "1024": 194.74484157562256,
+        "2048": 195.65812420845032,
+        "3072": 192.77846932411194,
+        "4096": 193.99995279312134,
+        "5120": 196.16112327575684
+      }
+    },
+    "causaldiffrec": {
+      "source_records": {
+        "1024": "checkpoints/amazon_beauty_causaldiffrec_e0_v1_strict_ood_v5_fair_bpr25_e0_seed1024_strict_ood_seed1024_v4.pt",
+        "2048": "checkpoints/amazon_beauty_causaldiffrec_e0_v1_strict_ood_v5_fair_bpr25_e0_seed2048_strict_ood_seed2048_v4.pt",
+        "3072": "checkpoints/amazon_beauty_causaldiffrec_e0_v1_strict_ood_v5_fair_bpr25_e0_seed3072_strict_ood_seed3072_v4.pt",
+        "4096": "checkpoints/amazon_beauty_causaldiffrec_e0_v1_strict_ood_v5_fair_bpr25_e0_seed4096_strict_ood_seed4096_v4.pt",
+        "5120": "checkpoints/amazon_beauty_causaldiffrec_e0_v1_strict_ood_v5_fair_bpr25_e0_seed5120_strict_ood_seed5120_v4.pt"
+      },
+      "validation_ndcg20": {
+        "1024": 0.03063,
+        "2048": 0.04345,
+        "3072": 0.03304,
+        "4096": 0.03008,
+        "5120": 0.03459
+      },
+      "bpr_passes": {
+        "1024": 25,
+        "2048": 25,
+        "3072": 25,
+        "4096": 25,
+        "5120": 25
+      },
+      "peak_vram_mb": {
+        "1024": 9508.2705078125,
+        "2048": 9508.28466796875,
+        "3072": 9508.2841796875,
+        "4096": 9508.2783203125,
+        "5120": 9508.30126953125
+      },
+      "wall_time_sec": {
+        "1024": 361.7264130115509,
+        "2048": 353.89711713790894,
+        "3072": 354.5647225379944,
+        "4096": 357.24133014678955,
+        "5120": 354.6682116985321
+      }
+    },
+    "full_method": {
+      "source_records": {
+        "1024": "checkpoints/amazon_beauty_lsci_e3_scorefusion_a0.75_v1_strict_ood_v5_fair_bpr25_full_seed1024_strict_ood_e3_seed1024_v4.pt",
+        "2048": "checkpoints/amazon_beauty_lsci_e3_scorefusion_a0.75_v1_strict_ood_v5_fair_bpr25_full_seed2048_strict_ood_e3_seed2048_v4.pt",
+        "3072": "checkpoints/amazon_beauty_lsci_e3_scorefusion_a0.75_v1_strict_ood_v5_fair_bpr25_full_seed3072_strict_ood_e3_seed3072_v4.pt",
+        "4096": "checkpoints/amazon_beauty_lsci_e3_scorefusion_a0.75_v1_strict_ood_v5_fair_bpr25_full_seed4096_strict_ood_e3_seed4096_v4.pt",
+        "5120": "checkpoints/amazon_beauty_lsci_e3_scorefusion_a0.75_v1_strict_ood_v5_fair_bpr25_full_seed5120_strict_ood_e3_seed5120_v4.pt"
+      },
+      "validation_ndcg20": {
+        "1024": 0.04729,
+        "2048": 0.04501,
+        "3072": 0.04407,
+        "4096": 0.04671,
+        "5120": 0.04724
+      },
+      "bpr_passes": {
+        "1024": 25,
+        "2048": 25,
+        "3072": 25,
+        "4096": 25,
+        "5120": 25
+      },
+      "peak_vram_mb": {
+        "1024": 7700.8408203125,
+        "2048": 7700.8408203125,
+        "3072": 7700.8408203125,
+        "4096": 7700.8408203125,
+        "5120": 7700.8408203125
+      },
+      "wall_time_sec": {
+        "1024": 323.722350358963,
+        "2048": 322.7443709373474,
+        "3072": 323.7476427555084,
+        "4096": 323.0371551513672,
+        "5120": 325.7872383594513
+      }
+    }
+  },
+  "scope_note": "Equal budget means equal complete BPR passes. CausalDiffRec/full method also optimize their architecture-specific representation objectives, which is part of each method. Checkpoint selection is validation-only. This audit does not assert an independent validation confirmation for a fixed semantic score alpha when no confirmation file is supplied."
+}

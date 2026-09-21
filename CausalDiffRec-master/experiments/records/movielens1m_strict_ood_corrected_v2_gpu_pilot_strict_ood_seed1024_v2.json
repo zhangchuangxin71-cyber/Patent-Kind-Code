@@ -1,0 +1,152 @@
+{
+  "settings": {
+    "dataset": "movielens1m",
+    "seed": 1024,
+    "epochs": 3,
+    "learning_rate": 0.1,
+    "lr2": 0.1,
+    "wd2": 0.0,
+    "hidden1": 8,
+    "hidden2": 8,
+    "emd_size": 8,
+    "emb_size": 10,
+    "mlp_dims": "[8]",
+    "steps": 100,
+    "sampling_steps": 100,
+    "noise_schedule": "linear-var",
+    "noise_scale": 0.1,
+    "noise_min": 0.01,
+    "noise_max": 0.09,
+    "mean_type": "x0",
+    "reweight": true,
+    "sampling_noise": false,
+    "gpu_id": 0,
+    "generator_rank": 128,
+    "num_environments_K": 3,
+    "bpr_batch_size": 1024,
+    "lgcn_layers": 3,
+    "rec_lr": 0.001,
+    "num_nodes": 7528,
+    "num_users": 5148,
+    "num_items": 2380,
+    "feat_dim": 64,
+    "train_edges": 619670,
+    "test_edges": 619670,
+    "param_count": {
+      "vgae": 69000,
+      "diffusion": 0,
+      "mlp": 398,
+      "generator": 7708672,
+      "env_infer": 232,
+      "total": 7778302
+    },
+    "device": "cuda:0",
+    "method": "causaldiffrec_e0",
+    "data_version": "v1_strict",
+    "data_status": "method-validation",
+    "eval_split": "ood",
+    "data_root": "data_strict/processed/movielens1m/v1_strict",
+    "val_gt_users": 5004,
+    "val_gt_interactions": 44262,
+    "gt_users": 5127,
+    "gt_interactions": 110655,
+    "protocol_version": "corrected_v2",
+    "selection_split": "val",
+    "selection_metric": "NDCG@20"
+  },
+  "best_epoch": 3,
+  "best_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.07284,
+      "Precision": 0.06443,
+      "Recall": 0.08518,
+      "NDCG": 0.09021
+    },
+    "Top20": {
+      "Hit Ratio": 0.12675,
+      "Precision": 0.05606,
+      "Recall": 0.14608,
+      "NDCG": 0.10955
+    }
+  },
+  "best_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.00932,
+      "Precision": 0.02011,
+      "Recall": 0.01589,
+      "NDCG": 0.02354
+    },
+    "Top20": {
+      "Hit Ratio": 0.01839,
+      "Precision": 0.01985,
+      "Recall": 0.02849,
+      "NDCG": 0.02778
+    }
+  },
+  "epoch_logs": [
+    {
+      "epoch": 1,
+      "pretrain_loss": 1061.6265301673695,
+      "rec_loss": 113.53154504299164,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07347,
+          "Precision": 0.06499,
+          "Recall": 0.0865,
+          "NDCG": 0.09062
+        },
+        "Top20": {
+          "Hit Ratio": 0.12609,
+          "Precision": 0.05577,
+          "Recall": 0.14543,
+          "NDCG": 0.10905
+        }
+      },
+      "is_best": true
+    },
+    {
+      "epoch": 2,
+      "pretrain_loss": 662.1881812719354,
+      "rec_loss": 118.48401322960854,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07306,
+          "Precision": 0.06463,
+          "Recall": 0.08549,
+          "NDCG": 0.09041
+        },
+        "Top20": {
+          "Hit Ratio": 0.12566,
+          "Precision": 0.05558,
+          "Recall": 0.14597,
+          "NDCG": 0.10921
+        }
+      },
+      "is_best": true
+    },
+    {
+      "epoch": 3,
+      "pretrain_loss": 377.28749564745533,
+      "rec_loss": 136.5671594440937,
+      "val_metrics": {
+        "Top10": {
+          "Hit Ratio": 0.07284,
+          "Precision": 0.06443,
+          "Recall": 0.08518,
+          "NDCG": 0.09021
+        },
+        "Top20": {
+          "Hit Ratio": 0.12675,
+          "Precision": 0.05606,
+          "Recall": 0.14608,
+          "NDCG": 0.10955
+        }
+      },
+      "is_best": true
+    }
+  ],
+  "peak_vram_mb": 2298.458984375,
+  "checkpoint": "checkpoints/movielens1m_causaldiffrec_e0_v1_strict_ood_corrected_v2_gpu_pilot_strict_ood_seed1024_v2.pt",
+  "wall_time_sec": 49.068641901016235,
+  "wall_time_hms": "00:00:49"
+}

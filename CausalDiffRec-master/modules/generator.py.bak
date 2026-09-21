@@ -1,0 +1,64 @@
+import torch
+import torch.nn as nn
+
+
+class Graph_Editer(nn.Module):
+    """Low-rank environment generator (B_k ≈ U_k @ V_k^T).
+
+    Matches the successful GPU reproduction logic: the edited graph is built from
+    multinomial samples of B, with noise-controlled keep/add — not from densifying
+    the original adjacency.
+    """
+
+    def __init__(self, K, n, device, rank=128):
+        super(Graph_Editer, self).__init__()
+        self.U = nn.Parameter(torch.FloatTensor(K, n, rank))
+        self.V = nn.Parameter(torch.FloatTensor(K, n, rank))
+        self.rank = rank
+        self.n = n
+        self.device = device
+        self.reset_parameters()
+
+    def reset_parameters(self):
+        nn.init.xavier_uniform_(self.U)
+        nn.init.xavier_uniform_(self.V)
+
+    def forward(self, n, num_sample, k, edge_index, noise_level=0.5):
+        device = edge_index.device
+        U_k = self.U[k].to(device)
+        V_k = self.V[k].to(device)
+
+        # Sparse membership via hashed edge ids (avoid n×n bool matrix)
+        orig_keys = edge_index[0].long() * n + edge_index[1].long()
+
+        kept_src, kept_dst = [], []
+        log_p_cols = []
+        chunk = 256
+        for start in range(0, n, chunk):
+            end = min(n, start + chunk)
+            scores = torch.matmul(U_k, V_k[start:end].t())          # [n, c]
+            probs = torch.softmax(scores, dim=0)                    # [n, c]
+            samples = torch.multinomial(probs.t(), num_samples=num_sample)  # [c, s]
+            cols = torch.arange(start, end, device=device).unsqueeze(1).expand(-1, num_sample)
+            rows = samples
+
+            sample_keys = rows.reshape(-1).long() * n + cols.reshape(-1).long()
+            is_orig = torch.isin(sample_keys, orig_keys).view(rows.shape)
+            rand = torch.rand(rows.shape, device=device)
+            keep = torch.where(is_orig, rand > noise_level, rand < noise_level)
+
+            kept_src.append(rows[keep])
+            kept_dst.append(cols[keep])
+
+            gather_probs = torch.gather(probs.t(), 1, samples)      # [c, s]
+            log_p_cols.append(torch.log(gather_probs + 1e-8).sum(dim=1))
+
+        if kept_src:
+            new_src = torch.cat(kept_src, dim=0)
+            new_dst = torch.cat(kept_dst, dim=0)
+            new_edge_index = torch.stack([new_src, new_dst], dim=0)
+        else:
+            new_edge_index = edge_index.clone()
+
+        log_p = torch.cat(log_p_cols, dim=0)  # [n]
+        return new_edge_index, log_p

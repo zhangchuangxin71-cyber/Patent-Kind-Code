@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Sync every local commit to the configured GitHub remote. A failed push never
+# blocks the commit; run `git push` later after restoring network/auth access.
+set -u
+
+if [ "${SKIP_GITHUB_AUTO_PUSH:-}" = "1" ]; then
+  exit 0
+fi
+
+branch="$(git branch --show-current)"
+if [ -z "$branch" ]; then
+  exit 0
+fi
+
+if ! git push origin "$branch"; then
+  echo "Note: this commit is local only; GitHub auto-sync will retry on the next commit." >&2
+fi

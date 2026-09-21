@@ -1,0 +1,139 @@
+# Strict dataset registry
+split_seed: 1024
+root: data_strict
+paper_stats:
+  food: {users: 7809, items: 6309, interactions: 216407, shift: temporal}
+  kuairec: {users: 7175, items: 10611, interactions: 1153797, shift: exposure}
+  yelp2018: {users: 8090, items: 13878, interactions: 398216, shift: popularity}
+  douban: {users: 8735, items: 13143, interactions: 354933, shift: popularity}
+  movielens1m: {users: null, items: null, interactions: null, shift: popularity}
+  amazon_beauty: {users: null, items: null, interactions: null, shift: popularity}
+
+datasets:
+  food:
+    status_default: rule-equivalent
+    license: "Food.com / Kaggle shuyangli94; record before use"
+    sources:
+      - name: kaggle_food_com
+        url: https://www.kaggle.com/datasets/shuyangli94/food-com-recipes-and-user-interactions
+        files: [RAW_interactions.csv, RAW_recipes.csv]
+        needs_auth: true
+    filters:
+      min_rating: 4
+      min_user_inter: 15
+      # Paper stats (7809/6309/216407) match sequential user->item at 15/15,
+      # not iterative bipartite k-core at item>=50 (which collapses to empty).
+      min_item_inter: 15
+      filter_mode: sequential_user_then_item
+      iterative_kcore: false
+    text_fields: [name, tags, description, ingredients]
+    feat_dim: 64
+
+  kuairec:
+    status_default: paper-snapshot
+    license: "CC BY-SA 4.0 (KuaiRec)"
+    sources:
+      - name: zenodo
+        url: https://zenodo.org/records/18164998/files/KuaiRec.zip
+        files: [KuaiRec.zip]
+        needs_auth: false
+      - name: caption
+        url: https://zenodo.org/records/18164998/files/kuairec_caption_category.csv
+        files: [kuairec_caption_category.csv]
+        needs_auth: false
+    filters:
+      min_watch_ratio: 2.0
+      iterative_kcore: false
+    text_fields: [caption, category]
+    feat_dim: 64
+
+  yelp2018:
+    status_default: rule-equivalent
+    license: "Yelp Dataset License; accept on Kaggle or yelp.com before download"
+    sources:
+      - name: kaggle_yelp_dataset
+        url: https://www.kaggle.com/datasets/yelp-dataset/yelp-dataset
+        files: [yelp_academic_dataset_review.json, yelp_academic_dataset_business.json]
+        needs_auth: true
+      - name: yelp_open_dataset
+        url: https://www.yelp.com/dataset/download
+        files: [yelp_academic_dataset_review.json, yelp_academic_dataset_business.json]
+        needs_auth: true
+        manual: true
+    filters:
+      min_rating: 4
+      # Full iterative k-core at 25/50 collapses to empty on current Open Dataset.
+      # Coarse search best near paper: 3 rounds of joint filter at 25/20
+      # -> ~10520 users / 12185 items / 526173 interactions (rule-equivalent).
+      min_user_inter: 25
+      min_item_inter: 20
+      filter_mode: bounded_kcore
+      max_rounds: 3
+      iterative_kcore: false
+    text_fields: [name, categories, attributes]
+    feat_dim: 16
+
+  douban:
+    # DeepGraph DoubanMovie for LSCI method validation (NOT CausalDiffRec Table-1).
+    status_default: deepgraph-method-validation
+    license: "DeepGraphLearning Douban.tar.gz (Song et al. WSDM'19); research use — cite DGRec"
+    sources:
+      - name: deepgraph_douban_movie
+        url: https://www.dropbox.com/s/u2ejjezjk08lz1o/Douban.tar.gz
+        files: [Douban/movie/douban_movie.tsv]
+        needs_auth: false
+        note: "ItemId remapped 0..N-1; no title/genres in release"
+    filters:
+      min_rating: 4
+      min_user_inter: 25
+      min_item_inter: 50
+      filter_mode: iterative_kcore
+      iterative_kcore: true
+      # CausalDiffRec builds dense n×n adj; n>~46k hits INT_MAX / VRAM.
+      # After k-core, randomly keep users so n_user+n_item <= max_nodes (disclosed).
+      max_nodes: 22000
+      subsample_seed: 1024
+    text_fields: [title, genres, summary]
+    feat_dim: 64
+    # after k-core ~38k/9.9k/5.8M; after max_nodes subsample ~20k users + ~9k items
+  movielens1m:
+    status_default: method-validation
+    license: "MovieLens 1M — GroupLens research license; cite Harper & Konstan 2015"
+    sources:
+      - name: grouplens_ml1m
+        url: https://files.grouplens.org/datasets/movielens/ml-1m.zip
+        files: [ml-1m/ratings.dat, ml-1m/movies.dat]
+        needs_auth: false
+    filters:
+      min_rating: 4
+      min_user_inter: 20
+      min_item_inter: 20
+      filter_mode: iterative_kcore
+      iterative_kcore: true
+      max_nodes: 22000
+      subsample_seed: 1024
+    text_fields: [title, genres]
+    feat_dim: 64
+
+  amazon_beauty:
+    status_default: method-validation
+    license: "Amazon review data (McAuley/SNAP) for academic research; cite He & McAuley / McAuley et al."
+    sources:
+      - name: snap_beauty_5core
+        url: https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Beauty_5.json.gz
+        files: [reviews_Beauty_5.json.gz]
+        needs_auth: false
+      - name: snap_beauty_meta
+        url: https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/meta_Beauty.json.gz
+        files: [meta_Beauty.json.gz]
+        needs_auth: false
+    filters:
+      min_rating: 4
+      min_user_inter: 5
+      min_item_inter: 5
+      filter_mode: iterative_kcore
+      iterative_kcore: true
+      max_nodes: 22000
+      subsample_seed: 1024
+    text_fields: [title, categories, description, brand]
+    feat_dim: 64

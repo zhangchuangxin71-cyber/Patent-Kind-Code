@@ -1,0 +1,98 @@
+{
+  "settings": {
+    "dataset": "amazon_beauty",
+    "seed": 5120,
+    "method": "pure_lightgcn_semantic_late_fusion",
+    "protocol_version": "corrected_v3_late_fusion",
+    "data_version": "v1_strict",
+    "eval_split": "ood",
+    "selection_split": "val",
+    "selection_metric": "NDCG@20",
+    "alpha": 1.0,
+    "alpha_selection_seeds": [
+      1024,
+      2048,
+      3072
+    ],
+    "alpha_confirmation_seeds": [
+      4096,
+      5120
+    ],
+    "score_normalization": "per_user_zscore",
+    "user_semantic_profile": "mean_train_item_semantics",
+    "semantic_prior_path": "data_strict/processed/amazon_beauty/v1_strict/features/semantic_prior.pt",
+    "semantic_prior_meta": {
+      "dataset": "amazon_beauty",
+      "mode": "raw",
+      "backend": "sbert",
+      "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "n_item": 6086,
+      "emb_dim": 384,
+      "coverage": 1.0,
+      "data_root": "data_strict/processed/amazon_beauty/v1_strict"
+    },
+    "frozen_comparison_set": [
+      "collaborative_alpha_0",
+      "semantic_late_fusion"
+    ]
+  },
+  "source_record": "experiments/records/amazon_beauty_lightgcn_strict_ood_seed5120_v3.json",
+  "checkpoint": "checkpoints/amazon_beauty_lightgcn_strict_ood_seed5120_v3.pt",
+  "best_epoch": 182,
+  "baseline_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.1041,
+      "Precision": 0.01597,
+      "Recall": 0.09919,
+      "NDCG": 0.05672
+    },
+    "Top20": {
+      "Hit Ratio": 0.15775,
+      "Precision": 0.0121,
+      "Recall": 0.14986,
+      "NDCG": 0.07096
+    }
+  },
+  "best_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.11937,
+      "Precision": 0.01831,
+      "Recall": 0.11843,
+      "NDCG": 0.07041
+    },
+    "Top20": {
+      "Hit Ratio": 0.17992,
+      "Precision": 0.0138,
+      "Recall": 0.17334,
+      "NDCG": 0.08595
+    }
+  },
+  "baseline_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.02135,
+      "Precision": 0.00487,
+      "Recall": 0.0248,
+      "NDCG": 0.01491
+    },
+    "Top20": {
+      "Hit Ratio": 0.03665,
+      "Precision": 0.00418,
+      "Recall": 0.03974,
+      "NDCG": 0.01955
+    }
+  },
+  "best_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.04636,
+      "Precision": 0.01057,
+      "Recall": 0.05008,
+      "NDCG": 0.0318
+    },
+    "Top20": {
+      "Hit Ratio": 0.07313,
+      "Precision": 0.00834,
+      "Recall": 0.0775,
+      "NDCG": 0.04019
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "dataset": "yelp2018",
+  "protocol": "corrected_v4_frozen_validation_selected_ood",
+  "alpha": 0.25,
+  "validation_summary": {
+    "dataset": "yelp2018",
+    "protocol_version": "corrected_v4_latefusion_validation_only",
+    "test_gt_loaded": false,
+    "alphas": [
+      0.0,
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      2.0
+    ],
+    "selection_seeds": [
+      1024,
+      2048,
+      3072
+    ],
+    "confirmation_seeds": [
+      4096,
+      5120
+    ],
+    "selected_alpha": 0.25,
+    "selection_real_ndcg20": 0.0519608828358459,
+    "selection_shuffle_ndcg20": 0.04980643313356061,
+    "confirmation_real_ndcg20": 0.05150469170803236,
+    "confirmation_shuffle_ndcg20": 0.04886726749219832,
+    "selection_baseline_ndcg20": 0.050765714529087146,
+    "confirmation_baseline_ndcg20": 0.0498556446876178,
+    "semantic_prior_path": "data_strict/processed/yelp2018/v1_strict/features/semantic_prior.pt",
+    "shuffled_prior_path": "data_strict/processed/yelp2018/v1_strict/features/semantic_prior_shuffled.pt",
+    "checks": {
+      "test_gt_not_loaded": true,
+      "positive_alpha": true,
+      "selection_beats_baseline": true,
+      "confirmation_beats_baseline": true,
+      "confirmation_beats_shuffle": true,
+      "confirmation_relative_gain_at_least_1pct": true,
+      "each_confirmation_seed_improves": true
+    },
+    "ood_test_allowed": true
+  },
+  "top20_ndcg": {
+    "baseline_alpha0": {
+      "mean": 0.013448,
+      "sample_std": 0.0011462198741951741,
+      "values": [
+        0.01328,
+        0.01399,
+        0.01309,
+        0.01189,
+        0.01499
+      ]
+    },
+    "semantic_real": {
+      "mean": 0.014524,
+      "sample_std": 0.0007959459780663509,
+      "values": [
+        0.01426,
+        0.01465,
+        0.01456,
+        0.01347,
+        0.01568
+      ]
+    },
+    "semantic_shuffled": {
+      "mean": 0.013142,
+      "sample_std": 0.0011465905982520526,
+      "values": [
+        0.01293,
+        0.01375,
+        0.01278,
+        0.01159,
+        0.01466
+      ]
+    },
+    "real_minus_baseline": {
+      "mean": 0.001076,
+      "sample_std": 0.00043026735874337525,
+      "values": [
+        0.00098,
+        0.0006599999999999991,
+        0.0014700000000000008,
+        0.0015799999999999998,
+        0.0006899999999999996
+      ]
+    },
+    "real_minus_shuffled": {
+      "mean": 0.001382,
+      "sample_std": 0.00043945420694311264,
+      "values": [
+        0.0013299999999999996,
+        0.0008999999999999998,
+        0.0017800000000000003,
+        0.0018799999999999997,
+        0.00102
+      ]
+    }
+  },
+  "all_test_records_frozen_after_validation": true
+}

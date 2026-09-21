@@ -1,0 +1,112 @@
+{
+  "dataset": "food",
+  "protocol": "corrected_v4_frozen_validation_selected_ood",
+  "alpha": 0.25,
+  "validation_summary": {
+    "dataset": "food",
+    "protocol_version": "corrected_v4_food_uniform_validation_only",
+    "test_gt_loaded": false,
+    "alphas": [
+      0.0,
+      0.025,
+      0.05,
+      0.075,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      2.0
+    ],
+    "selection_seeds": [
+      1024,
+      2048,
+      3072
+    ],
+    "confirmation_seeds": [
+      4096,
+      5120
+    ],
+    "selected_alpha": 0.25,
+    "selection_real_ndcg20": 0.03160034743944292,
+    "selection_shuffle_ndcg20": 0.028823553249452936,
+    "confirmation_real_ndcg20": 0.03120409222644786,
+    "confirmation_shuffle_ndcg20": 0.02875769777003189,
+    "selection_baseline_ndcg20": 0.03039228355238344,
+    "confirmation_baseline_ndcg20": 0.030176468446393948,
+    "semantic_prior_path": "data_strict/processed/food/v1_strict/features/semantic_prior.pt",
+    "shuffled_prior_path": "data_strict/processed/food/v1_strict/features/semantic_prior_shuffled.pt",
+    "checks": {
+      "test_gt_not_loaded": true,
+      "positive_alpha": true,
+      "selection_beats_baseline": true,
+      "confirmation_beats_baseline": true,
+      "confirmation_beats_shuffle": true,
+      "confirmation_relative_gain_at_least_1pct": true,
+      "each_confirmation_seed_improves": true
+    },
+    "ood_test_allowed": true
+  },
+  "top20_ndcg": {
+    "baseline_alpha0": {
+      "mean": 0.027800000000000002,
+      "sample_std": 0.00017204650534085304,
+      "values": [
+        0.02767,
+        0.02798,
+        0.02789,
+        0.02757,
+        0.02789
+      ]
+    },
+    "semantic_real": {
+      "mean": 0.027684,
+      "sample_std": 0.00013557285864065845,
+      "values": [
+        0.02779,
+        0.02749,
+        0.02782,
+        0.02761,
+        0.02771
+      ]
+    },
+    "semantic_shuffled": {
+      "mean": 0.026612,
+      "sample_std": 0.0002626214004988935,
+      "values": [
+        0.02674,
+        0.02615,
+        0.02678,
+        0.02674,
+        0.02665
+      ]
+    },
+    "real_minus_baseline": {
+      "mean": -0.00011600000000000152,
+      "sample_std": 0.00023776038357977122,
+      "values": [
+        0.00011999999999999858,
+        -0.0004900000000000009,
+        -7.000000000000062e-05,
+        3.999999999999837e-05,
+        -0.00018000000000000307
+      ]
+    },
+    "real_minus_shuffled": {
+      "mean": 0.0010719999999999994,
+      "sample_std": 0.0001690266251216069,
+      "values": [
+        0.0010499999999999989,
+        0.001340000000000001,
+        0.0010399999999999993,
+        0.0008699999999999992,
+        0.0010599999999999984
+      ]
+    }
+  },
+  "all_test_records_frozen_after_validation": true
+}

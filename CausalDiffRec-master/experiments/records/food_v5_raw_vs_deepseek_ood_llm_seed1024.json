@@ -1,0 +1,101 @@
+{
+  "settings": {
+    "dataset": "food",
+    "seed": 1024,
+    "method": "pure_lightgcn_semantic_late_fusion",
+    "protocol_version": "corrected_v5_raw_vs_deepseek_frozen_ood",
+    "comparison_label": "llm_text_sbert",
+    "source_protocol_version": "corrected_v3_lightgcn_validation_only",
+    "data_version": "v1_strict",
+    "eval_split": "ood",
+    "selection_split": "val",
+    "selection_metric": "NDCG@20",
+    "alpha": 0.25,
+    "alpha_selection_seeds": [
+      1024,
+      2048,
+      3072
+    ],
+    "alpha_confirmation_seeds": [
+      4096,
+      5120
+    ],
+    "score_normalization": "per_user_zscore",
+    "user_semantic_profile": "mean_train_item_semantics",
+    "semantic_prior_path": "data_strict/processed/food/v1_strict/features/semantic_prior.pt",
+    "semantic_prior_meta": {
+      "dataset": "food",
+      "mode": "llm",
+      "backend": "sbert",
+      "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "n_item": 6309,
+      "emb_dim": 384,
+      "coverage": 1.0,
+      "data_root": "data_strict/processed/food/v1_strict"
+    },
+    "frozen_comparison_set": [
+      "collaborative_alpha_0",
+      "semantic_late_fusion"
+    ],
+    "test_gt_loaded": true
+  },
+  "source_record": "experiments/records/food_lightgcn_strict_ood_seed1024_v3.json",
+  "checkpoint": "checkpoints/food_lightgcn_strict_ood_seed1024_v3.pt",
+  "best_epoch": 195,
+  "baseline_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.03089,
+      "Precision": 0.00903,
+      "Recall": 0.04004,
+      "NDCG": 0.02452
+    },
+    "Top20": {
+      "Hit Ratio": 0.04822,
+      "Precision": 0.00705,
+      "Recall": 0.05898,
+      "NDCG": 0.03011
+    }
+  },
+  "best_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.03133,
+      "Precision": 0.00916,
+      "Recall": 0.0403,
+      "NDCG": 0.0249
+    },
+    "Top20": {
+      "Hit Ratio": 0.04995,
+      "Precision": 0.0073,
+      "Recall": 0.06267,
+      "NDCG": 0.03142
+    }
+  },
+  "baseline_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.02125,
+      "Precision": 0.01192,
+      "Recall": 0.02722,
+      "NDCG": 0.02105
+    },
+    "Top20": {
+      "Hit Ratio": 0.03706,
+      "Precision": 0.0104,
+      "Recall": 0.04652,
+      "NDCG": 0.02767
+    }
+  },
+  "best_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.02086,
+      "Precision": 0.0117,
+      "Recall": 0.02674,
+      "NDCG": 0.02078
+    },
+    "Top20": {
+      "Hit Ratio": 0.03718,
+      "Precision": 0.01043,
+      "Recall": 0.04729,
+      "NDCG": 0.02779
+    }
+  }
+}

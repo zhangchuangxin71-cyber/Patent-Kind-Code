@@ -1,0 +1,888 @@
+{
+  "generated_by": "scripts/summarize_patent_experiments.py",
+  "seeds": [
+    1024,
+    2048,
+    3072,
+    4096,
+    5120
+  ],
+  "claim_supported": "semantic priors / score-level semantic fusion improve OOD recommendation robustness over baseline on MovieLens-1M, Yelp2018, and Amazon Beauty; Food supports real-vs-shuffled semantic specificity only",
+  "claim_not_supported": "full end-to-end LSCI-DiffRec universally outperforms CausalDiffRec",
+  "datasets": [
+    {
+      "label": "MovieLens-1M",
+      "dataset": "movielens1m",
+      "protocol": "corrected-v4 pure LightGCN BPR200 late fusion",
+      "seeds": [
+        1024,
+        2048,
+        3072,
+        4096,
+        5120
+      ],
+      "selection_seeds": [
+        1024,
+        2048,
+        3072
+      ],
+      "confirmation_seeds": [
+        4096,
+        5120
+      ],
+      "selected_alpha": 0.1,
+      "selected_group_alphas": null,
+      "validation_gate": {
+        "test_gt_loaded": false,
+        "ood_test_allowed": true,
+        "checks": {
+          "test_gt_not_loaded": true,
+          "positive_alpha": true,
+          "selection_beats_baseline": true,
+          "confirmation_beats_baseline": true,
+          "confirmation_beats_shuffle": true,
+          "confirmation_relative_gain_at_least_1pct": true,
+          "each_confirmation_seed_improves": true
+        }
+      },
+      "metrics": {
+        "baseline": {
+          "Recall@20": {
+            "mean": 0.06927799999999999,
+            "sample_std": 0.0021849187627918827,
+            "values": [
+              0.07259,
+              0.06645,
+              0.06903,
+              0.06902,
+              0.0693
+            ]
+          },
+          "NDCG@20": {
+            "mean": 0.06831,
+            "sample_std": 0.0019055051823597881,
+            "values": [
+              0.07122,
+              0.06594,
+              0.06851,
+              0.06769,
+              0.06819
+            ]
+          }
+        },
+        "real": {
+          "Recall@20": {
+            "mean": 0.07165,
+            "sample_std": 0.0026066165809339866,
+            "values": [
+              0.0755,
+              0.06839,
+              0.07247,
+              0.07077,
+              0.07112
+            ]
+          },
+          "NDCG@20": {
+            "mean": 0.07037399999999999,
+            "sample_std": 0.0020096840547707997,
+            "values": [
+              0.07335,
+              0.06791,
+              0.07105,
+              0.0696,
+              0.06996
+            ]
+          }
+        },
+        "shuffle": {
+          "Recall@20": {
+            "mean": 0.067198,
+            "sample_std": 0.0023905898853630223,
+            "values": [
+              0.07114,
+              0.06468,
+              0.06716,
+              0.06641,
+              0.0666
+            ]
+          },
+          "NDCG@20": {
+            "mean": 0.066996,
+            "sample_std": 0.0018530731232199137,
+            "values": [
+              0.06993,
+              0.06489,
+              0.06724,
+              0.06629,
+              0.06663
+            ]
+          }
+        }
+      },
+      "extra_variants": {},
+      "comparisons": {
+        "real_minus_baseline_Recall@20": {
+          "mean": 0.0023720000000000047,
+          "sample_std": 0.0007596512357654677,
+          "values": [
+            0.002909999999999996,
+            0.0019400000000000112,
+            0.0034400000000000125,
+            0.0017500000000000016,
+            0.0018200000000000022
+          ],
+          "relative_gain": 0.034238863708536696,
+          "bootstrap_95ci": [
+            0.0018160000000000038,
+            0.003010000000000007
+          ],
+          "one_sided_sign_p": 0.03125,
+          "positive_seed_count": 5
+        },
+        "real_minus_shuffle_Recall@20": {
+          "mean": 0.004452000000000003,
+          "sample_std": 0.0005719003409686007,
+          "values": [
+            0.004360000000000003,
+            0.003710000000000005,
+            0.005310000000000009,
+            0.004360000000000003,
+            0.004519999999999996
+          ],
+          "relative_gain": 0.0662519717848746,
+          "bootstrap_95ci": [
+            0.004002000000000003,
+            0.004930000000000006
+          ],
+          "one_sided_sign_p": 0.03125,
+          "positive_seed_count": 5
+        },
+        "real_minus_baseline_NDCG@20": {
+          "mean": 0.0020639999999999964,
+          "sample_std": 0.0002957701810527918,
+          "values": [
+            0.002129999999999993,
+            0.0019699999999999995,
+            0.0025400000000000006,
+            0.001909999999999995,
+            0.0017699999999999938
+          ],
+          "relative_gain": 0.030215195432586685,
+          "bootstrap_95ci": [
+            0.0018659999999999955,
+            0.0023120000000000003
+          ],
+          "one_sided_sign_p": 0.03125,
+          "positive_seed_count": 5
+        },
+        "real_minus_shuffle_NDCG@20": {
+          "mean": 0.0033779999999999978,
+          "sample_std": 0.0002843765109850015,
+          "values": [
+            0.0034199999999999925,
+            0.003019999999999995,
+            0.003810000000000008,
+            0.0033099999999999935,
+            0.0033299999999999996
+          ],
+          "relative_gain": 0.05042092065197919,
+          "bootstrap_95ci": [
+            0.003157999999999994,
+            0.0036180000000000045
+          ],
+          "one_sided_sign_p": 0.03125,
+          "positive_seed_count": 5
+        }
+      },
+      "source_report": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/reports/movielens1m_pure_lightgcn_v4_bpr200_ood.json",
+      "source_records": [
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/movielens1m_pure_lightgcn_v4_bpr200_ood_semantic_real_seed1024.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/movielens1m_pure_lightgcn_v4_bpr200_ood_semantic_shuffled_seed1024.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/movielens1m_pure_lightgcn_v4_bpr200_ood_semantic_real_seed2048.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/movielens1m_pure_lightgcn_v4_bpr200_ood_semantic_shuffled_seed2048.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/movielens1m_pure_lightgcn_v4_bpr200_ood_semantic_real_seed3072.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/movielens1m_pure_lightgcn_v4_bpr200_ood_semantic_shuffled_seed3072.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/movielens1m_pure_lightgcn_v4_bpr200_ood_semantic_real_seed4096.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/movielens1m_pure_lightgcn_v4_bpr200_ood_semantic_shuffled_seed4096.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/movielens1m_pure_lightgcn_v4_bpr200_ood_semantic_real_seed5120.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/movielens1m_pure_lightgcn_v4_bpr200_ood_semantic_shuffled_seed5120.json"
+      ]
+    },
+    {
+      "label": "Yelp2018",
+      "dataset": "yelp2018",
+      "protocol": "corrected-v4 LSCI-stage late fusion",
+      "seeds": [
+        1024,
+        2048,
+        3072,
+        4096,
+        5120
+      ],
+      "selection_seeds": [
+        1024,
+        2048,
+        3072
+      ],
+      "confirmation_seeds": [
+        4096,
+        5120
+      ],
+      "selected_alpha": 0.25,
+      "selected_group_alphas": null,
+      "validation_gate": {
+        "test_gt_loaded": false,
+        "ood_test_allowed": true,
+        "checks": {
+          "test_gt_not_loaded": true,
+          "positive_alpha": true,
+          "selection_beats_baseline": true,
+          "confirmation_beats_baseline": true,
+          "confirmation_beats_shuffle": true,
+          "confirmation_relative_gain_at_least_1pct": true,
+          "each_confirmation_seed_improves": true
+        }
+      },
+      "metrics": {
+        "baseline": {
+          "Recall@20": {
+            "mean": 0.017308,
+            "sample_std": 0.0014616668567084632,
+            "values": [
+              0.01724,
+              0.01815,
+              0.01674,
+              0.01527,
+              0.01914
+            ]
+          },
+          "NDCG@20": {
+            "mean": 0.013448,
+            "sample_std": 0.0011462198741951741,
+            "values": [
+              0.01328,
+              0.01399,
+              0.01309,
+              0.01189,
+              0.01499
+            ]
+          }
+        },
+        "real": {
+          "Recall@20": {
+            "mean": 0.01862,
+            "sample_std": 0.0010553909228338085,
+            "values": [
+              0.01831,
+              0.01904,
+              0.01854,
+              0.01716,
+              0.02005
+            ]
+          },
+          "NDCG@20": {
+            "mean": 0.014524,
+            "sample_std": 0.0007959459780663509,
+            "values": [
+              0.01426,
+              0.01465,
+              0.01456,
+              0.01347,
+              0.01568
+            ]
+          }
+        },
+        "shuffle": {
+          "Recall@20": {
+            "mean": 0.016936,
+            "sample_std": 0.0013578401967831125,
+            "values": [
+              0.01669,
+              0.01776,
+              0.01639,
+              0.01514,
+              0.0187
+            ]
+          },
+          "NDCG@20": {
+            "mean": 0.013142,
+            "sample_std": 0.0011465905982520526,
+            "values": [
+              0.01293,
+              0.01375,
+              0.01278,
+              0.01159,
+              0.01466
+            ]
+          }
+        }
+      },
+      "extra_variants": {},
+      "comparisons": {
+        "real_minus_baseline_Recall@20": {
+          "mean": 0.0013120000000000002,
+          "sample_std": 0.0004925647165601695,
+          "values": [
+            0.0010700000000000015,
+            0.0008900000000000019,
+            0.0017999999999999995,
+            0.001890000000000001,
+            0.0009099999999999976
+          ],
+          "relative_gain": 0.07580309683383407,
+          "bootstrap_95ci": [
+            0.0009340000000000002,
+            0.0016900000000000005
+          ],
+          "one_sided_sign_p": 0.03125,
+          "positive_seed_count": 5
+        },
+        "real_minus_shuffle_Recall@20": {
+          "mean": 0.0016840000000000002,
+          "sample_std": 0.0003901666310693436,
+          "values": [
+            0.00162,
+            0.0012799999999999999,
+            0.0021500000000000026,
+            0.002020000000000001,
+            0.001349999999999997
+          ],
+          "relative_gain": 0.09943316013226265,
+          "bootstrap_95ci": [
+            0.0013759999999999988,
+            0.0019920000000000016
+          ],
+          "one_sided_sign_p": 0.03125,
+          "positive_seed_count": 5
+        },
+        "real_minus_baseline_NDCG@20": {
+          "mean": 0.001076,
+          "sample_std": 0.00043026735874337525,
+          "values": [
+            0.00098,
+            0.0006599999999999991,
+            0.0014700000000000008,
+            0.0015799999999999998,
+            0.0006899999999999996
+          ],
+          "relative_gain": 0.0800118976799524,
+          "bootstrap_95ci": [
+            0.0007359999999999995,
+            0.0014160000000000002
+          ],
+          "one_sided_sign_p": 0.03125,
+          "positive_seed_count": 5
+        },
+        "real_minus_shuffle_NDCG@20": {
+          "mean": 0.001382,
+          "sample_std": 0.00043945420694311264,
+          "values": [
+            0.0013299999999999996,
+            0.0008999999999999998,
+            0.0017800000000000003,
+            0.0018799999999999997,
+            0.00102
+          ],
+          "relative_gain": 0.10515903211078984,
+          "bootstrap_95ci": [
+            0.0010339999999999998,
+            0.00173
+          ],
+          "one_sided_sign_p": 0.03125,
+          "positive_seed_count": 5
+        }
+      },
+      "source_report": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/reports/yelp2018_v4_latefusion_ood.json",
+      "source_records": [
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/yelp2018_v4_lf_ood_semantic_real_seed1024_v4.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/yelp2018_v4_lf_ood_semantic_shuffled_seed1024_v4.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/yelp2018_v4_lf_ood_semantic_real_seed2048_v4.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/yelp2018_v4_lf_ood_semantic_shuffled_seed2048_v4.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/yelp2018_v4_lf_ood_semantic_real_seed3072_v4.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/yelp2018_v4_lf_ood_semantic_shuffled_seed3072_v4.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/yelp2018_v4_lf_ood_semantic_real_seed4096_v4.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/yelp2018_v4_lf_ood_semantic_shuffled_seed4096_v4.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/yelp2018_v4_lf_ood_semantic_real_seed5120_v4.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/yelp2018_v4_lf_ood_semantic_shuffled_seed5120_v4.json"
+      ]
+    },
+    {
+      "label": "Food",
+      "dataset": "food",
+      "protocol": "corrected-v4 pure LightGCN late fusion",
+      "seeds": [
+        1024,
+        2048,
+        3072,
+        4096,
+        5120
+      ],
+      "selection_seeds": [
+        1024,
+        2048,
+        3072
+      ],
+      "confirmation_seeds": [
+        4096,
+        5120
+      ],
+      "selected_alpha": 0.25,
+      "selected_group_alphas": null,
+      "validation_gate": {
+        "test_gt_loaded": false,
+        "ood_test_allowed": true,
+        "checks": {
+          "test_gt_not_loaded": true,
+          "positive_alpha": true,
+          "selection_beats_baseline": true,
+          "confirmation_beats_baseline": true,
+          "confirmation_beats_shuffle": true,
+          "confirmation_relative_gain_at_least_1pct": true,
+          "each_confirmation_seed_improves": true
+        }
+      },
+      "metrics": {
+        "baseline": {
+          "Recall@20": {
+            "mean": 0.046902,
+            "sample_std": 0.0006504383137546575,
+            "values": [
+              0.04652,
+              0.04728,
+              0.04639,
+              0.04645,
+              0.04787
+            ]
+          },
+          "NDCG@20": {
+            "mean": 0.027800000000000002,
+            "sample_std": 0.00017204650534085304,
+            "values": [
+              0.02767,
+              0.02798,
+              0.02789,
+              0.02757,
+              0.02789
+            ]
+          }
+        },
+        "real": {
+          "Recall@20": {
+            "mean": 0.046786,
+            "sample_std": 0.0003632216953872665,
+            "values": [
+              0.04729,
+              0.04645,
+              0.04701,
+              0.04646,
+              0.04672
+            ]
+          },
+          "NDCG@20": {
+            "mean": 0.027684,
+            "sample_std": 0.00013557285864065845,
+            "values": [
+              0.02779,
+              0.02749,
+              0.02782,
+              0.02761,
+              0.02771
+            ]
+          }
+        },
+        "shuffle": {
+          "Recall@20": {
+            "mean": 0.044306,
+            "sample_std": 0.0007950660349933209,
+            "values": [
+              0.04437,
+              0.04337,
+              0.04377,
+              0.04544,
+              0.04458
+            ]
+          },
+          "NDCG@20": {
+            "mean": 0.026612,
+            "sample_std": 0.0002626214004988935,
+            "values": [
+              0.02674,
+              0.02615,
+              0.02678,
+              0.02674,
+              0.02665
+            ]
+          }
+        }
+      },
+      "extra_variants": {},
+      "comparisons": {
+        "real_minus_baseline_Recall@20": {
+          "mean": -0.00011600000000000083,
+          "sample_std": 0.0008546227237793326,
+          "values": [
+            0.0007699999999999999,
+            -0.0008300000000000043,
+            0.0006200000000000025,
+            1.0000000000003062e-05,
+            -0.0011500000000000052
+          ],
+          "relative_gain": -0.0024732420792290483,
+          "bootstrap_95ci": [
+            -0.0007900000000000032,
+            0.0005580000000000015
+          ],
+          "one_sided_sign_p": 0.5,
+          "positive_seed_count": 3
+        },
+        "real_minus_shuffle_Recall@20": {
+          "mean": 0.0024799999999999987,
+          "sample_std": 0.0009190212184710428,
+          "values": [
+            0.002919999999999999,
+            0.0030799999999999994,
+            0.00324,
+            0.00102,
+            0.002139999999999996
+          ],
+          "relative_gain": 0.05597436013181056,
+          "bootstrap_95ci": [
+            0.0016879999999999992,
+            0.0031119999999999993
+          ],
+          "one_sided_sign_p": 0.03125,
+          "positive_seed_count": 5
+        },
+        "real_minus_baseline_NDCG@20": {
+          "mean": -0.00011600000000000152,
+          "sample_std": 0.00023776038357977122,
+          "values": [
+            0.00011999999999999858,
+            -0.0004900000000000009,
+            -7.000000000000062e-05,
+            3.999999999999837e-05,
+            -0.00018000000000000307
+          ],
+          "relative_gain": -0.004172661870503651,
+          "bootstrap_95ci": [
+            -0.00032200000000000143,
+            4.9999999999998654e-05
+          ],
+          "one_sided_sign_p": 0.8125,
+          "positive_seed_count": 2
+        },
+        "real_minus_shuffle_NDCG@20": {
+          "mean": 0.0010719999999999994,
+          "sample_std": 0.0001690266251216069,
+          "values": [
+            0.0010499999999999989,
+            0.001340000000000001,
+            0.0010399999999999993,
+            0.0008699999999999992,
+            0.0010599999999999984
+          ],
+          "relative_gain": 0.040282579287539436,
+          "bootstrap_95ci": [
+            0.000941999999999999,
+            0.001224
+          ],
+          "one_sided_sign_p": 0.03125,
+          "positive_seed_count": 5
+        }
+      },
+      "source_report": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/reports/food_v4_uniform_ood.json",
+      "source_records": [
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/food_v4_uniform_ood_semantic_real_seed1024.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/food_v4_uniform_ood_semantic_shuffled_seed1024.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/food_v4_uniform_ood_semantic_real_seed2048.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/food_v4_uniform_ood_semantic_shuffled_seed2048.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/food_v4_uniform_ood_semantic_real_seed3072.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/food_v4_uniform_ood_semantic_shuffled_seed3072.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/food_v4_uniform_ood_semantic_real_seed4096.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/food_v4_uniform_ood_semantic_shuffled_seed4096.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/food_v4_uniform_ood_semantic_real_seed5120.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/food_v4_uniform_ood_semantic_shuffled_seed5120.json"
+      ]
+    },
+    {
+      "label": "Amazon Beauty",
+      "dataset": "amazon_beauty",
+      "protocol": "corrected-v4 activity-adaptive semantic fusion",
+      "seeds": [
+        1024,
+        2048,
+        3072,
+        4096,
+        5120
+      ],
+      "selection_seeds": [
+        1024,
+        2048,
+        3072
+      ],
+      "confirmation_seeds": [
+        4096,
+        5120
+      ],
+      "selected_alpha": 1.0,
+      "selected_group_alphas": {
+        "low_activity": 1.0,
+        "mid_activity": 1.0,
+        "high_activity": 0.5
+      },
+      "validation_gate": {
+        "test_gt_loaded": false,
+        "ood_test_allowed": true,
+        "checks": {
+          "test_gt_not_loaded": true,
+          "confirmation_beats_uniform": true,
+          "confirmation_beats_baseline": true,
+          "confirmation_beats_shuffle": true,
+          "each_confirmation_seed_beats_uniform": true
+        }
+      },
+      "metrics": {
+        "baseline": {
+          "Recall@20": {
+            "mean": 0.038466,
+            "sample_std": 0.00116601029154978,
+            "values": [
+              0.03969,
+              0.03736,
+              0.03802,
+              0.03752,
+              0.03974
+            ]
+          },
+          "NDCG@20": {
+            "mean": 0.018236,
+            "sample_std": 0.001091503550154557,
+            "values": [
+              0.01897,
+              0.0167,
+              0.01805,
+              0.01791,
+              0.01955
+            ]
+          }
+        },
+        "real": {
+          "Recall@20": {
+            "mean": 0.075756,
+            "sample_std": 0.0015925859474452235,
+            "values": [
+              0.07706,
+              0.07688,
+              0.07341,
+              0.0748,
+              0.07663
+            ]
+          },
+          "NDCG@20": {
+            "mean": 0.03834,
+            "sample_std": 0.0011704059124936122,
+            "values": [
+              0.03921,
+              0.03864,
+              0.03691,
+              0.03734,
+              0.0396
+            ]
+          }
+        },
+        "shuffle": {
+          "Recall@20": {
+            "mean": 0.031894,
+            "sample_std": 0.0010352197834276535,
+            "values": [
+              0.03337,
+              0.03049,
+              0.03187,
+              0.03213,
+              0.03161
+            ]
+          },
+          "NDCG@20": {
+            "mean": 0.014658,
+            "sample_std": 0.0005113413732527423,
+            "values": [
+              0.01533,
+              0.0139,
+              0.01458,
+              0.01475,
+              0.01473
+            ]
+          }
+        }
+      },
+      "extra_variants": {
+        "uniform_real": {
+          "Recall@20": {
+            "mean": 0.076616,
+            "sample_std": 0.001437299551241843,
+            "values": [
+              0.07759,
+              0.07766,
+              0.07438,
+              0.07595,
+              0.0775
+            ]
+          },
+          "NDCG@20": {
+            "mean": 0.038896,
+            "sample_std": 0.0012103016153009113,
+            "values": [
+              0.03972,
+              0.0393,
+              0.03735,
+              0.03792,
+              0.04019
+            ]
+          }
+        }
+      },
+      "comparisons": {
+        "real_minus_baseline_Recall@20": {
+          "mean": 0.037290000000000004,
+          "sample_std": 0.0014789692356502893,
+          "values": [
+            0.03737,
+            0.039520000000000007,
+            0.035390000000000005,
+            0.03728000000000001,
+            0.036890000000000006
+          ],
+          "relative_gain": 0.9694275464046171,
+          "bootstrap_95ci": [
+            0.036164,
+            0.03856400000000001
+          ],
+          "one_sided_sign_p": 0.03125,
+          "positive_seed_count": 5
+        },
+        "real_minus_shuffle_Recall@20": {
+          "mean": 0.043862000000000005,
+          "sample_std": 0.0019087875733040589,
+          "values": [
+            0.04369000000000001,
+            0.04639,
+            0.04154,
+            0.04267000000000001,
+            0.045020000000000004
+          ],
+          "relative_gain": 1.3752429924123661,
+          "bootstrap_95ci": [
+            0.042422,
+            0.045372
+          ],
+          "one_sided_sign_p": 0.03125,
+          "positive_seed_count": 5
+        },
+        "real_minus_baseline_NDCG@20": {
+          "mean": 0.020104,
+          "sample_std": 0.0011612622442842108,
+          "values": [
+            0.02024,
+            0.02194,
+            0.01886,
+            0.01943,
+            0.020050000000000002
+          ],
+          "relative_gain": 1.1024347444615048,
+          "bootstrap_95ci": [
+            0.019326,
+            0.021098000000000002
+          ],
+          "one_sided_sign_p": 0.03125,
+          "positive_seed_count": 5
+        },
+        "real_minus_shuffle_NDCG@20": {
+          "mean": 0.023682,
+          "sample_std": 0.001182188648228363,
+          "values": [
+            0.023880000000000002,
+            0.02474,
+            0.02233,
+            0.02259,
+            0.024870000000000003
+          ],
+          "relative_gain": 1.6156365124846501,
+          "bootstrap_95ci": [
+            0.022744,
+            0.024620000000000003
+          ],
+          "one_sided_sign_p": 0.03125,
+          "positive_seed_count": 5
+        }
+      },
+      "source_report": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/reports/amazon_beauty_v4_activity_adaptive_ood.json",
+      "source_records": [
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/amazon_beauty_v4_activity_adaptive_ood_real_seed1024.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/amazon_beauty_v4_activity_adaptive_ood_shuffle_seed1024.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/amazon_beauty_v4_activity_adaptive_ood_real_seed2048.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/amazon_beauty_v4_activity_adaptive_ood_shuffle_seed2048.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/amazon_beauty_v4_activity_adaptive_ood_real_seed3072.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/amazon_beauty_v4_activity_adaptive_ood_shuffle_seed3072.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/amazon_beauty_v4_activity_adaptive_ood_real_seed4096.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/amazon_beauty_v4_activity_adaptive_ood_shuffle_seed4096.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/amazon_beauty_v4_activity_adaptive_ood_real_seed5120.json",
+        "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/records/amazon_beauty_v4_activity_adaptive_ood_shuffle_seed5120.json"
+      ]
+    }
+  ],
+  "strict_main": {
+    "source": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/reports/strict_ood_e0_stage1_e3_final.md",
+    "available": true,
+    "role": "background only; corrected-v3 full LSCI is not used as the positive patent main table"
+  },
+  "kuairec_v2_diagnostic": {
+    "late_fusion": {
+      "selected_alpha": 0.0,
+      "selection_baseline_ndcg20": 0.4605963143846565,
+      "selection_real_ndcg20": 0.4605963143846565,
+      "ood_test_allowed": false
+    },
+    "popularity_rerank": {
+      "selected_gamma": 0.0,
+      "ood_baseline": 0.06807283853421767,
+      "ood_ndcg20": 0.06807283853421767,
+      "ood_gain": 0.0
+    },
+    "groups": {
+      "item_target_recall20": {
+        "tail": {
+          "n": 5,
+          "mean": 0.0,
+          "std": 0.0,
+          "positive_count": 71910
+        },
+        "mid": {
+          "n": 5,
+          "mean": 0.0,
+          "std": 0.0,
+          "positive_count": 345110
+        },
+        "head": {
+          "n": 5,
+          "mean": 0.09354149839007712,
+          "std": 0.00570750308026074,
+          "positive_count": 451885
+        },
+        "cold_le_5": {
+          "n": 5,
+          "mean": 0.0,
+          "std": 0.0,
+          "positive_count": 5160
+        }
+      },
+      "source": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/reports/kuairec_v2_latefusion_groups_real_a05.json"
+    }
+  },
+  "supporting_reports": {
+    "strict_main": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/reports/strict_ood_e0_stage1_e3_final.md",
+    "kuairec_v2_latefusion": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/reports/kuairec_v2_latefusion_validation.json",
+    "kuairec_v2_popularity": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/reports/kuairec_v2_popularity_rerank.json",
+    "kuairec_v2_groups": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/reports/kuairec_v2_latefusion_groups_real_a05.json",
+    "complexity": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/experiments/复杂度分析.md"
+  }
+}

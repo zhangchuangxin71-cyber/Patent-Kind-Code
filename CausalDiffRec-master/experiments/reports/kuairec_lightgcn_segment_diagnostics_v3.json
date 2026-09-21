@@ -1,0 +1,435 @@
+{
+  "dataset": "kuairec",
+  "protocol": "exploratory_validation_only_user_activity_and_item_popularity_segments",
+  "test_gt_loaded": false,
+  "alpha_frozen_from_prior_selection": 0.025,
+  "caution": "All five seeds have already been inspected. This is mechanism diagnosis, not independent confirmation; any redesigned method needs new confirmation seeds.",
+  "user_activity_quartile_thresholds": [
+    32,
+    65,
+    116
+  ],
+  "positive_item_popularity_thresholds": [
+    3,
+    71
+  ],
+  "group_metadata": {
+    "all": {
+      "users": 6944,
+      "validation_interactions": 84641
+    },
+    "user_activity_q1_le_32": {
+      "users": 1746,
+      "validation_interactions": 5834
+    },
+    "user_activity_q2_33_to_65": {
+      "users": 1760,
+      "validation_interactions": 12177
+    },
+    "user_activity_q3_66_to_116": {
+      "users": 1711,
+      "validation_interactions": 21180
+    },
+    "user_activity_q4_gt_116": {
+      "users": 1727,
+      "validation_interactions": 45450
+    },
+    "gt_item_cold_pop_0": {
+      "users": 229,
+      "validation_interactions": 240,
+      "candidate_items_in_segment": 611
+    },
+    "gt_item_tail_pop_1_to_3": {
+      "users": 683,
+      "validation_interactions": 744,
+      "candidate_items_in_segment": 3009
+    },
+    "gt_item_mid_pop_4_to_71": {
+      "users": 5069,
+      "validation_interactions": 13690,
+      "candidate_items_in_segment": 4492
+    },
+    "gt_item_head_pop_gt_71": {
+      "users": 6802,
+      "validation_interactions": 69967,
+      "candidate_items_in_segment": 2500
+    }
+  },
+  "aggregate_ndcg20": {
+    "collaborative": {
+      "all": 0.0799886433671079,
+      "user_activity_q1_le_32": 0.11214800497914768,
+      "user_activity_q2_33_to_65": 0.08389598022046918,
+      "user_activity_q3_66_to_116": 0.06471777317165019,
+      "user_activity_q4_gt_116": 0.05862286494666256,
+      "gt_item_cold_pop_0": 0.0,
+      "gt_item_tail_pop_1_to_3": 0.00028184242621249686,
+      "gt_item_mid_pop_4_to_71": 0.0005713395703830391,
+      "gt_item_head_pop_gt_71": 0.0902195702775628
+    },
+    "real_fusion": {
+      "all": 0.08000075152844321,
+      "user_activity_q1_le_32": 0.11209625054024004,
+      "user_activity_q2_33_to_65": 0.08424448762118959,
+      "user_activity_q3_66_to_116": 0.06494157809056178,
+      "user_activity_q4_gt_116": 0.058146975590043816,
+      "gt_item_cold_pop_0": 0.0,
+      "gt_item_tail_pop_1_to_3": 0.00027983540323220623,
+      "gt_item_mid_pop_4_to_71": 0.0006009149242364334,
+      "gt_item_head_pop_gt_71": 0.09019354281153538
+    },
+    "shuffle_fusion": {
+      "all": 0.07970435959991418,
+      "user_activity_q1_le_32": 0.11184743155444421,
+      "user_activity_q2_33_to_65": 0.08413903445217256,
+      "user_activity_q3_66_to_116": 0.06414202662229974,
+      "user_activity_q4_gt_116": 0.058106398020362424,
+      "gt_item_cold_pop_0": 0.0,
+      "gt_item_tail_pop_1_to_3": 0.0002796941363162976,
+      "gt_item_mid_pop_4_to_71": 0.0005923485439876877,
+      "gt_item_head_pop_gt_71": 0.08983563343295328
+    },
+    "pure_semantic": {
+      "all": 0.0009800231101043042,
+      "user_activity_q1_le_32": 0.0008939177382625967,
+      "user_activity_q2_33_to_65": 0.0007373208330654402,
+      "user_activity_q3_66_to_116": 0.0010380352808241932,
+      "user_activity_q4_gt_116": 0.001256940980817849,
+      "gt_item_cold_pop_0": 0.0,
+      "gt_item_tail_pop_1_to_3": 0.0,
+      "gt_item_mid_pop_4_to_71": 0.0011861661793285544,
+      "gt_item_head_pop_gt_71": 0.0006903785166412444
+    },
+    "popularity": {
+      "all": 0.057542149534024936,
+      "user_activity_q1_le_32": 0.0681979510488621,
+      "user_activity_q2_33_to_65": 0.07101451390239089,
+      "user_activity_q3_66_to_116": 0.048975348792602534,
+      "user_activity_q4_gt_116": 0.04152675019143313,
+      "gt_item_cold_pop_0": 0.0,
+      "gt_item_tail_pop_1_to_3": 0.0,
+      "gt_item_mid_pop_4_to_71": 0.0,
+      "gt_item_head_pop_gt_71": 0.06361131736179684
+    },
+    "real_minus_collaborative": {
+      "all": 1.2108161335316892e-05,
+      "user_activity_q1_le_32": -5.175443890763354e-05,
+      "user_activity_q2_33_to_65": 0.0003485074007204131,
+      "user_activity_q3_66_to_116": 0.0002238049189115937,
+      "user_activity_q4_gt_116": -0.00047588935661874165,
+      "gt_item_cold_pop_0": 0.0,
+      "gt_item_tail_pop_1_to_3": -2.0070229802906267e-06,
+      "gt_item_mid_pop_4_to_71": 2.9575353853394286e-05,
+      "gt_item_head_pop_gt_71": -2.6027466027422896e-05
+    },
+    "real_improved_seed_count": {
+      "all": 3,
+      "user_activity_q1_le_32": 3,
+      "user_activity_q2_33_to_65": 4,
+      "user_activity_q3_66_to_116": 4,
+      "user_activity_q4_gt_116": 1,
+      "gt_item_cold_pop_0": 0,
+      "gt_item_tail_pop_1_to_3": 1,
+      "gt_item_mid_pop_4_to_71": 4,
+      "gt_item_head_pop_gt_71": 3
+    },
+    "real_minus_shuffle": {
+      "all": 0.0002963919285290384,
+      "user_activity_q1_le_32": 0.0002488189857958317,
+      "user_activity_q2_33_to_65": 0.00010545316901702795,
+      "user_activity_q3_66_to_116": 0.0007995514682620358,
+      "user_activity_q4_gt_116": 4.057756968139231e-05,
+      "gt_item_cold_pop_0": 0.0,
+      "gt_item_tail_pop_1_to_3": 1.4126691590864377e-07,
+      "gt_item_mid_pop_4_to_71": 8.566380248745684e-06,
+      "gt_item_head_pop_gt_71": 0.0003579093785820997
+    }
+  },
+  "per_seed_ndcg20": {
+    "1024": {
+      "collaborative": {
+        "all": 0.07940874812403935,
+        "user_activity_q1_le_32": 0.11020222501112296,
+        "user_activity_q2_33_to_65": 0.08206816796887896,
+        "user_activity_q3_66_to_116": 0.06519987866835936,
+        "user_activity_q4_gt_116": 0.05964348238397148,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.00027024260143421403,
+        "gt_item_mid_pop_4_to_71": 0.0003911959846410233,
+        "gt_item_head_pop_gt_71": 0.08975690508934706
+      },
+      "real_fusion": {
+        "all": 0.0795978904401262,
+        "user_activity_q1_le_32": 0.11077872373608019,
+        "user_activity_q2_33_to_65": 0.08239323174450675,
+        "user_activity_q3_66_to_116": 0.0657054556907098,
+        "user_activity_q4_gt_116": 0.05898898495420034,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0002595011519532178,
+        "gt_item_mid_pop_4_to_71": 0.00046690051618872384,
+        "gt_item_head_pop_gt_71": 0.08987853750480514
+      },
+      "shuffle_fusion": {
+        "all": 0.07910719330120568,
+        "user_activity_q1_le_32": 0.11005706940243279,
+        "user_activity_q2_33_to_65": 0.08223252817109587,
+        "user_activity_q3_66_to_116": 0.06432771350493664,
+        "user_activity_q4_gt_116": 0.05927431367622998,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.00027024260143421403,
+        "gt_item_mid_pop_4_to_71": 0.00040895074259445017,
+        "gt_item_head_pop_gt_71": 0.08927249442784205
+      },
+      "pure_semantic": {
+        "all": 0.0009800231101043042,
+        "user_activity_q1_le_32": 0.0008939177382625967,
+        "user_activity_q2_33_to_65": 0.0007373208330654402,
+        "user_activity_q3_66_to_116": 0.0010380352808241932,
+        "user_activity_q4_gt_116": 0.001256940980817849,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0,
+        "gt_item_mid_pop_4_to_71": 0.0011861661793285544,
+        "gt_item_head_pop_gt_71": 0.0006903785166412444
+      },
+      "popularity": {
+        "all": 0.05754214953402493,
+        "user_activity_q1_le_32": 0.0681979510488621,
+        "user_activity_q2_33_to_65": 0.07101451390239089,
+        "user_activity_q3_66_to_116": 0.048975348792602534,
+        "user_activity_q4_gt_116": 0.04152675019143313,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0,
+        "gt_item_mid_pop_4_to_71": 0.0,
+        "gt_item_head_pop_gt_71": 0.06361131736179684
+      }
+    },
+    "2048": {
+      "collaborative": {
+        "all": 0.07984652122176625,
+        "user_activity_q1_le_32": 0.11233573028677701,
+        "user_activity_q2_33_to_65": 0.08490277581312393,
+        "user_activity_q3_66_to_116": 0.06410359881589067,
+        "user_activity_q4_gt_116": 0.057444073698983814,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.00027024260143421403,
+        "gt_item_mid_pop_4_to_71": 0.0006268923729458943,
+        "gt_item_head_pop_gt_71": 0.08995546427926662
+      },
+      "real_fusion": {
+        "all": 0.08030718717878733,
+        "user_activity_q1_le_32": 0.11251833047511654,
+        "user_activity_q2_33_to_65": 0.0860747712198424,
+        "user_activity_q3_66_to_116": 0.06447902019496099,
+        "user_activity_q4_gt_116": 0.05754539771826566,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.00027024260143421403,
+        "gt_item_mid_pop_4_to_71": 0.0006282019014219999,
+        "gt_item_head_pop_gt_71": 0.09049324539091783
+      },
+      "shuffle_fusion": {
+        "all": 0.07997914892733585,
+        "user_activity_q1_le_32": 0.11222195013608005,
+        "user_activity_q2_33_to_65": 0.08596461781497412,
+        "user_activity_q3_66_to_116": 0.06409863167808186,
+        "user_activity_q4_gt_116": 0.057015170271147546,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.00027024260143421403,
+        "gt_item_mid_pop_4_to_71": 0.0006698223112320026,
+        "gt_item_head_pop_gt_71": 0.09003833501000687
+      },
+      "pure_semantic": {
+        "all": 0.0009800231101043042,
+        "user_activity_q1_le_32": 0.0008939177382625967,
+        "user_activity_q2_33_to_65": 0.0007373208330654402,
+        "user_activity_q3_66_to_116": 0.0010380352808241932,
+        "user_activity_q4_gt_116": 0.001256940980817849,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0,
+        "gt_item_mid_pop_4_to_71": 0.0011861661793285544,
+        "gt_item_head_pop_gt_71": 0.0006903785166412444
+      },
+      "popularity": {
+        "all": 0.05754214953402493,
+        "user_activity_q1_le_32": 0.0681979510488621,
+        "user_activity_q2_33_to_65": 0.07101451390239089,
+        "user_activity_q3_66_to_116": 0.048975348792602534,
+        "user_activity_q4_gt_116": 0.04152675019143313,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0,
+        "gt_item_mid_pop_4_to_71": 0.0,
+        "gt_item_head_pop_gt_71": 0.06361131736179684
+      }
+    },
+    "3072": {
+      "collaborative": {
+        "all": 0.08014817246028111,
+        "user_activity_q1_le_32": 0.11253513741617625,
+        "user_activity_q2_33_to_65": 0.08389946318936245,
+        "user_activity_q3_66_to_116": 0.0648193665171292,
+        "user_activity_q4_gt_116": 0.05876871355614501,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.00027024260143421403,
+        "gt_item_mid_pop_4_to_71": 0.0004818155935346219,
+        "gt_item_head_pop_gt_71": 0.09050385612882929
+      },
+      "real_fusion": {
+        "all": 0.07988422023266453,
+        "user_activity_q1_le_32": 0.1116273767948634,
+        "user_activity_q2_33_to_65": 0.08430065298315632,
+        "user_activity_q3_66_to_116": 0.06462945387337937,
+        "user_activity_q4_gt_116": 0.05840444735615743,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0002504144715486356,
+        "gt_item_mid_pop_4_to_71": 0.0004938056295701264,
+        "gt_item_head_pop_gt_71": 0.09021770087810921
+      },
+      "shuffle_fusion": {
+        "all": 0.07980677058738707,
+        "user_activity_q1_le_32": 0.11147329978738824,
+        "user_activity_q2_33_to_65": 0.08415770606645077,
+        "user_activity_q3_66_to_116": 0.06442902686509942,
+        "user_activity_q4_gt_116": 0.05859305494319484,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0002595011519532178,
+        "gt_item_mid_pop_4_to_71": 0.0005170468353545416,
+        "gt_item_head_pop_gt_71": 0.08999195851034787
+      },
+      "pure_semantic": {
+        "all": 0.0009800231101043042,
+        "user_activity_q1_le_32": 0.0008939177382625967,
+        "user_activity_q2_33_to_65": 0.0007373208330654402,
+        "user_activity_q3_66_to_116": 0.0010380352808241932,
+        "user_activity_q4_gt_116": 0.001256940980817849,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0,
+        "gt_item_mid_pop_4_to_71": 0.0011861661793285544,
+        "gt_item_head_pop_gt_71": 0.0006903785166412444
+      },
+      "popularity": {
+        "all": 0.05754214953402493,
+        "user_activity_q1_le_32": 0.0681979510488621,
+        "user_activity_q2_33_to_65": 0.07101451390239089,
+        "user_activity_q3_66_to_116": 0.048975348792602534,
+        "user_activity_q4_gt_116": 0.04152675019143313,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0,
+        "gt_item_mid_pop_4_to_71": 0.0,
+        "gt_item_head_pop_gt_71": 0.06361131736179684
+      }
+    },
+    "4096": {
+      "collaborative": {
+        "all": 0.08003830950042973,
+        "user_activity_q1_le_32": 0.11202452376886196,
+        "user_activity_q2_33_to_65": 0.08334716983849967,
+        "user_activity_q3_66_to_116": 0.06540336179819542,
+        "user_activity_q4_gt_116": 0.058827464804909746,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0002992421633799211,
+        "gt_item_mid_pop_4_to_71": 0.000794121743191276,
+        "gt_item_head_pop_gt_71": 0.09003064459772725
+      },
+      "real_fusion": {
+        "all": 0.0801378418454545,
+        "user_activity_q1_le_32": 0.11247337217313154,
+        "user_activity_q2_33_to_65": 0.08365455374821516,
+        "user_activity_q3_66_to_116": 0.06560715928596879,
+        "user_activity_q4_gt_116": 0.05825871559084956,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.00031977662784504274,
+        "gt_item_mid_pop_4_to_71": 0.0008640163616997317,
+        "gt_item_head_pop_gt_71": 0.09003662441517
+      },
+      "shuffle_fusion": {
+        "all": 0.07973885208750496,
+        "user_activity_q1_le_32": 0.11220445944901723,
+        "user_activity_q2_33_to_65": 0.08354030500609859,
+        "user_activity_q3_66_to_116": 0.06454053677719342,
+        "user_activity_q4_gt_116": 0.05809948318537282,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0002992421633799211,
+        "gt_item_mid_pop_4_to_71": 0.0008564877139844725,
+        "gt_item_head_pop_gt_71": 0.08969294412355229
+      },
+      "pure_semantic": {
+        "all": 0.0009800231101043042,
+        "user_activity_q1_le_32": 0.0008939177382625967,
+        "user_activity_q2_33_to_65": 0.0007373208330654402,
+        "user_activity_q3_66_to_116": 0.0010380352808241932,
+        "user_activity_q4_gt_116": 0.001256940980817849,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0,
+        "gt_item_mid_pop_4_to_71": 0.0011861661793285544,
+        "gt_item_head_pop_gt_71": 0.0006903785166412444
+      },
+      "popularity": {
+        "all": 0.05754214953402493,
+        "user_activity_q1_le_32": 0.0681979510488621,
+        "user_activity_q2_33_to_65": 0.07101451390239089,
+        "user_activity_q3_66_to_116": 0.048975348792602534,
+        "user_activity_q4_gt_116": 0.04152675019143313,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0,
+        "gt_item_mid_pop_4_to_71": 0.0,
+        "gt_item_head_pop_gt_71": 0.06361131736179684
+      }
+    },
+    "5120": {
+      "collaborative": {
+        "all": 0.08050146552902311,
+        "user_activity_q1_le_32": 0.1136424084128002,
+        "user_activity_q2_33_to_65": 0.08526232429248096,
+        "user_activity_q3_66_to_116": 0.06406266005867627,
+        "user_activity_q4_gt_116": 0.0584305902893027,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0002992421633799211,
+        "gt_item_mid_pop_4_to_71": 0.0005626721576023802,
+        "gt_item_head_pop_gt_71": 0.09085098129264377
+      },
+      "real_fusion": {
+        "all": 0.08007661794518348,
+        "user_activity_q1_le_32": 0.11308344952200855,
+        "user_activity_q2_33_to_65": 0.08479922841022731,
+        "user_activity_q3_66_to_116": 0.06428680140778999,
+        "user_activity_q4_gt_116": 0.05753733233074608,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0002992421633799211,
+        "gt_item_mid_pop_4_to_71": 0.0005516502123015855,
+        "gt_item_head_pop_gt_71": 0.09034160586867473
+      },
+      "shuffle_fusion": {
+        "all": 0.07988983309613736,
+        "user_activity_q1_le_32": 0.11328037899730269,
+        "user_activity_q2_33_to_65": 0.08480001520224346,
+        "user_activity_q3_66_to_116": 0.06331422428618737,
+        "user_activity_q4_gt_116": 0.05754996802586693,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0002992421633799211,
+        "gt_item_mid_pop_4_to_71": 0.0005094351167729717,
+        "gt_item_head_pop_gt_71": 0.09018243509301735
+      },
+      "pure_semantic": {
+        "all": 0.0009800231101043042,
+        "user_activity_q1_le_32": 0.0008939177382625967,
+        "user_activity_q2_33_to_65": 0.0007373208330654402,
+        "user_activity_q3_66_to_116": 0.0010380352808241932,
+        "user_activity_q4_gt_116": 0.001256940980817849,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0,
+        "gt_item_mid_pop_4_to_71": 0.0011861661793285544,
+        "gt_item_head_pop_gt_71": 0.0006903785166412444
+      },
+      "popularity": {
+        "all": 0.05754214953402493,
+        "user_activity_q1_le_32": 0.0681979510488621,
+        "user_activity_q2_33_to_65": 0.07101451390239089,
+        "user_activity_q3_66_to_116": 0.048975348792602534,
+        "user_activity_q4_gt_116": 0.04152675019143313,
+        "gt_item_cold_pop_0": 0.0,
+        "gt_item_tail_pop_1_to_3": 0.0,
+        "gt_item_mid_pop_4_to_71": 0.0,
+        "gt_item_head_pop_gt_71": 0.06361131736179684
+      }
+    }
+  }
+}

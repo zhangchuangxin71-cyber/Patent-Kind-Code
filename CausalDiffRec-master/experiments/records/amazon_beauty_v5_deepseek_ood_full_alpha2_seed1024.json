@@ -1,0 +1,101 @@
+{
+  "settings": {
+    "dataset": "amazon_beauty",
+    "seed": 1024,
+    "method": "lsci_stage1_semantic_late_fusion",
+    "protocol_version": "corrected_v5_deepseek_alpha2_frozen_ood",
+    "comparison_label": "full_method_alpha2",
+    "source_protocol_version": "corrected_v4_controlled",
+    "data_version": "v1_strict",
+    "eval_split": "ood",
+    "selection_split": "val",
+    "selection_metric": "NDCG@20",
+    "alpha": 2.0,
+    "alpha_selection_seeds": [
+      1024,
+      2048,
+      3072
+    ],
+    "alpha_confirmation_seeds": [
+      4096,
+      5120
+    ],
+    "score_normalization": "per_user_zscore",
+    "user_semantic_profile": "mean_train_item_semantics",
+    "semantic_prior_path": "data_strict/processed/amazon_beauty/v1_strict/features/semantic_prior_deepseek.pt",
+    "semantic_prior_meta": {
+      "dataset": "amazon_beauty",
+      "mode": "llm",
+      "backend": "sbert",
+      "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "n_item": 6086,
+      "emb_dim": 384,
+      "coverage": 1.0,
+      "data_root": "data_strict/processed/amazon_beauty/v1_strict"
+    },
+    "frozen_comparison_set": [
+      "collaborative_alpha_0",
+      "semantic_late_fusion"
+    ],
+    "test_gt_loaded": true
+  },
+  "source_record": "experiments/records/amazon_beauty_lsci_strict_ood_e3_v5_deepseek_full_seed1024_strict_ood_e3_seed1024_v4.json",
+  "checkpoint": "checkpoints/amazon_beauty_lsci_e3_scorefusion_a0.75_v1_strict_ood_v5_deepseek_full_seed1024_strict_ood_e3_seed1024_v4.pt",
+  "best_epoch": 25,
+  "baseline_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.02961,
+      "Precision": 0.00454,
+      "Recall": 0.03129,
+      "NDCG": 0.01668
+    },
+    "Top20": {
+      "Hit Ratio": 0.05325,
+      "Precision": 0.00408,
+      "Recall": 0.05573,
+      "NDCG": 0.02339
+    }
+  },
+  "best_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.09627,
+      "Precision": 0.01477,
+      "Recall": 0.09764,
+      "NDCG": 0.05985
+    },
+    "Top20": {
+      "Hit Ratio": 0.14327,
+      "Precision": 0.01099,
+      "Recall": 0.14376,
+      "NDCG": 0.07271
+    }
+  },
+  "baseline_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.0026,
+      "Precision": 0.00059,
+      "Recall": 0.00326,
+      "NDCG": 0.00172
+    },
+    "Top20": {
+      "Hit Ratio": 0.00457,
+      "Precision": 0.00052,
+      "Recall": 0.00606,
+      "NDCG": 0.0025
+    }
+  },
+  "best_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.03272,
+      "Precision": 0.00746,
+      "Recall": 0.03757,
+      "NDCG": 0.02214
+    },
+    "Top20": {
+      "Hit Ratio": 0.05699,
+      "Precision": 0.0065,
+      "Recall": 0.06391,
+      "NDCG": 0.03014
+    }
+  }
+}
