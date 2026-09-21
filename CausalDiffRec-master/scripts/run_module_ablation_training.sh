@@ -2,14 +2,18 @@
 set -euo pipefail
 
 # Strict validation-only A0/A1/A2 training. A3 is evaluation-only and must
-# reuse A2 checkpoints. Usage: bash scripts/run_module_ablation_training.sh DATASET [GPU]
+# reuse A2 checkpoints. Usage:
+#   bash scripts/run_module_ablation_training.sh DATASET [GPU] [ARMS]
+# ARMS defaults to a0,a1,a2; an explicit comma list permits safe parallel arms.
 DATASET="${1:?dataset required}"
 GPU="${2:-0}"
+ARMS_ARG="${3:-a0,a1,a2}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 PYTHON_BIN="${PYTHON_BIN:-/home/p520/anaconda3/envs/zpp1/bin/python}"
 DATA_ROOT="$ROOT/data_strict/processed/$DATASET/v1_strict"
 PRIOR="$DATA_ROOT/features/semantic_prior.pt"
 SEEDS=(1024 2048 3072 4096 5120)
+IFS=',' read -r -a ARMS <<< "$ARMS_ARG"
 
 cd "$ROOT"
 mkdir -p logs experiments/records checkpoints
@@ -48,7 +52,8 @@ run_one() {
   echo "[$(date '+%F %T')] complete dataset=$DATASET arm=$arm seed=$seed"
 }
 
-for arm in a0 a1 a2; do
+for arm in "${ARMS[@]}"; do
+  case "$arm" in a0|a1|a2) ;; *) echo "unknown arm: $arm" >&2; exit 2 ;; esac
   for seed in "${SEEDS[@]}"; do
     case "$arm" in
       a0) run_one "$arm" "$seed" ;;
