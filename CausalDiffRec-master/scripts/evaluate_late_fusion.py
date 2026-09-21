@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from pathlib import Path
 
 import torch
@@ -30,6 +31,9 @@ def score_split(
     datasets, split, rec_model, user_profiles, item_semantic,
     train_interactions, n_user, alpha, device,
 ):
+    if torch.cuda.is_available():
+        torch.cuda.synchronize(device)
+    started = time.perf_counter()
     rec_model.eval()
     with torch.no_grad():
         emb = rec_model()
@@ -45,12 +49,16 @@ def score_split(
         full_scores[user_idx] = fused
         full_scores = mask_seen_items(full_scores, train_interactions, users)
         recs = get_rec_list(users, full_scores, n_user, topk=20)
-    return ranking_evaluation(
+    measure = ranking_evaluation(
         datasets[f"{split}_origin_inter"], recs, [10, 20],
     )
+    if torch.cuda.is_available():
+        torch.cuda.synchronize(device)
+    return measure, time.perf_counter() - started
 
 
 def main():
+    script_started = time.perf_counter()
     ap = argparse.ArgumentParser()
     ap.add_argument("--source_record", required=True)
     ap.add_argument("--data_root", required=True)
@@ -67,6 +75,8 @@ def main():
     dataset = settings["dataset"]
     seed = int(settings["seed"])
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    if torch.cuda.is_available():
+        torch.cuda.reset_peak_memory_stats(device)
     datasets, meta = load_strict_datasets(
         dataset, data_root=args.data_root, eval_split=args.eval_split,
     )
@@ -81,7 +91,11 @@ def main():
     item_semantic = torch.nn.functional.normalize(
         prior["item_emb"].float().to(device), dim=1,
     )
+    profile_started = time.perf_counter()
     profiles = build_user_semantic_profiles(item_semantic, train_interactions)
+    if torch.cuda.is_available():
+        torch.cuda.synchronize(device)
+    profile_time_sec = time.perf_counter() - profile_started
 
     checkpoint = torch.load(source["checkpoint"], map_location="cpu")
     state = checkpoint["rec_model"]
@@ -98,19 +112,19 @@ def main():
     # Alpha and the comparison set are already frozen.  Score the collaborative
     # baseline and semantic fusion from the same loaded test context so the
     # paired comparison does not require a second test-data pass.
-    baseline_val_measure = score_split(
+    baseline_val_measure, baseline_val_time = score_split(
         datasets, "val", rec_model, profiles, item_semantic,
         train_interactions, n_user, 0.0, device,
     )
-    val_measure = score_split(
+    val_measure, fusion_val_time = score_split(
         datasets, "val", rec_model, profiles, item_semantic,
         train_interactions, n_user, args.alpha, device,
     )
-    baseline_test_measure = score_split(
+    baseline_test_measure, baseline_test_time = score_split(
         datasets, "test", rec_model, profiles, item_semantic,
         train_interactions, n_user, 0.0, device,
     )
-    test_measure = score_split(
+    test_measure, fusion_test_time = score_split(
         datasets, "test", rec_model, profiles, item_semantic,
         train_interactions, n_user, args.alpha, device,
     )
@@ -147,6 +161,20 @@ def main():
         "best_val_metrics": parse_measure_block(val_measure),
         "baseline_metrics": parse_measure_block(baseline_test_measure),
         "best_metrics": parse_measure_block(test_measure),
+        "timing": {
+            "offline_train_profile_build_sec": profile_time_sec,
+            "validation_collaborative_score_sec": baseline_val_time,
+            "validation_fused_score_sec": fusion_val_time,
+            "ood_collaborative_score_sec": baseline_test_time,
+            "ood_fused_score_sec": fusion_test_time,
+            "evaluation_script_wall_time_sec": time.perf_counter() - script_started,
+            "online_requires_llm_call": False,
+            "online_requires_diffusion_sampling": False,
+        },
+        "peak_vram_mb": (
+            torch.cuda.max_memory_allocated(device) / (1024 ** 2)
+            if torch.cuda.is_available() else None
+        ),
     }
     save_run_record(args.out, record)
     print("Validation collaborative baseline:\n" + "".join(baseline_val_measure))

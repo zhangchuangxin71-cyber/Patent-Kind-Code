@@ -28,13 +28,22 @@ record_for() {
 }
 
 a2_records=()
+a0_records=()
+a1_records=()
 for seed in "${SEEDS[@]}"; do
   for arm in a0 a1 a2; do
     required="$(record_for "$arm" "$seed")"
     [[ -f "$required" ]] || { echo "missing training record $required" >&2; exit 2; }
   done
+  a0_records+=("$(record_for a0 "$seed")")
+  a1_records+=("$(record_for a1 "$seed")")
   a2_records+=("$(record_for a2 "$seed")")
 done
+
+"$PYTHON_BIN" scripts/audit_module_ablation_training.py --dataset "$DATASET" \
+  --a0 "${a0_records[@]}" --a1 "${a1_records[@]}" --a2 "${a2_records[@]}" \
+  --out "experiments/reports/${DATASET}_v6_module_ablation_training_audit.json" \
+  > "logs/${DATASET}_v6_module_ablation_training_audit.log" 2>&1
 
 env CUDA_VISIBLE_DEVICES="$GPU" "$PYTHON_BIN" scripts/validate_late_fusion.py \
   --dataset "$DATASET" --data_root "$DATA_ROOT" \
