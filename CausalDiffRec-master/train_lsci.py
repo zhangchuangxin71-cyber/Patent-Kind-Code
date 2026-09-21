@@ -240,6 +240,9 @@ def run_epoch(models, optimizers, feats, edge_index, adj, norm, weight_tensor, d
               user_item_train_inter, num_user, num_item, train_graph,
               causal_edge_index, variant_edge_index, split_ready, datasets=None,
               rank_norm_adj=None, rec_model=None, rec_optimizer=None):
+    if torch.cuda.is_available():
+        torch.cuda.synchronize(device)
+    epoch_started = time.perf_counter()
     vgae_model, diffusion_model, mlp_model, env_infer_model, edge_scorer, inv_loss_fn = models[:6]
     mlp_model.train()
     edge_scorer.train()
@@ -393,11 +396,19 @@ def run_epoch(models, optimizers, feats, edge_index, adj, norm, weight_tensor, d
             f"causal={causal_edge_index.shape[1]}, variant={variant_edge_index.shape[1]}"
         )
 
+    if torch.cuda.is_available():
+        torch.cuda.synchronize(device)
+    representation_train_sec = time.perf_counter() - epoch_started
+    sampling_started = time.perf_counter()
     all_embeddings = generate_embeddings(
         models[0], models[1], models[2], models[3], feats, edge_index, 1, device,
         num_user, sem_ctx,
         edge_weight=(scores.detach() if args.edge_gate_mode == 'soft_pair_environment' else None),
     )
+    if torch.cuda.is_available():
+        torch.cuda.synchronize(device)
+    reverse_diffusion_sampling_sec = time.perf_counter() - sampling_started
+    ranking_started = time.perf_counter()
     user_embeddings = all_embeddings[:num_user]
     item_embeddings = all_embeddings[num_user:]
     if args.rec_refresh_source == 'matched_random':
@@ -430,13 +441,23 @@ def run_epoch(models, optimizers, feats, edge_index, adj, norm, weight_tensor, d
             rec_optimizer.step()
             total_rec_loss += rec_loss.item()
 
+    if torch.cuda.is_available():
+        torch.cuda.synchronize(device)
+    ranking_bpr_sec = time.perf_counter() - ranking_started
+    epoch_timing = {
+        "representation_training_sec": representation_train_sec,
+        "reverse_diffusion_sampling_sec": reverse_diffusion_sampling_sec,
+        "ranking_bpr_sec": ranking_bpr_sec,
+        "total_run_epoch_sec": time.perf_counter() - epoch_started,
+    }
     upstream_rank_loss_value = (
         float(torch.stack(upstream_rank_losses).mean().detach().item())
         if upstream_rank_losses else None
     )
     return (pretrain_loss, total_rec_loss, causal_edge_index, variant_edge_index,
             split_ready, rec_model, upstream_rank_loss_value,
-            upstream_rank_grad_diagnostics, rec_optimizer, soft_gate_grad_norm)
+            upstream_rank_grad_diagnostics, rec_optimizer, soft_gate_grad_norm,
+            epoch_timing)
 
 
 def evaluate_epoch(datasets, split, trained_rec_model, device, num_user, num_item,
@@ -581,7 +602,8 @@ def train_model(models, optimizers, device, datasets, user_item_train_inter, num
     for epoch in range(args.epochs):
         (total_loss, rec_loss, causal_edge_index, variant_edge_index,
          split_ready, rec_model, upstream_rank_loss_value,
-         upstream_rank_grad_diagnostics, rec_optimizer, soft_gate_grad_norm) = run_epoch(
+         upstream_rank_grad_diagnostics, rec_optimizer, soft_gate_grad_norm,
+         epoch_timing) = run_epoch(
             models, optimizers, feats, edge_index, adj, norm, weight_tensor, device, epoch,
             user_item_train_inter, num_user, num_item, train_graph,
             causal_edge_index, variant_edge_index, split_ready, datasets=datasets,
@@ -614,6 +636,7 @@ def train_model(models, optimizers, device, datasets, user_item_train_inter, num
             "upstream_rank_loss": upstream_rank_loss_value,
             "upstream_rank_grad_diagnostics": upstream_rank_grad_diagnostics,
             "soft_gate_grad_norm": soft_gate_grad_norm,
+            "timing": epoch_timing,
         })
         if selection_eligible and bestPerformance and bestPerformance[0] == epoch + 1:
             ckpt = {
