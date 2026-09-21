@@ -1,0 +1,667 @@
+{
+  "protocol_version": "corrected_v6_strict_split_and_leakage_audit",
+  "git_commit": "e6111a18f52ce99e082639c23dc4d937ce7d81ed",
+  "python": "3.8.20",
+  "torch": "2.1.1+cu118",
+  "dgl": "2.1.0+cu118",
+  "datasets": [
+    {
+      "dataset": "yelp2018",
+      "data_root": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/data_strict/processed/yelp2018/v1_strict",
+      "manifest_split_seed": 1024,
+      "manifest_sha256": "978fb8aa771185fc4f2b46736cbbec5388f5ad7cbbabac8884e18ebc25b24b10",
+      "counts": {
+        "train": {
+          "interactions": 294657,
+          "users": 10520,
+          "items": 12184
+        },
+        "val": {
+          "interactions": 42093,
+          "users": 9926,
+          "items": 10439
+        },
+        "iid_test": {
+          "interactions": 84189,
+          "users": 10482,
+          "items": 11801
+        },
+        "ood_test": {
+          "interactions": 105234,
+          "users": 10501,
+          "items": 12176
+        }
+      },
+      "catalog": {
+        "users": 10520,
+        "items": 12185
+      },
+      "popularity_shift": {
+        "train": {
+          "interactions": 294657,
+          "active_items": 12184,
+          "gini_all_catalog_items": 0.47100796466702377,
+          "head_10pct_interaction_share": 0.3714081118045728,
+          "frequency_quantiles_active_items": {
+            "0.0": 1.0,
+            "0.25": 10.0,
+            "0.5": 14.0,
+            "0.75": 27.0,
+            "0.9": 52.0,
+            "0.99": 138.0,
+            "1.0": 579.0
+          }
+        },
+        "ood": {
+          "interactions": 105234,
+          "active_items": 12176,
+          "gini_all_catalog_items": 0.1979084351625966,
+          "head_10pct_interaction_share": 0.16267556113043313,
+          "frequency_quantiles_active_items": {
+            "0.0": 1.0,
+            "0.25": 6.0,
+            "0.5": 9.0,
+            "0.75": 11.0,
+            "0.9": 13.0,
+            "0.99": 16.0,
+            "1.0": 20.0
+          }
+        },
+        "jensen_shannon_divergence_base2": 0.11980567963325757,
+        "ood_unseen_users_vs_train": 0,
+        "ood_unseen_items_vs_train": 1,
+        "ood_interaction_fraction_all_splits": 0.19999885969063408
+      },
+      "pair_overlap_counts": {
+        "train__val": 0,
+        "train__iid_test": 0,
+        "train__ood_test": 0,
+        "val__iid_test": 0,
+        "val__ood_test": 0,
+        "iid_test__ood_test": 0
+      },
+      "graph_pair_counts": {
+        "train_parquet": 294657,
+        "train_graph": 294657,
+        "iid_context_graph": 294657,
+        "ood_context_graph": 294657
+      },
+      "checks": {
+        "all_required_evaluation_files_exist": true,
+        "train_val_iid_ood_pairs_disjoint": true,
+        "train_graph_contains_exactly_train_edges": true,
+        "iid_context_contains_only_train_edges": true,
+        "ood_context_contains_only_train_edges": true,
+        "validation_test_edges_not_used_for_message_passing": true
+      },
+      "files": {
+        "READY": {
+          "exists": true,
+          "sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22"
+        },
+        "manifest.json": {
+          "exists": true,
+          "sha256": "978fb8aa771185fc4f2b46736cbbec5388f5ad7cbbabac8884e18ebc25b24b10"
+        },
+        "interactions/train.parquet": {
+          "exists": true,
+          "sha256": "5006df6c7baabce6c484b9ec34cdecc1efbc16d98faaa6f6a49962e8f29aa0d8"
+        },
+        "interactions/val.parquet": {
+          "exists": true,
+          "sha256": "00af97382ab98d5667fe38683f99f3bf505bf0c6b8a6ef3fd5f9f7e45878f4e2"
+        },
+        "interactions/iid_test.parquet": {
+          "exists": true,
+          "sha256": "54084aa24e591f9df4ef0950376fdfbdb904a10abc2b795649364b57f0473e98"
+        },
+        "interactions/ood_test.parquet": {
+          "exists": true,
+          "sha256": "60ef2166b7a844596662515d7f7f4e32f4afd9243c90bc291f2dbd1ee8dae35a"
+        },
+        "graphs/train.bin": {
+          "exists": true,
+          "sha256": "932698d3dc2f1d690e95a26870c564b4e6b23f747e55211f32a00b5dc24c2f5b"
+        },
+        "graphs/eval_context_ood.bin": {
+          "exists": true,
+          "sha256": "af468478893f911ad453ae5e6f67d8fd7e45343c69a568a3244713673f6efdfb"
+        },
+        "features/node_feat.pt": {
+          "exists": true,
+          "sha256": "cdb9594703e02af2af2f40ad695e1957181b8972ace806093ce25ae502c7397c"
+        },
+        "features/semantic_prior.pt": {
+          "exists": true,
+          "sha256": "c168196c19a134dceb4309e50e1463e9512ff6079cb8ad68942ab4f1b469c462"
+        },
+        "features/semantic_prior_shuffled.pt": {
+          "exists": true,
+          "sha256": "2b718d5a24a85a224a14931ac23338dec0b7e95623c2117964f9f8ef8fca33be"
+        },
+        "metadata/items.jsonl": {
+          "exists": true,
+          "sha256": "112aef9eb23b55cef464fde0d3a07db717d51dbaae326ec8fe9b22161c8e56e0"
+        },
+        "mappings/user_id_map.json": {
+          "exists": true,
+          "sha256": "4d4bc69d0eeb574e19098d400bc14a0451ee6db6037c5bfb69ec569a91052818"
+        },
+        "mappings/item_id_map.json": {
+          "exists": true,
+          "sha256": "5fb09d5d56082b91b5fa72e5a65c867d8be234ff220a240da20858801ee48c23"
+        }
+      }
+    },
+    {
+      "dataset": "movielens1m",
+      "data_root": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/data_strict/processed/movielens1m/v1_strict",
+      "manifest_split_seed": 1024,
+      "manifest_sha256": "0c267124ecde691d3576c7f594017837a3f289850bfd1819197803ace0154b97",
+      "counts": {
+        "train": {
+          "interactions": 309835,
+          "users": 5148,
+          "items": 2379
+        },
+        "val": {
+          "interactions": 44262,
+          "users": 5004,
+          "items": 2207
+        },
+        "iid_test": {
+          "interactions": 88525,
+          "users": 5137,
+          "items": 2339
+        },
+        "ood_test": {
+          "interactions": 110655,
+          "users": 5127,
+          "items": 2380
+        }
+      },
+      "catalog": {
+        "users": 5148,
+        "items": 2380
+      },
+      "popularity_shift": {
+        "train": {
+          "interactions": 309835,
+          "active_items": 2379,
+          "gini_all_catalog_items": 0.6699897614249275,
+          "head_10pct_interaction_share": 0.49585101747704424,
+          "frequency_quantiles_active_items": {
+            "0.0": 1.0,
+            "0.25": 15.0,
+            "0.5": 39.0,
+            "0.75": 154.0,
+            "0.9": 366.0,
+            "0.99": 1074.5399999999986,
+            "1.0": 1751.0
+          }
+        },
+        "ood": {
+          "interactions": 110655,
+          "active_items": 2380,
+          "gini_all_catalog_items": 0.24705427080687237,
+          "head_10pct_interaction_share": 0.15266368442456282,
+          "frequency_quantiles_active_items": {
+            "0.0": 4.0,
+            "0.25": 26.0,
+            "0.5": 56.0,
+            "0.75": 64.0,
+            "0.9": 68.0,
+            "0.99": 75.0,
+            "1.0": 82.0
+          }
+        },
+        "jensen_shannon_divergence_base2": 0.18872126207425893,
+        "ood_unseen_users_vs_train": 0,
+        "ood_unseen_items_vs_train": 1,
+        "ood_interaction_fraction_all_splits": 0.19999927703483064
+      },
+      "pair_overlap_counts": {
+        "train__val": 0,
+        "train__iid_test": 0,
+        "train__ood_test": 0,
+        "val__iid_test": 0,
+        "val__ood_test": 0,
+        "iid_test__ood_test": 0
+      },
+      "graph_pair_counts": {
+        "train_parquet": 309835,
+        "train_graph": 309835,
+        "iid_context_graph": 309835,
+        "ood_context_graph": 309835
+      },
+      "checks": {
+        "all_required_evaluation_files_exist": true,
+        "train_val_iid_ood_pairs_disjoint": true,
+        "train_graph_contains_exactly_train_edges": true,
+        "iid_context_contains_only_train_edges": true,
+        "ood_context_contains_only_train_edges": true,
+        "validation_test_edges_not_used_for_message_passing": true
+      },
+      "files": {
+        "READY": {
+          "exists": true,
+          "sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22"
+        },
+        "manifest.json": {
+          "exists": true,
+          "sha256": "0c267124ecde691d3576c7f594017837a3f289850bfd1819197803ace0154b97"
+        },
+        "interactions/train.parquet": {
+          "exists": true,
+          "sha256": "5be51cc0e4b5f009fc50e99f54e8692a42b3c909e0f5e6ddc3992dbbaf4a920d"
+        },
+        "interactions/val.parquet": {
+          "exists": true,
+          "sha256": "86889777a4fa1cabdbd3565e5dd16a7b438478ca65152df6fb9c10a704ac851f"
+        },
+        "interactions/iid_test.parquet": {
+          "exists": true,
+          "sha256": "7c9a32a7680e3eb85b0bb7c587d95e7977d1724373e7a3124f11647a0298cf4c"
+        },
+        "interactions/ood_test.parquet": {
+          "exists": true,
+          "sha256": "55b96a639162330fea8ab6b394b999f742a8e552dd298dcaf242466ddda02e98"
+        },
+        "graphs/train.bin": {
+          "exists": true,
+          "sha256": "23783e3e5500efc9f6560a1e0b35f7ac33d5c13cd64c553124bb03ee9f498178"
+        },
+        "graphs/eval_context_ood.bin": {
+          "exists": true,
+          "sha256": "8d1371ed76347cd1c02bb5639a7836fe3cb42e6b8f697b554d5105d2e135722b"
+        },
+        "features/node_feat.pt": {
+          "exists": true,
+          "sha256": "5b1ee2134448f88a56a1aa5287cb033d17e69fd358e839835ee6c4303c2cec2d"
+        },
+        "features/semantic_prior.pt": {
+          "exists": true,
+          "sha256": "95125fc98f305332d9097c151d927ce291899a95eb3224aa18fe5c3c09fd9da1"
+        },
+        "features/semantic_prior_shuffled.pt": {
+          "exists": true,
+          "sha256": "daff6bea6a8b59922b08fedfbdd2a1ab935d2cf8782d0c9921806d308c7f0839"
+        },
+        "metadata/items.jsonl": {
+          "exists": true,
+          "sha256": "58c0c2dc5520d97c8a57c89400fe8d1749c9455347a73919084eaa30f00a76da"
+        },
+        "mappings/user_id_map.json": {
+          "exists": true,
+          "sha256": "bf18af5b509f4a7c919aab1096d3e1e280b6678cba1a4e1b6fc53a807c72c91a"
+        },
+        "mappings/item_id_map.json": {
+          "exists": true,
+          "sha256": "a5c6a3fb76e121554c2e8a22b9eabf259427a7a13ad7969a568aa8141a77bb4c"
+        }
+      }
+    },
+    {
+      "dataset": "food",
+      "data_root": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/data_strict/processed/food/v1_strict",
+      "manifest_split_seed": 1024,
+      "manifest_sha256": "5e1a52beaf5479067871d7940df6d8c2c4b613715c9560f3ebaf242fa179c81c",
+      "counts": {
+        "train": {
+          "interactions": 117713,
+          "users": 7597,
+          "items": 6307
+        },
+        "val": {
+          "interactions": 13854,
+          "users": 4739,
+          "items": 5010
+        },
+        "iid_test": {
+          "interactions": 41453,
+          "users": 7809,
+          "items": 6183
+        },
+        "ood_test": {
+          "interactions": 43387,
+          "users": 7732,
+          "items": 6145
+        }
+      },
+      "catalog": {
+        "users": 7809,
+        "items": 6309
+      },
+      "popularity_shift": {
+        "train": {
+          "interactions": 117713,
+          "active_items": 6307,
+          "gini_all_catalog_items": 0.40092335283638914,
+          "head_10pct_interaction_share": 0.34193334635936556,
+          "frequency_quantiles_active_items": {
+            "0.0": 1.0,
+            "0.25": 9.0,
+            "0.5": 13.0,
+            "0.75": 20.0,
+            "0.9": 34.400000000000546,
+            "0.99": 102.0,
+            "1.0": 386.0
+          }
+        },
+        "ood": {
+          "interactions": 43387,
+          "active_items": 6145,
+          "gini_all_catalog_items": 0.4682600866713287,
+          "head_10pct_interaction_share": 0.35867886694171064,
+          "frequency_quantiles_active_items": {
+            "0.0": 1.0,
+            "0.25": 3.0,
+            "0.5": 5.0,
+            "0.75": 8.0,
+            "0.9": 14.0,
+            "0.99": 41.0,
+            "1.0": 124.0
+          }
+        },
+        "jensen_shannon_divergence_base2": 0.07428396225625526,
+        "ood_unseen_users_vs_train": 135,
+        "ood_unseen_items_vs_train": 2,
+        "ood_interaction_fraction_all_splits": 0.20048796942797598
+      },
+      "pair_overlap_counts": {
+        "train__val": 0,
+        "train__iid_test": 0,
+        "train__ood_test": 0,
+        "val__iid_test": 0,
+        "val__ood_test": 0,
+        "iid_test__ood_test": 0
+      },
+      "graph_pair_counts": {
+        "train_parquet": 117713,
+        "train_graph": 117713,
+        "iid_context_graph": 117713,
+        "ood_context_graph": 117713
+      },
+      "checks": {
+        "all_required_evaluation_files_exist": true,
+        "train_val_iid_ood_pairs_disjoint": true,
+        "train_graph_contains_exactly_train_edges": true,
+        "iid_context_contains_only_train_edges": true,
+        "ood_context_contains_only_train_edges": true,
+        "validation_test_edges_not_used_for_message_passing": true
+      },
+      "files": {
+        "READY": {
+          "exists": true,
+          "sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22"
+        },
+        "manifest.json": {
+          "exists": true,
+          "sha256": "5e1a52beaf5479067871d7940df6d8c2c4b613715c9560f3ebaf242fa179c81c"
+        },
+        "interactions/train.parquet": {
+          "exists": true,
+          "sha256": "82c1e96669e8e602ae84954bd3d92e034f6953009a45ea1362946cc50fc2c320"
+        },
+        "interactions/val.parquet": {
+          "exists": true,
+          "sha256": "4cab53b7e6125b6160b81077faeeb0f5b43d5299abe8e77a6fe0e83288f5f96d"
+        },
+        "interactions/iid_test.parquet": {
+          "exists": true,
+          "sha256": "2e114d6c3ebebef0b3f5c3b0795752cb27b3f6769d07649468a89758a1a2af5a"
+        },
+        "interactions/ood_test.parquet": {
+          "exists": true,
+          "sha256": "2da276a0e747e38a9d7980cb5536949e17b204d0c17431f60fe8089016e0d0d9"
+        },
+        "graphs/train.bin": {
+          "exists": true,
+          "sha256": "6a3f6946a2e2afd22c68f0bfd88ee996db6d788a25f92a91881b54c08612d964"
+        },
+        "graphs/eval_context_ood.bin": {
+          "exists": true,
+          "sha256": "577ff3221c2964374e2a73f621ba362c745557a28eacba854dc6115dc3b2eff8"
+        },
+        "features/node_feat.pt": {
+          "exists": true,
+          "sha256": "305ad36d08aa629e99d35808ad49003caf2d2510ca3f834d2ebf842edff7009d"
+        },
+        "features/semantic_prior.pt": {
+          "exists": true,
+          "sha256": "3df232abc3c85dbe97b659e7a1b401657c6d3bc6e9bc46f260ca5881aa448975"
+        },
+        "features/semantic_prior_shuffled.pt": {
+          "exists": true,
+          "sha256": "1d13dfee4ad7d7960706996479ace97dea77e87d0a3f9c478128d58f382e6024"
+        },
+        "metadata/items.jsonl": {
+          "exists": true,
+          "sha256": "5d71f700c8ba7cb256830e633c642a45febeecb56a52b3f49e59ac4d80fb5257"
+        },
+        "mappings/user_id_map.json": {
+          "exists": true,
+          "sha256": "1a5c4ab913cf0efff0598d01207d84b694a0ddcc514b6ecc022603bcec01eaae"
+        },
+        "mappings/item_id_map.json": {
+          "exists": true,
+          "sha256": "846197d66602d8331705041357ba5811382d4f1122a3d16cbe919ca78108c5b3"
+        }
+      },
+      "temporal_audit": {
+        "users": 7809,
+        "last_20pct_count_rule_all_users": true,
+        "ood_not_earlier_than_train_val_iid_all_users": true,
+        "ood_strictly_later_all_users": false,
+        "strictly_later_user_count": 6909,
+        "duplicate_user_item_rows_after_dedup": 0,
+        "dedupe_rule": "keep latest timestamp per raw user-item pair before splitting",
+        "timestamp_by_split": {
+          "train": {
+            "valid_count": 117713,
+            "quantiles": {
+              "0.0": "2001-01-19T00:00:00",
+              "0.25": "2006-03-22T00:00:00",
+              "0.5": "2007-11-25T00:00:00",
+              "0.75": "2009-03-31T00:00:00",
+              "1.0": "2018-10-09T00:00:00"
+            }
+          },
+          "val": {
+            "valid_count": 13854,
+            "quantiles": {
+              "0.0": "2001-07-05T00:00:00",
+              "0.25": "2006-02-27T06:00:00",
+              "0.5": "2007-11-19T00:00:00",
+              "0.75": "2009-03-13T00:00:00",
+              "1.0": "2018-06-14T00:00:00"
+            }
+          },
+          "iid_test": {
+            "valid_count": 41453,
+            "quantiles": {
+              "0.0": "2001-06-20T00:00:00",
+              "0.25": "2006-03-31T00:00:00",
+              "0.5": "2007-12-08T00:00:00",
+              "0.75": "2009-04-21T00:00:00",
+              "1.0": "2018-07-31T00:00:00"
+            }
+          },
+          "ood_test": {
+            "valid_count": 43387,
+            "quantiles": {
+              "0.0": "2001-09-07T00:00:00",
+              "0.25": "2009-01-13T00:00:00",
+              "0.5": "2010-05-22T00:00:00",
+              "0.75": "2012-08-22T00:00:00",
+              "1.0": "2018-12-18T00:00:00"
+            }
+          }
+        },
+        "recipe_metadata_snapshot_time": null,
+        "recipe_metadata_time_truncated_per_interaction": false,
+        "disclosure": "Food interactions use per-user temporal OOD splitting, but recipe text comes from the available metadata dump and is not an interaction-time semantic snapshot."
+      }
+    },
+    {
+      "dataset": "amazon_beauty",
+      "data_root": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/data_strict/processed/amazon_beauty/v1_strict",
+      "manifest_split_seed": 1024,
+      "manifest_sha256": "6bd9a852a29969eaf05dbbc42d78553cd5b237a630af287ed388a20e5bb1f97b",
+      "counts": {
+        "train": {
+          "interactions": 52723,
+          "users": 10447,
+          "items": 5918
+        },
+        "val": {
+          "interactions": 7531,
+          "users": 4909,
+          "items": 3117
+        },
+        "iid_test": {
+          "interactions": 15065,
+          "users": 7440,
+          "items": 4249
+        },
+        "ood_test": {
+          "interactions": 18829,
+          "users": 8257,
+          "items": 5937
+        }
+      },
+      "catalog": {
+        "users": 10553,
+        "items": 6086
+      },
+      "popularity_shift": {
+        "train": {
+          "interactions": 52723,
+          "active_items": 5918,
+          "gini_all_catalog_items": 0.5981675887150304,
+          "head_10pct_interaction_share": 0.47764732659370673,
+          "frequency_quantiles_active_items": {
+            "0.0": 1.0,
+            "0.25": 2.0,
+            "0.5": 4.0,
+            "0.75": 9.0,
+            "0.9": 22.0,
+            "0.99": 68.0,
+            "1.0": 207.0
+          }
+        },
+        "ood": {
+          "interactions": 18829,
+          "active_items": 5937,
+          "gini_all_catalog_items": 0.25388823363433466,
+          "head_10pct_interaction_share": 0.18136916458654204,
+          "frequency_quantiles_active_items": {
+            "0.0": 1.0,
+            "0.25": 2.0,
+            "0.5": 3.0,
+            "0.75": 4.0,
+            "0.9": 5.0,
+            "0.99": 6.0,
+            "1.0": 8.0
+          }
+        },
+        "jensen_shannon_divergence_base2": 0.24111926605575545,
+        "ood_unseen_users_vs_train": 106,
+        "ood_unseen_items_vs_train": 168,
+        "ood_interaction_fraction_all_splits": 0.19999362705527468
+      },
+      "pair_overlap_counts": {
+        "train__val": 0,
+        "train__iid_test": 0,
+        "train__ood_test": 0,
+        "val__iid_test": 0,
+        "val__ood_test": 0,
+        "iid_test__ood_test": 0
+      },
+      "graph_pair_counts": {
+        "train_parquet": 52723,
+        "train_graph": 52723,
+        "iid_context_graph": 52723,
+        "ood_context_graph": 52723
+      },
+      "checks": {
+        "all_required_evaluation_files_exist": true,
+        "train_val_iid_ood_pairs_disjoint": true,
+        "train_graph_contains_exactly_train_edges": true,
+        "iid_context_contains_only_train_edges": true,
+        "ood_context_contains_only_train_edges": true,
+        "validation_test_edges_not_used_for_message_passing": true
+      },
+      "files": {
+        "READY": {
+          "exists": true,
+          "sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22"
+        },
+        "manifest.json": {
+          "exists": true,
+          "sha256": "6bd9a852a29969eaf05dbbc42d78553cd5b237a630af287ed388a20e5bb1f97b"
+        },
+        "interactions/train.parquet": {
+          "exists": true,
+          "sha256": "237d5c504a613155b40f8cd36faf1d088bf4602ec9eef6eede35f32c63f30d11"
+        },
+        "interactions/val.parquet": {
+          "exists": true,
+          "sha256": "e646dd9201d68bcce42c8837f3b91e17c570cf35201cfc09fca6e508edd9c04e"
+        },
+        "interactions/iid_test.parquet": {
+          "exists": true,
+          "sha256": "0368784e52ff946a5447377dd44303ed2f6e565e8df282c049f086d0a73242f9"
+        },
+        "interactions/ood_test.parquet": {
+          "exists": true,
+          "sha256": "6c5548219d9dea0d3ba1f515e8fe3b6f223eeb362ff2ffc20f0ff50d9ce0d220"
+        },
+        "graphs/train.bin": {
+          "exists": true,
+          "sha256": "dcd3ceb328c48a0ce20d6c54e8bb5e8ca186ebc2cc01baca31dcae5108099bb2"
+        },
+        "graphs/eval_context_ood.bin": {
+          "exists": true,
+          "sha256": "be09d6e9bad0d1d1bccac0e47aaf98e96b4428f7c99dc2ff4a7e2d7e169dde92"
+        },
+        "features/node_feat.pt": {
+          "exists": true,
+          "sha256": "d5cbef654a54555e9cae9d5172159b4b69f18e499c88e4dba531fa2409f275cb"
+        },
+        "features/semantic_prior.pt": {
+          "exists": true,
+          "sha256": "cf9b3df6a43e30ab1fa9cbf2c57bc678a9be9e86d1b17674aad378a700f59940"
+        },
+        "features/semantic_prior_shuffled.pt": {
+          "exists": true,
+          "sha256": "3dca7eba489e3d008053ae0c43c607e3f5b966f24b7866a2513edc56b0a06327"
+        },
+        "metadata/items.jsonl": {
+          "exists": true,
+          "sha256": "1b9b121aa8c7596050ca16c350b7d1576de41d6ff92b2133365f860435a2788f"
+        },
+        "mappings/user_id_map.json": {
+          "exists": true,
+          "sha256": "eb3d2730b62025b414b86a923558b31b0a497e0df884056951d5a378d5b2ae58"
+        },
+        "mappings/item_id_map.json": {
+          "exists": true,
+          "sha256": "4eda2cf494c30521bf96a5d5e531ba7d090fb7ef4634cce68740ad07c43a740a"
+        }
+      }
+    }
+  ],
+  "source_level_leakage_checks": {
+    "user_profiles_use_train_interactions_only": true,
+    "alpha_search_loader_sets_load_test_gt_false": true,
+    "llm_input_uses_item_metadata_not_user_history": true,
+    "candidate_scoring_masks_train_interactions": true,
+    "evidence": {
+      "profile_and_mask": "utils/late_fusion.py + scripts/evaluate_late_fusion.py",
+      "alpha_search": "scripts/validate_late_fusion.py",
+      "llm_input": "utils/semantic_prior.py + scripts/build_semantic_prior.py"
+    }
+  },
+  "all_structural_checks_pass": true
+}

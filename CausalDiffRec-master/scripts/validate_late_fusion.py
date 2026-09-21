@@ -51,7 +51,10 @@ def main():
     ap.add_argument("--source_records", nargs="+", required=True)
     ap.add_argument("--semantic_prior_path", default="")
     ap.add_argument("--shuffled_prior_path", default="")
-    ap.add_argument("--alphas", default="0,0.1,0.25,0.5,0.75,1,1.25,1.5,2")
+    ap.add_argument(
+        "--alphas",
+        default="0,0.025,0.05,0.075,0.1,0.15,0.2,0.25,0.5,0.75,1,1.25,1.5,2",
+    )
     ap.add_argument("--selection_seeds", default="1024,2048,3072")
     ap.add_argument("--confirmation_seeds", default="4096,5120")
     ap.add_argument("--out", required=True)
@@ -156,6 +159,7 @@ def main():
         "dataset": args.dataset,
         "protocol_version": args.protocol_version,
         "test_gt_loaded": False,
+        "alpha_frozen_before_ood": True,
         "alphas": alphas,
         "selection_seeds": selection,
         "confirmation_seeds": confirmation,
