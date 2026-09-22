@@ -66,6 +66,7 @@ bash scripts/run_module_ablation_evaluation.sh movielens1m 0
 
 git add experiments/records/*_v6_module_ablation_*.json
 git add experiments/reports/*_v6_module_ablation_*.json experiments/reports/*_v6_module_ablation_*.md
+git add experiments/reports/v6_module_ablation_final.json experiments/reports/v6_module_ablation_final.md
 git add experiments/reports/strict_data_leakage_audit.json experiments/reports/strict_data_leakage_audit.md
 git add experiments/reports/reproducibility_evidence.json experiments/reports/reproducibility_evidence.md
 git add artifacts/v6_evaluation
