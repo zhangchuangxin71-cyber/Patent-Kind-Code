@@ -1,6 +1,6 @@
 {
   "protocol_version": "corrected_v6_patent_training_module_ablation_final",
-  "scope": "Yelp2018 and MovieLens-1M A0/A1/A2 training plus A3 frozen-score evaluation",
+  "scope": "Yelp2018 and MovieLens-1M A0/A1/A2 training, A3 frozen-score evaluation, and B0/B1/B2 fixed-inference-form checkpoint comparison",
   "datasets": {
     "yelp2018": {
       "dataset": "yelp2018",
@@ -407,7 +407,10 @@
             0.0011212413448709903
           ],
           "positive_seed_count": 2,
+          "negative_seed_count": 3,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.8125
         },
         "A2_minus_A1_Recall@20": {
@@ -426,7 +429,10 @@
             0.0036546885250142627
           ],
           "positive_seed_count": 3,
+          "negative_seed_count": 2,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.5
         },
         "A3_minus_A2_Recall@20": {
@@ -445,7 +451,10 @@
             0.001928259406205299
           ],
           "positive_seed_count": 5,
+          "negative_seed_count": 0,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.03125
         },
         "A1_minus_A0_NDCG@20": {
@@ -464,7 +473,10 @@
             0.001056226283396906
           ],
           "positive_seed_count": 1,
+          "negative_seed_count": 4,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.96875
         },
         "A2_minus_A1_NDCG@20": {
@@ -483,7 +495,10 @@
             0.0028961610746964187
           ],
           "positive_seed_count": 3,
+          "negative_seed_count": 2,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.5
         },
         "A3_minus_A2_NDCG@20": {
@@ -502,7 +517,10 @@
             0.0015598761373699988
           ],
           "positive_seed_count": 5,
+          "negative_seed_count": 0,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.03125
         },
         "A3_minus_CausalDiffRec_Recall@20": {
@@ -521,7 +539,10 @@
             0.003882967979151435
           ],
           "positive_seed_count": 5,
+          "negative_seed_count": 0,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.03125
         },
         "A3_minus_CausalDiffRec_NDCG@20": {
@@ -540,7 +561,10 @@
             0.003014771607649347
           ],
           "positive_seed_count": 5,
+          "negative_seed_count": 0,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.03125
         },
         "A3_minus_LightGCN_Recall@20": {
@@ -559,7 +583,10 @@
             -0.0022840516645124425
           ],
           "positive_seed_count": 0,
+          "negative_seed_count": 5,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 1.0
         },
         "A3_minus_LightGCN_NDCG@20": {
@@ -578,9 +605,232 @@
             -0.0018049834846709178
           ],
           "positive_seed_count": 0,
+          "negative_seed_count": 5,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 1.0
         }
+      },
+      "inference_form_definitions": {
+        "B0": "A0 checkpoint + frozen score fusion alpha=0.25",
+        "B1": "A1 checkpoint + frozen score fusion alpha=0.25",
+        "B2": "A2 checkpoint + frozen score fusion alpha=0.25; identical to A3"
+      },
+      "inference_form_metrics": {
+        "B0": {
+          "Recall@20": {
+            "values": [
+              0.01831,
+              0.01904,
+              0.01854,
+              0.01716,
+              0.02005
+            ],
+            "mean": 0.01862,
+            "sample_std": 0.0010553909228338085
+          },
+          "NDCG@20": {
+            "values": [
+              0.01426,
+              0.01465,
+              0.01456,
+              0.01347,
+              0.01568
+            ],
+            "mean": 0.014523999999999999,
+            "sample_std": 0.000795945978066351
+          }
+        },
+        "B1": {
+          "Recall@20": {
+            "values": [
+              0.01795,
+              0.02032,
+              0.01847,
+              0.01728,
+              0.01679
+            ],
+            "mean": 0.018162,
+            "sample_std": 0.0013653827302262183
+          },
+          "NDCG@20": {
+            "values": [
+              0.01395,
+              0.0161,
+              0.01463,
+              0.01357,
+              0.0134
+            ],
+            "mean": 0.014329999999999999,
+            "sample_std": 0.001096562811698445
+          }
+        },
+        "B2": {
+          "Recall@20": {
+            "values": [
+              0.01772,
+              0.01845,
+              0.01804,
+              0.01984,
+              0.01839
+            ],
+            "mean": 0.018488,
+            "sample_std": 0.0008107835716145215
+          },
+          "NDCG@20": {
+            "values": [
+              0.0137,
+              0.01442,
+              0.01401,
+              0.01542,
+              0.01441
+            ],
+            "mean": 0.014391999999999999,
+            "sample_std": 0.0006485907800763127
+          }
+        }
+      },
+      "inference_form_comparisons": {
+        "B1_minus_B0_Recall@20": {
+          "paired_differences": [
+            -0.0003599999999999992,
+            0.0012799999999999999,
+            -7.000000000000062e-05,
+            0.00011999999999999858,
+            -0.003259999999999999
+          ],
+          "mean_difference": -0.0004580000000000001,
+          "sample_std_difference": 0.0016856808713395304,
+          "relative_gain_percent": -2.4597207303974225,
+          "paired_t_95ci": [
+            -0.0025510492504030504,
+            0.0016350492504030503
+          ],
+          "positive_seed_count": 2,
+          "negative_seed_count": 3,
+          "tied_seed_count": 0,
+          "non_tied_seed_count": 5,
+          "total_seed_count": 5,
+          "one_sided_exact_sign_p": 0.8125
+        },
+        "B2_minus_B1_Recall@20": {
+          "paired_differences": [
+            -0.00023000000000000104,
+            -0.0018700000000000001,
+            -0.0004299999999999998,
+            0.0025599999999999998,
+            0.0016000000000000007
+          ],
+          "mean_difference": 0.0003259999999999999,
+          "sample_std_difference": 0.0017547734896561438,
+          "relative_gain_percent": 1.79495650258782,
+          "paired_t_95ci": [
+            -0.0018528390671084232,
+            0.002504839067108423
+          ],
+          "positive_seed_count": 2,
+          "negative_seed_count": 3,
+          "tied_seed_count": 0,
+          "non_tied_seed_count": 5,
+          "total_seed_count": 5,
+          "one_sided_exact_sign_p": 0.8125
+        },
+        "B2_minus_B0_Recall@20": {
+          "paired_differences": [
+            -0.0005900000000000002,
+            -0.0005900000000000002,
+            -0.0005000000000000004,
+            0.0026799999999999984,
+            -0.0016599999999999983
+          ],
+          "mean_difference": -0.00013200000000000017,
+          "sample_std_difference": 0.0016429455255728951,
+          "relative_gain_percent": -0.7089151450053714,
+          "paired_t_95ci": [
+            -0.00217198631011383,
+            0.0019079863101138296
+          ],
+          "positive_seed_count": 1,
+          "negative_seed_count": 4,
+          "tied_seed_count": 0,
+          "non_tied_seed_count": 5,
+          "total_seed_count": 5,
+          "one_sided_exact_sign_p": 0.96875
+        },
+        "B1_minus_B0_NDCG@20": {
+          "paired_differences": [
+            -0.0003099999999999995,
+            0.00145,
+            7.000000000000062e-05,
+            0.00010000000000000113,
+            -0.002279999999999999
+          ],
+          "mean_difference": -0.00019399999999999938,
+          "sample_std_difference": 0.0013438489498451822,
+          "relative_gain_percent": -1.3357201872762283,
+          "paired_t_95ci": [
+            -0.001862608860046701,
+            0.0014746088600467023
+          ],
+          "positive_seed_count": 3,
+          "negative_seed_count": 2,
+          "tied_seed_count": 0,
+          "non_tied_seed_count": 5,
+          "total_seed_count": 5,
+          "one_sided_exact_sign_p": 0.5
+        },
+        "B2_minus_B1_NDCG@20": {
+          "paired_differences": [
+            -0.0002500000000000002,
+            -0.0016799999999999992,
+            -0.0006200000000000008,
+            0.0018499999999999992,
+            0.0010099999999999987
+          ],
+          "mean_difference": 6.199999999999956e-05,
+          "sample_std_difference": 0.0013867840495188854,
+          "relative_gain_percent": 0.4326587578506599,
+          "paired_t_95ci": [
+            -0.0016599198275708297,
+            0.0017839198275708288
+          ],
+          "positive_seed_count": 2,
+          "negative_seed_count": 3,
+          "tied_seed_count": 0,
+          "non_tied_seed_count": 5,
+          "total_seed_count": 5,
+          "one_sided_exact_sign_p": 0.8125
+        },
+        "B2_minus_B0_NDCG@20": {
+          "paired_differences": [
+            -0.0005599999999999997,
+            -0.0002299999999999993,
+            -0.0005500000000000001,
+            0.0019500000000000003,
+            -0.0012700000000000003
+          ],
+          "mean_difference": -0.00013199999999999982,
+          "sample_std_difference": 0.0012244672310846054,
+          "relative_gain_percent": -0.9088405397961983,
+          "paired_t_95ci": [
+            -0.001652376877818006,
+            0.0013883768778180066
+          ],
+          "positive_seed_count": 1,
+          "negative_seed_count": 4,
+          "tied_seed_count": 0,
+          "non_tied_seed_count": 5,
+          "total_seed_count": 5,
+          "one_sided_exact_sign_p": 0.96875
+        }
+      },
+      "inference_form_checkpoint_audit": {
+        "b0_reuses_a0_checkpoint": true,
+        "b1_reuses_a1_checkpoint": true,
+        "b0_b1_b2_use_same_frozen_alpha": true,
+        "b2_is_existing_a3_result": true,
+        "all_checks_pass": true
       },
       "five_shuffle_control": {
         "per_model_seed_shuffle_ndcg20": {
@@ -608,9 +858,9 @@
           },
           "3072": {
             "values": [
-              0.01258,
               0.01232,
               0.01207,
+              0.01258,
               0.01199,
               0.01239
             ],
@@ -659,9 +909,9 @@
             0.0135,
             0.01336,
             0.01317,
-            0.01258,
             0.01232,
             0.01207,
+            0.01258,
             0.01199,
             0.01239,
             0.01425,
@@ -708,9 +958,13 @@
             0.001699986005061707
           ],
           "positive_seed_count": 5,
+          "negative_seed_count": 0,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.03125
-        }
+        },
+        "independence_note": "The 25 real-versus-permutation pairs are descriptive only. Formal sign inference uses five model-seed-level differences against each seed's mean over five permutations."
       }
     },
     "movielens1m": {
@@ -1118,7 +1372,10 @@
             0.0002188135662245903
           ],
           "positive_seed_count": 3,
+          "negative_seed_count": 2,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.5
         },
         "A2_minus_A1_Recall@20": {
@@ -1137,7 +1394,10 @@
             0.0002862987996848474
           ],
           "positive_seed_count": 4,
+          "negative_seed_count": 1,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.1875
         },
         "A3_minus_A2_Recall@20": {
@@ -1156,7 +1416,10 @@
             0.011862555830124539
           ],
           "positive_seed_count": 5,
+          "negative_seed_count": 0,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.03125
         },
         "A1_minus_A0_NDCG@20": {
@@ -1175,7 +1438,10 @@
             0.00013010046729840943
           ],
           "positive_seed_count": 2,
+          "negative_seed_count": 2,
+          "tied_seed_count": 1,
           "non_tied_seed_count": 4,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.6875
         },
         "A2_minus_A1_NDCG@20": {
@@ -1194,7 +1460,10 @@
             0.00011993051163821054
           ],
           "positive_seed_count": 2,
+          "negative_seed_count": 3,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.8125
         },
         "A3_minus_A2_NDCG@20": {
@@ -1213,7 +1482,10 @@
             0.01001433902651995
           ],
           "positive_seed_count": 5,
+          "negative_seed_count": 0,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.03125
         },
         "A3_minus_CausalDiffRec_Recall@20": {
@@ -1232,7 +1504,10 @@
             0.012165159237984334
           ],
           "positive_seed_count": 5,
+          "negative_seed_count": 0,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.03125
         },
         "A3_minus_CausalDiffRec_NDCG@20": {
@@ -1251,7 +1526,10 @@
             0.010100287501828368
           ],
           "positive_seed_count": 5,
+          "negative_seed_count": 0,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.03125
         },
         "A3_minus_LightGCN_Recall@20": {
@@ -1270,7 +1548,10 @@
             0.01189806329895986
           ],
           "positive_seed_count": 5,
+          "negative_seed_count": 0,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.03125
         },
         "A3_minus_LightGCN_NDCG@20": {
@@ -1289,19 +1570,242 @@
             0.009993148172091845
           ],
           "positive_seed_count": 5,
+          "negative_seed_count": 0,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.03125
         }
+      },
+      "inference_form_definitions": {
+        "B0": "A0 checkpoint + frozen score fusion alpha=1.0",
+        "B1": "A1 checkpoint + frozen score fusion alpha=1.0",
+        "B2": "A2 checkpoint + frozen score fusion alpha=1.0; identical to A3"
+      },
+      "inference_form_metrics": {
+        "B0": {
+          "Recall@20": {
+            "values": [
+              0.04031,
+              0.03998,
+              0.04007,
+              0.0405,
+              0.04007
+            ],
+            "mean": 0.040186,
+            "sample_std": 0.00021407942451342625
+          },
+          "NDCG@20": {
+            "values": [
+              0.03786,
+              0.03741,
+              0.03749,
+              0.03778,
+              0.03753
+            ],
+            "mean": 0.037614,
+            "sample_std": 0.00019501282009139746
+          }
+        },
+        "B1": {
+          "Recall@20": {
+            "values": [
+              0.03999,
+              0.04016,
+              0.04005,
+              0.04044,
+              0.04
+            ],
+            "mean": 0.040128000000000004,
+            "sample_std": 0.00018700267377767498
+          },
+          "NDCG@20": {
+            "values": [
+              0.03752,
+              0.0375,
+              0.03746,
+              0.03779,
+              0.03747
+            ],
+            "mean": 0.037548,
+            "sample_std": 0.00013736811857195826
+          }
+        },
+        "B2": {
+          "Recall@20": {
+            "values": [
+              0.04013,
+              0.04038,
+              0.04019,
+              0.03896,
+              0.04009
+            ],
+            "mean": 0.03995,
+            "sample_std": 0.0005644909210961666
+          },
+          "NDCG@20": {
+            "values": [
+              0.03749,
+              0.03765,
+              0.03755,
+              0.0366,
+              0.03747
+            ],
+            "mean": 0.037352,
+            "sample_std": 0.000426168980569915
+          }
+        }
+      },
+      "inference_form_comparisons": {
+        "B1_minus_B0_Recall@20": {
+          "paired_differences": [
+            -0.00032000000000000084,
+            0.0001799999999999996,
+            -1.9999999999999185e-05,
+            -6.0000000000004494e-05,
+            -7.000000000000062e-05
+          ],
+          "mean_difference": -5.8000000000001105e-05,
+          "sample_std_difference": 0.00017810109488714573,
+          "relative_gain_percent": -0.14432887075101056,
+          "paired_t_95ci": [
+            -0.0002791417175620429,
+            0.00016314171756204066
+          ],
+          "positive_seed_count": 1,
+          "negative_seed_count": 4,
+          "tied_seed_count": 0,
+          "non_tied_seed_count": 5,
+          "total_seed_count": 5,
+          "one_sided_exact_sign_p": 0.96875
+        },
+        "B2_minus_B1_Recall@20": {
+          "paired_differences": [
+            0.00014000000000000123,
+            0.00021999999999999797,
+            0.0001399999999999943,
+            -0.0014799999999999952,
+            8.99999999999998e-05
+          ],
+          "mean_difference": -0.00017800000000000037,
+          "sample_std_difference": 0.000729328458240864,
+          "relative_gain_percent": -0.4435805422647537,
+          "paired_t_95ci": [
+            -0.0010835808894631403,
+            0.0007275808894631395
+          ],
+          "positive_seed_count": 4,
+          "negative_seed_count": 1,
+          "tied_seed_count": 0,
+          "non_tied_seed_count": 5,
+          "total_seed_count": 5,
+          "one_sided_exact_sign_p": 0.1875
+        },
+        "B2_minus_B0_Recall@20": {
+          "paired_differences": [
+            -0.0001799999999999996,
+            0.0003999999999999976,
+            0.00011999999999999511,
+            -0.0015399999999999997,
+            1.9999999999999185e-05
+          ],
+          "mean_difference": -0.00023600000000000148,
+          "sample_std_difference": 0.0007583402930083552,
+          "relative_gain_percent": -0.5872691982282424,
+          "paired_t_95ci": [
+            -0.0011776038402157717,
+            0.0007056038402157687
+          ],
+          "positive_seed_count": 3,
+          "negative_seed_count": 2,
+          "tied_seed_count": 0,
+          "non_tied_seed_count": 5,
+          "total_seed_count": 5,
+          "one_sided_exact_sign_p": 0.5
+        },
+        "B1_minus_B0_NDCG@20": {
+          "paired_differences": [
+            -0.00034,
+            8.99999999999998e-05,
+            -3.0000000000002247e-05,
+            9.999999999996123e-06,
+            -5.9999999999997555e-05
+          ],
+          "mean_difference": -6.600000000000078e-05,
+          "sample_std_difference": 0.00016318700928689089,
+          "relative_gain_percent": -0.17546658159196252,
+          "paired_t_95ci": [
+            -0.00026862343440607687,
+            0.00013662343440607534
+          ],
+          "positive_seed_count": 2,
+          "negative_seed_count": 3,
+          "tied_seed_count": 0,
+          "non_tied_seed_count": 5,
+          "total_seed_count": 5,
+          "one_sided_exact_sign_p": 0.8125
+        },
+        "B2_minus_B1_NDCG@20": {
+          "paired_differences": [
+            -2.9999999999995308e-05,
+            0.0001500000000000043,
+            8.99999999999998e-05,
+            -0.0011899999999999966,
+            0.0
+          ],
+          "mean_difference": -0.00019599999999999755,
+          "sample_std_difference": 0.0005602499442213264,
+          "relative_gain_percent": -0.5219985085756833,
+          "paired_t_95ci": [
+            -0.000891642185735287,
+            0.0004996421857352917
+          ],
+          "positive_seed_count": 2,
+          "negative_seed_count": 2,
+          "tied_seed_count": 1,
+          "non_tied_seed_count": 4,
+          "total_seed_count": 5,
+          "one_sided_exact_sign_p": 0.6875
+        },
+        "B2_minus_B0_NDCG@20": {
+          "paired_differences": [
+            -0.00036999999999999533,
+            0.0002400000000000041,
+            5.9999999999997555e-05,
+            -0.0011800000000000005,
+            -5.9999999999997555e-05
+          ],
+          "mean_difference": -0.00026199999999999835,
+          "sample_std_difference": 0.0005592137337369326,
+          "relative_gain_percent": -0.696549157228687,
+          "paired_t_95ci": [
+            -0.0009563555604822545,
+            0.00043235556048225776
+          ],
+          "positive_seed_count": 2,
+          "negative_seed_count": 3,
+          "tied_seed_count": 0,
+          "non_tied_seed_count": 5,
+          "total_seed_count": 5,
+          "one_sided_exact_sign_p": 0.8125
+        }
+      },
+      "inference_form_checkpoint_audit": {
+        "b0_reuses_a0_checkpoint": true,
+        "b1_reuses_a1_checkpoint": true,
+        "b0_b1_b2_use_same_frozen_alpha": true,
+        "b2_is_existing_a3_result": true,
+        "all_checks_pass": true
       },
       "five_shuffle_control": {
         "per_model_seed_shuffle_ndcg20": {
           "1024": {
             "values": [
-              0.02462,
               0.02403,
-              0.02503,
               0.02407,
-              0.02541
+              0.02541,
+              0.02462,
+              0.02503
             ],
             "mean": 0.024632,
             "sample_std": 0.0006004331769647638
@@ -1309,10 +1813,10 @@
           "2048": {
             "values": [
               0.02397,
-              0.02463,
-              0.02499,
               0.024,
-              0.02539
+              0.02539,
+              0.02463,
+              0.02499
             ],
             "mean": 0.024596,
             "sample_std": 0.0006192576200580811
@@ -1320,32 +1824,32 @@
           "3072": {
             "values": [
               0.02394,
-              0.02475,
-              0.02502,
               0.02415,
-              0.02542
+              0.02542,
+              0.02475,
+              0.02502
             ],
-            "mean": 0.024656,
+            "mean": 0.024656000000000004,
             "sample_std": 0.0006110891915260821
           },
           "4096": {
             "values": [
-              0.02513,
-              0.02528,
               0.02411,
               0.02454,
-              0.02548
+              0.02548,
+              0.02513,
+              0.02528
             ],
-            "mean": 0.024908000000000003,
+            "mean": 0.024908,
             "sample_std": 0.0005672477412912282
           },
           "5120": {
             "values": [
-              0.02476,
-              0.02501,
               0.02404,
               0.02411,
-              0.02543
+              0.02543,
+              0.02476,
+              0.02501
             ],
             "mean": 0.024670000000000004,
             "sample_std": 0.0005940959518461653
@@ -1354,39 +1858,39 @@
         "five_shuffle_mean_by_model_seed": [
           0.024632,
           0.024596,
-          0.024656,
-          0.024908000000000003,
+          0.024656000000000004,
+          0.024908,
           0.024670000000000004
         ],
         "overall_shuffle_ndcg20": {
           "values": [
-            0.02462,
             0.02403,
-            0.02503,
             0.02407,
             0.02541,
+            0.02462,
+            0.02503,
             0.02397,
-            0.02463,
-            0.02499,
             0.024,
             0.02539,
+            0.02463,
+            0.02499,
             0.02394,
-            0.02475,
-            0.02502,
             0.02415,
             0.02542,
-            0.02513,
-            0.02528,
+            0.02475,
+            0.02502,
             0.02411,
             0.02454,
             0.02548,
-            0.02476,
-            0.02501,
+            0.02513,
+            0.02528,
             0.02404,
             0.02411,
-            0.02543
+            0.02543,
+            0.02476,
+            0.02501
           ],
-          "mean": 0.024692399999999996,
+          "mean": 0.0246924,
           "sample_std": 0.0005580791461193773
         },
         "real_ndcg20": {
@@ -1407,21 +1911,25 @@
           "paired_differences": [
             0.012858000000000001,
             0.013054000000000003,
-            0.012894,
-            0.011691999999999998,
+            0.012893999999999996,
+            0.011692000000000001,
             0.012799999999999999
           ],
           "mean_difference": 0.012659599999999998,
-          "sample_std_difference": 0.0005490489959921626,
+          "sample_std_difference": 0.0005490489959921607,
           "relative_gain_percent": 51.269216439066255,
           "paired_t_95ci": [
-            0.011977865628426607,
-            0.01334133437157339
+            0.011977865628426608,
+            0.013341334371573388
           ],
           "positive_seed_count": 5,
+          "negative_seed_count": 0,
+          "tied_seed_count": 0,
           "non_tied_seed_count": 5,
+          "total_seed_count": 5,
           "one_sided_exact_sign_p": 0.03125
-        }
+        },
+        "independence_note": "The 25 real-versus-permutation pairs are descriptive only. Formal sign inference uses five model-seed-level differences against each seed's mean over five permutations."
       }
     }
   },
@@ -10391,5 +10899,21 @@
       }
     }
   },
-  "claim_rule": "Attribute ConditionFusion only from A1-A0, InfoNCE only from A2-A1, and score fusion only from A3-A2. Report negative or mixed directions without suppressing them."
+  "claim_rule": "Attribute ConditionFusion only from A1-A0, InfoNCE only from A2-A1, and score fusion only from A3-A2. Report negative or mixed directions without suppressing them.",
+  "patent_evidence_boundary": {
+    "supported": [
+      "Frozen semantic score fusion improves over the same A2 checkpoint without fusion on both datasets.",
+      "Correct item-semantic alignment improves over five-permutation means for all five model seeds.",
+      "A3 improves over CausalDiffRec on both datasets and over LightGCN on MovieLens-1M.",
+      "Yelp supports a DeepSeek-rewrite implementation example; it does not establish universal LLM gains."
+    ],
+    "not_supported": [
+      "ConditionFusion independently improves recommendation quality.",
+      "InfoNCE independently improves recommendation quality.",
+      "ConditionFusion and InfoNCE jointly improve the final inference form.",
+      "A3 outperforms LightGCN on every dataset.",
+      "LLM rewriting outperforms raw text on every dataset.",
+      "Learned edge gating is effective under the v6 experiment, where it is disabled."
+    ]
+  }
 }

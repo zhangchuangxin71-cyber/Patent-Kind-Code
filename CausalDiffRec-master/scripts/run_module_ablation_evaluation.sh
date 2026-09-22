@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Validation alpha selection followed by frozen one-shot OOD A0/A1/A2/A3
-# evaluation and five row-permutation controls. A3 always reuses A2 checkpoint.
+# Validation alpha selection followed by frozen one-shot OOD A0/A1/A2/A3,
+# B0/B1/B2 inference-form evaluation, and five row-permutation controls.
+# A3/B2 always reuse the A2 checkpoint.
 DATASET="${1:?dataset required}"
 GPU="${2:-0}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -45,13 +46,15 @@ done
   --out "experiments/reports/${DATASET}_v6_module_ablation_training_audit.json" \
   > "logs/${DATASET}_v6_module_ablation_training_audit.log" 2>&1
 
-env CUDA_VISIBLE_DEVICES="$GPU" "$PYTHON_BIN" scripts/validate_late_fusion.py \
-  --dataset "$DATASET" --data_root "$DATA_ROOT" \
-  --source_records "${a2_records[@]}" --semantic_prior_path "$PRIOR" \
-  --alphas '0,0.025,0.05,0.075,0.1,0.15,0.2,0.25,0.5,0.75,1,1.25,1.5,2' \
-  --selection_seeds '1024,2048,3072' --confirmation_seeds '4096,5120' \
-  --protocol_version corrected_v6_module_ablation_alpha_validation_only \
-  --out "$ALPHA_REPORT" > "logs/${DATASET}_v6_module_ablation_alpha_validation.log" 2>&1
+if [[ ! -f "$ALPHA_REPORT" ]]; then
+  env CUDA_VISIBLE_DEVICES="$GPU" "$PYTHON_BIN" scripts/validate_late_fusion.py \
+    --dataset "$DATASET" --data_root "$DATA_ROOT" \
+    --source_records "${a2_records[@]}" --semantic_prior_path "$PRIOR" \
+    --alphas '0,0.025,0.05,0.075,0.1,0.15,0.2,0.25,0.5,0.75,1,1.25,1.5,2' \
+    --selection_seeds '1024,2048,3072' --confirmation_seeds '4096,5120' \
+    --protocol_version corrected_v6_module_ablation_alpha_validation_only \
+    --out "$ALPHA_REPORT" > "logs/${DATASET}_v6_module_ablation_alpha_validation.log" 2>&1
+fi
 
 alpha="$($PYTHON_BIN -c 'import json,sys; print(json.load(open(sys.argv[1]))["summary"]["selected_alpha"])' "$ALPHA_REPORT")"
 "$PYTHON_BIN" scripts/build_semantic_shuffle_controls.py \
@@ -76,6 +79,12 @@ for seed in "${SEEDS[@]}"; do
   a2="$(record_for a2 "$seed")"
   evaluate "$a0" "$PRIOR" 0 A0 "experiments/records/${DATASET}_v6_module_ablation_ood_a0_seed${seed}.json"
   evaluate "$a1" "$PRIOR" 0 A1 "experiments/records/${DATASET}_v6_module_ablation_ood_a1_seed${seed}.json"
+  # Hold the final inference form fixed across the three trained checkpoints.
+  # B2 is identical to A3 and is therefore not evaluated a second time.
+  evaluate "$a0" "$PRIOR" "$alpha" B0_A0_checkpoint_with_frozen_score_fusion \
+    "experiments/records/${DATASET}_v6_module_ablation_ood_b0_real_seed${seed}.json"
+  evaluate "$a1" "$PRIOR" "$alpha" B1_A1_checkpoint_with_frozen_score_fusion \
+    "experiments/records/${DATASET}_v6_module_ablation_ood_b1_real_seed${seed}.json"
   # This single record contains A2 in baseline_metrics and A3 in best_metrics.
   evaluate "$a2" "$PRIOR" "$alpha" A3_reuses_A2 \
     "experiments/records/${DATASET}_v6_module_ablation_ood_a3_real_seed${seed}.json"
