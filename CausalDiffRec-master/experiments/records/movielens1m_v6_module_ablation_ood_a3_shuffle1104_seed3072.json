@@ -1,0 +1,119 @@
+{
+  "settings": {
+    "dataset": "movielens1m",
+    "seed": 3072,
+    "method": "lsci_stage1_semantic_late_fusion",
+    "protocol_version": "corrected_v6_module_ablation_frozen_ood",
+    "comparison_label": "A3_shuffle_1104",
+    "source_protocol_version": "corrected_v4_controlled",
+    "data_version": "v1_strict",
+    "eval_split": "ood",
+    "selection_split": "val",
+    "selection_metric": "NDCG@20",
+    "alpha": 1.0,
+    "alpha_selection_seeds": [
+      1024,
+      2048,
+      3072
+    ],
+    "alpha_confirmation_seeds": [
+      4096,
+      5120
+    ],
+    "score_normalization": "per_user_zscore",
+    "user_semantic_profile": "mean_train_item_semantics",
+    "semantic_prior_path": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/data_strict/processed/movielens1m/v1_strict/features/shuffle_controls_v6/semantic_prior_shuffled_seed1104.pt",
+    "semantic_prior_meta": {
+      "dataset": "movielens1m",
+      "mode": "raw",
+      "backend": "sbert",
+      "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "n_item": 2380,
+      "emb_dim": 384,
+      "coverage": 1.0,
+      "data_root": "data_strict/processed/movielens1m/v1_strict",
+      "control": "item_row_permutation",
+      "shuffle_seed": 1104,
+      "source_path": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/data_strict/processed/movielens1m/v1_strict/features/semantic_prior.pt",
+      "source_item_tensor_sha256": "d2af717a24e68602f72cc33d56d4de582057886d3f920cf01aa9a67b4501621a",
+      "shuffled_item_tensor_sha256": "2d003518d6f2e01656cfa48f2dd58024eb62ef7fcf82c58bc4454308de9a632b",
+      "permutation_sha256": "b3725a9eec41268645dad52d5ac5d1e470be9b7e58be771ecf7fdffa509a19c3",
+      "vector_multiset_unchanged": true
+    },
+    "frozen_comparison_set": [
+      "collaborative_alpha_0",
+      "semantic_late_fusion"
+    ],
+    "test_gt_loaded": true
+  },
+  "source_record": "experiments/records/movielens1m_lsci_strict_ood_e3_v6_module_ablation_a2_seed3072_strict_ood_e3_seed3072_v4.json",
+  "checkpoint": "checkpoints/movielens1m_lsci_e3_v1_strict_ood_v6_module_ablation_a2_seed3072_strict_ood_e3_seed3072_v4.pt",
+  "best_epoch": 21,
+  "baseline_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.07395,
+      "Precision": 0.06541,
+      "Recall": 0.08695,
+      "NDCG": 0.09175
+    },
+    "Top20": {
+      "Hit Ratio": 0.12668,
+      "Precision": 0.05603,
+      "Recall": 0.14611,
+      "NDCG": 0.11008
+    }
+  },
+  "best_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.05533,
+      "Precision": 0.04894,
+      "Recall": 0.06669,
+      "NDCG": 0.07072
+    },
+    "Top20": {
+      "Hit Ratio": 0.09573,
+      "Precision": 0.04234,
+      "Recall": 0.11053,
+      "NDCG": 0.08421
+    }
+  },
+  "baseline_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.0093,
+      "Precision": 0.02007,
+      "Recall": 0.01572,
+      "NDCG": 0.02353
+    },
+    "Top20": {
+      "Hit Ratio": 0.01856,
+      "Precision": 0.02003,
+      "Recall": 0.02895,
+      "NDCG": 0.02799
+    }
+  },
+  "best_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.00871,
+      "Precision": 0.0188,
+      "Recall": 0.01322,
+      "NDCG": 0.02159
+    },
+    "Top20": {
+      "Hit Ratio": 0.0165,
+      "Precision": 0.01781,
+      "Recall": 0.02489,
+      "NDCG": 0.02475
+    }
+  },
+  "timing": {
+    "offline_train_profile_build_sec": 0.3077226360037457,
+    "validation_collaborative_score_sec": 0.34734379399742465,
+    "validation_fused_score_sec": 0.28507918000104837,
+    "ood_collaborative_score_sec": 0.30485769000370055,
+    "ood_fused_score_sec": 0.40129529000114417,
+    "evaluation_script_wall_time_sec": 2.4123350709996885,
+    "online_requires_llm_call": false,
+    "online_requires_diffusion_sampling": false
+  },
+  "peak_vram_mb": 257.49755859375
+}

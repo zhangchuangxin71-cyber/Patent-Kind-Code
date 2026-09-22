@@ -1,0 +1,119 @@
+{
+  "settings": {
+    "dataset": "yelp2018",
+    "seed": 5120,
+    "method": "lsci_stage1_semantic_late_fusion",
+    "protocol_version": "corrected_v6_module_ablation_frozen_ood",
+    "comparison_label": "A3_shuffle_1103",
+    "source_protocol_version": "corrected_v4_controlled",
+    "data_version": "v1_strict",
+    "eval_split": "ood",
+    "selection_split": "val",
+    "selection_metric": "NDCG@20",
+    "alpha": 0.25,
+    "alpha_selection_seeds": [
+      1024,
+      2048,
+      3072
+    ],
+    "alpha_confirmation_seeds": [
+      4096,
+      5120
+    ],
+    "score_normalization": "per_user_zscore",
+    "user_semantic_profile": "mean_train_item_semantics",
+    "semantic_prior_path": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/data_strict/processed/yelp2018/v1_strict/features/shuffle_controls_v6/semantic_prior_shuffled_seed1103.pt",
+    "semantic_prior_meta": {
+      "dataset": "yelp2018",
+      "mode": "llm",
+      "backend": "sbert",
+      "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "n_item": 12185,
+      "emb_dim": 384,
+      "coverage": 1.0,
+      "data_root": "data_strict/processed/yelp2018/v1_strict",
+      "control": "item_row_permutation",
+      "shuffle_seed": 1103,
+      "source_path": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/data_strict/processed/yelp2018/v1_strict/features/semantic_prior.pt",
+      "source_item_tensor_sha256": "6664338d55eff79432e76561fa5250dd17bfd3ebdc9c1ef959edaec1ae422f13",
+      "shuffled_item_tensor_sha256": "482b258f0b08b97a0c883d68dfe9a6fed0f3cbf9886b36df58d0f7ddea2a4f26",
+      "permutation_sha256": "54d7253e582c4315801a3c84980c4531a5853e22cf15d55d1d4d192e20cb7299",
+      "vector_multiset_unchanged": true
+    },
+    "frozen_comparison_set": [
+      "collaborative_alpha_0",
+      "semantic_late_fusion"
+    ],
+    "test_gt_loaded": true
+  },
+  "source_record": "experiments/records/yelp2018_lsci_strict_ood_e3_v6_module_ablation_a2_seed5120_strict_ood_e3_seed5120_v4.json",
+  "checkpoint": "checkpoints/yelp2018_lsci_e3_v1_strict_ood_v6_module_ablation_a2_seed5120_strict_ood_e3_seed5120_v4.pt",
+  "best_epoch": 22,
+  "baseline_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.04747,
+      "Precision": 0.02013,
+      "Recall": 0.04914,
+      "NDCG": 0.03827
+    },
+    "Top20": {
+      "Hit Ratio": 0.07868,
+      "Precision": 0.01668,
+      "Recall": 0.08067,
+      "NDCG": 0.04948
+    }
+  },
+  "best_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.04623,
+      "Precision": 0.01961,
+      "Recall": 0.04795,
+      "NDCG": 0.03775
+    },
+    "Top20": {
+      "Hit Ratio": 0.07709,
+      "Precision": 0.01635,
+      "Recall": 0.07879,
+      "NDCG": 0.04881
+    }
+  },
+  "baseline_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.00832,
+      "Precision": 0.00834,
+      "Recall": 0.00923,
+      "NDCG": 0.01027
+    },
+    "Top20": {
+      "Hit Ratio": 0.01609,
+      "Precision": 0.00806,
+      "Recall": 0.01739,
+      "NDCG": 0.0135
+    }
+  },
+  "best_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.00876,
+      "Precision": 0.00878,
+      "Recall": 0.00944,
+      "NDCG": 0.01068
+    },
+    "Top20": {
+      "Hit Ratio": 0.01595,
+      "Precision": 0.00799,
+      "Recall": 0.01723,
+      "NDCG": 0.01357
+    }
+  },
+  "timing": {
+    "offline_train_profile_build_sec": 0.6343479479983216,
+    "validation_collaborative_score_sec": 0.732481742001255,
+    "validation_fused_score_sec": 0.5816397290036548,
+    "ood_collaborative_score_sec": 0.6340451700016274,
+    "ood_fused_score_sec": 0.7301356610041694,
+    "evaluation_script_wall_time_sec": 4.702225083994563,
+    "online_requires_llm_call": false,
+    "online_requires_diffusion_sampling": false
+  },
+  "peak_vram_mb": 2493.16259765625
+}

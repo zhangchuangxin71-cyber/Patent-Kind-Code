@@ -1,0 +1,112 @@
+{
+  "settings": {
+    "dataset": "yelp2018",
+    "seed": 1024,
+    "method": "lsci_stage1_semantic_late_fusion",
+    "protocol_version": "corrected_v6_module_ablation_frozen_ood",
+    "comparison_label": "A3_reuses_A2",
+    "source_protocol_version": "corrected_v4_controlled",
+    "data_version": "v1_strict",
+    "eval_split": "ood",
+    "selection_split": "val",
+    "selection_metric": "NDCG@20",
+    "alpha": 0.25,
+    "alpha_selection_seeds": [
+      1024,
+      2048,
+      3072
+    ],
+    "alpha_confirmation_seeds": [
+      4096,
+      5120
+    ],
+    "score_normalization": "per_user_zscore",
+    "user_semantic_profile": "mean_train_item_semantics",
+    "semantic_prior_path": "/media/p520/F2FAF016FAEFD53F/ZCX-2026.5.27/专利/CausalDiffRec-master/data_strict/processed/yelp2018/v1_strict/features/semantic_prior.pt",
+    "semantic_prior_meta": {
+      "dataset": "yelp2018",
+      "mode": "llm",
+      "backend": "sbert",
+      "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "n_item": 12185,
+      "emb_dim": 384,
+      "coverage": 1.0,
+      "data_root": "data_strict/processed/yelp2018/v1_strict"
+    },
+    "frozen_comparison_set": [
+      "collaborative_alpha_0",
+      "semantic_late_fusion"
+    ],
+    "test_gt_loaded": true
+  },
+  "source_record": "experiments/records/yelp2018_lsci_strict_ood_e3_v6_module_ablation_a2_seed1024_strict_ood_e3_seed1024_v4.json",
+  "checkpoint": "checkpoints/yelp2018_lsci_e3_v1_strict_ood_v6_module_ablation_a2_seed1024_strict_ood_e3_seed1024_v4.pt",
+  "best_epoch": 24,
+  "baseline_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.04668,
+      "Precision": 0.0198,
+      "Recall": 0.04787,
+      "NDCG": 0.03774
+    },
+    "Top20": {
+      "Hit Ratio": 0.0775,
+      "Precision": 0.01643,
+      "Recall": 0.07895,
+      "NDCG": 0.04881
+    }
+  },
+  "best_val_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.04794,
+      "Precision": 0.02033,
+      "Recall": 0.05031,
+      "NDCG": 0.03872
+    },
+    "Top20": {
+      "Hit Ratio": 0.08063,
+      "Precision": 0.0171,
+      "Recall": 0.0823,
+      "NDCG": 0.05032
+    }
+  },
+  "baseline_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.00776,
+      "Precision": 0.00778,
+      "Recall": 0.00864,
+      "NDCG": 0.00941
+    },
+    "Top20": {
+      "Hit Ratio": 0.01479,
+      "Precision": 0.00741,
+      "Recall": 0.01598,
+      "NDCG": 0.01231
+    }
+  },
+  "best_metrics": {
+    "Top10": {
+      "Hit Ratio": 0.00859,
+      "Precision": 0.00861,
+      "Recall": 0.00922,
+      "NDCG": 0.01038
+    },
+    "Top20": {
+      "Hit Ratio": 0.01649,
+      "Precision": 0.00826,
+      "Recall": 0.01772,
+      "NDCG": 0.0137
+    }
+  },
+  "timing": {
+    "offline_train_profile_build_sec": 0.6223198480001884,
+    "validation_collaborative_score_sec": 0.7412091469959705,
+    "validation_fused_score_sec": 0.5878278460004367,
+    "ood_collaborative_score_sec": 0.6274839109973982,
+    "ood_fused_score_sec": 0.7240319710035692,
+    "evaluation_script_wall_time_sec": 4.718885533999128,
+    "online_requires_llm_call": false,
+    "online_requires_diffusion_sampling": false
+  },
+  "peak_vram_mb": 2493.16259765625
+}
