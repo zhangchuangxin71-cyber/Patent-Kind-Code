@@ -76,6 +76,10 @@ def main():
     seed = int(settings["seed"])
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     if torch.cuda.is_available():
+        # ``is_available`` does not create a CUDA context. Peak-memory APIs
+        # require explicit initialisation when called before the first tensor
+        # is moved to the device (as happens in the standalone evaluator).
+        torch.cuda.init()
         torch.cuda.reset_peak_memory_stats(device)
     datasets, meta = load_strict_datasets(
         dataset, data_root=args.data_root, eval_split=args.eval_split,
